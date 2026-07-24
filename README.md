@@ -46,13 +46,3 @@ python main.py
 
 ### 3. Open in Browser
 Navigate to **[http://localhost:5000](http://localhost:5000)** in your web browser.
-
----
-
-## 👥 Project Credits
-
-**CPE124-4 Mini Project**
-
-- **DE LEON, JUSTIN ANDRE**
-- **NAPARE, PAUL ANDREW**
-- **TRIA, AARON JOHN PAUL**
