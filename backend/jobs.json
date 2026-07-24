@@ -1,0 +1,382 @@
+[
+  {
+    "id": "job_001",
+    "title": "Software Engineer",
+    "description": "Develop scalable web applications and software systems using Python, Java, C++, and modern microservices architecture. Focus on algorithmic optimization, data structures, clean code, and API design.",
+    "category": "Software Engineering",
+    "experience_level": "Entry-Level",
+    "salary_range": "35,000 - 55,000 PHP/month",
+    "location": "Metro Manila, Philippines",
+    "skills_required": ["Python", "Java", "C++", "Algorithms", "Data Structures", "Git", "REST APIs"],
+    "job_type": "Full-time",
+    "key_responsibilities": [
+      "Write clean, maintainable, and efficient code",
+      "Collaborate with cross-functional teams to define software requirements",
+      "Debug, test, and deploy applications to production environments"
+    ],
+    "career_roadmap": [
+      {
+        "stage": "Junior Software Engineer",
+        "timeframe": "0 - 2 Years",
+        "focus": "Master core syntax, version control, unit testing, and component architecture."
+      },
+      {
+        "stage": "Mid-Level Engineer",
+        "timeframe": "2 - 5 Years",
+        "focus": "Lead feature implementations, perform code reviews, and optimize system performance."
+      },
+      {
+        "stage": "Senior / Tech Lead",
+        "timeframe": "5+ Years",
+        "focus": "Architect distributed systems, mentor junior engineers, and drive tech stack decisions."
+      }
+    ],
+    "recommended_courses": [
+      "Meta Back-End Developer Professional Certificate",
+      "Algorithms and Data Structures Masterclass",
+      "Clean Code & System Design Fundamentals"
+    ]
+  },
+  {
+    "id": "job_002",
+    "title": "Data Scientist",
+    "description": "Extract valuable business intelligence and actionable insights from structured and unstructured data using Python, R, machine learning, and statistical analytics. Build predictive models and data visualizer dashboards.",
+    "category": "Data & AI",
+    "experience_level": "Mid-Level",
+    "salary_range": "60,000 - 95,000 PHP/month",
+    "location": "Quezon City, Philippines",
+    "skills_required": ["Python", "R", "Machine Learning", "Statistics", "Data Visualization", "SQL", "Pandas", "Scikit-Learn"],
+    "job_type": "Full-time",
+    "key_responsibilities": [
+      "Develop predictive machine learning models and regression pipelines",
+      "Clean, explore, and analyze high-dimensional business data",
+      "Communicate data insights to stakeholders using clear visualizations"
+    ],
+    "career_roadmap": [
+      {
+        "stage": "Junior Data Analyst",
+        "timeframe": "0 - 2 Years",
+        "focus": "Data cleaning, SQL querying, and descriptive analytics dashboards."
+      },
+      {
+        "stage": "Data Scientist",
+        "timeframe": "2 - 4 Years",
+        "focus": "Feature engineering, ML modeling, hypothesis testing, and model deployment."
+      },
+      {
+        "stage": "Lead AI / ML Architect",
+        "timeframe": "5+ Years",
+        "focus": "Design enterprise AI strategy, MLOps infrastructure, and deep learning models."
+      }
+    ],
+    "recommended_courses": [
+      "IBM Data Science Professional Certificate",
+      "Deep Learning Specialization by Andrew Ng",
+      "Applied Machine Learning with Python"
+    ]
+  },
+  {
+    "id": "job_003",
+    "title": "UX/UI Designer",
+    "description": "Craft intuitive, accessible, and delightful user interfaces and user experiences for web and mobile platforms. Produce wireframes, interactive prototypes, user journey maps, and design systems using Figma and Adobe XD.",
+    "category": "Design & Product",
+    "experience_level": "Entry-Level",
+    "salary_range": "28,000 - 45,000 PHP/month",
+    "location": "Metro Manila, Philippines",
+    "skills_required": ["UX Design", "UI Design", "Figma", "Adobe XD", "Wireframing", "Prototyping", "User Research"],
+    "job_type": "Full-time",
+    "key_responsibilities": [
+      "Conduct user interviews, usability testing, and persona research",
+      "Create high-fidelity interactive mockups and component libraries in Figma",
+      "Collaborate closely with frontend developers to ensure pixel-perfect execution"
+    ],
+    "career_roadmap": [
+      {
+        "stage": "Junior UX/UI Designer",
+        "timeframe": "0 - 2 Years",
+        "focus": "Wireframing, UI polish, component library maintenance, and usability testing."
+      },
+      {
+        "stage": "Product Designer",
+        "timeframe": "2 - 5 Years",
+        "focus": "End-to-end product design, user flow optimization, and design system governance."
+      },
+      {
+        "stage": "Design Lead / UX Director",
+        "timeframe": "5+ Years",
+        "focus": "UX strategy, brand identity alignment, and managing design teams."
+      }
+    ],
+    "recommended_courses": [
+      "Google UX Design Professional Certificate",
+      "Figma UI/UX Essentials Masterclass",
+      "Interaction Design Specialization"
+    ]
+  },
+  {
+    "id": "job_004",
+    "title": "Cybersecurity Analyst",
+    "description": "Protect IT networks, cloud infrastructure, and sensitive data from cyber threats. Monitor security incidents, conduct vulnerability assessments, implement firewall protocols, and perform incident response.",
+    "category": "Cybersecurity & IT",
+    "experience_level": "Mid-Level",
+    "salary_range": "50,000 - 85,000 PHP/month",
+    "location": "Pasig City, Philippines",
+    "skills_required": ["Network Security", "Encryption", "Risk Assessment", "Incident Response", "Linux", "Penetration Testing", "SIEM Tools"],
+    "job_type": "Full-time",
+    "key_responsibilities": [
+      "Monitor security event logs and analyze real-time threats",
+      "Conduct vulnerability penetration testing and patch management",
+      "Develop security compliance guidelines and employee security awareness training"
+    ],
+    "career_roadmap": [
+      {
+        "stage": "Security Operations Specialist",
+        "timeframe": "0 - 2 Years",
+        "focus": "SOC monitoring, log management, and baseline security compliance."
+      },
+      {
+        "stage": "Cybersecurity Analyst",
+        "timeframe": "2 - 5 Years",
+        "focus": "Threat hunting, incident response, penetration testing, and network hardening."
+      },
+      {
+        "stage": "Chief Information Security Officer (CISO)",
+        "timeframe": "5+ Years",
+        "focus": "Enterprise security policies, threat governance, and risk mitigation."
+      }
+    ],
+    "recommended_courses": [
+      "CompTIA Security+ Certification",
+      "Certified Ethical Hacker (CEH) Course",
+      "Google Cybersecurity Certificate"
+    ]
+  },
+  {
+    "id": "job_005",
+    "title": "Mechanical Engineer",
+    "description": "Design, analyze, and test mechanical components, thermal systems, and manufacturing machinery. Utilize 3D CAD modeling (SolidWorks, AutoCAD), finite element analysis (FEA), and materials science principles.",
+    "category": "Engineering",
+    "experience_level": "Mid-Level",
+    "salary_range": "35,000 - 60,000 PHP/month",
+    "location": "Taguig City, Philippines",
+    "skills_required": ["Mechanical Engineering", "CAD Software", "SolidWorks", "Materials Science", "Problem Solving", "Thermodynamics"],
+    "job_type": "Full-time",
+    "key_responsibilities": [
+      "Develop 3D mechanical schematics and production blueprints",
+      "Perform stress, thermal, and structural simulations using FEA software",
+      "Supervise mechanical assembly testing and quality control inspections"
+    ],
+    "career_roadmap": [
+      {
+        "stage": "Assistant Mechanical Engineer",
+        "timeframe": "0 - 2 Years",
+        "focus": "CAD drafting, component tolerance checking, and testing assistance."
+      },
+      {
+        "stage": "Mechanical Design Engineer",
+        "timeframe": "2 - 5 Years",
+        "focus": "Product development, thermal modeling, and prototype validation."
+      },
+      {
+        "stage": "Principal Systems Engineer",
+        "timeframe": "5+ Years",
+        "focus": "Engineering project management, vendor management, and R&D strategy."
+      }
+    ],
+    "recommended_courses": [
+      "SolidWorks Mechanical Design Associate (CSWA)",
+      "Finite Element Analysis for Engineers",
+      "Fundamentals of Modern Manufacturing"
+    ]
+  },
+  {
+    "id": "job_006",
+    "title": "Financial Analyst",
+    "description": "Evaluate investment portfolios, analyze corporate financial metrics, build complex forecasting models in Excel, and generate strategic risk/reward reporting for executive decision-making.",
+    "category": "Finance & Business",
+    "experience_level": "Mid-Level",
+    "salary_range": "45,000 - 75,000 PHP/month",
+    "location": "Metro Manila, Philippines",
+    "skills_required": ["Financial Analysis", "Excel", "Financial Modeling", "Risk Assessment", "Accounting", "Data Analysis", "Bloomberg Terminal"],
+    "job_type": "Full-time",
+    "key_responsibilities": [
+      "Build discounted cash flow (DCF) models and valuation forecasts",
+      "Analyze corporate balance sheets, cash flow statements, and market trends",
+      "Prepare investment thesis recommendations for portfolio managers"
+    ],
+    "career_roadmap": [
+      {
+        "stage": "Junior Financial Analyst",
+        "timeframe": "0 - 2 Years",
+        "focus": "Financial statement analysis, data entry, and variance reporting."
+      },
+      {
+        "stage": "Senior Financial Analyst",
+        "timeframe": "2 - 5 Years",
+        "focus": "Complex financial modeling, M&A evaluation, and capital budgeting."
+      },
+      {
+        "stage": "Finance Director / CFO",
+        "timeframe": "5+ Years",
+        "focus": "Corporate capital management, investor relations, and strategic growth."
+      }
+    ],
+    "recommended_courses": [
+      "CFA Level 1 Preparation Course",
+      "Financial Modeling & Valuation Analyst (FMVA)",
+      "Advanced Excel for Financial Engineers"
+    ]
+  },
+  {
+    "id": "job_007",
+    "title": "Digital Marketing Specialist",
+    "description": "Plan, run, and optimize omnichannel digital marketing campaigns spanning SEO, Google Ads (PPC), social media advertising, content creation, and analytics tracking to drive brand engagement.",
+    "category": "Marketing & Media",
+    "experience_level": "Mid-Level",
+    "salary_range": "32,000 - 55,000 PHP/month",
+    "location": "Cebu City, Philippines",
+    "skills_required": ["SEO", "Content Marketing", "Google Analytics", "PPC", "Social Media", "Copywriting", "Email Campaigns"],
+    "job_type": "Full-time",
+    "key_responsibilities": [
+      "Optimize website content and metadata for search engine rankings",
+      "Manage Google Ads and Meta ad spend campaigns with ROI tracking",
+      "Analyze campaign conversion funnel performance using Google Analytics"
+    ],
+    "career_roadmap": [
+      {
+        "stage": "Digital Marketing Assistant",
+        "timeframe": "0 - 2 Years",
+        "focus": "Social media scheduling, blog drafting, and basic ad management."
+      },
+      {
+        "stage": "Digital Marketing Specialist",
+        "timeframe": "2 - 4 Years",
+        "focus": "PPC budget allocation, SEO audits, conversion rate optimization."
+      },
+      {
+        "stage": "Head of Growth Marketing",
+        "timeframe": "5+ Years",
+        "focus": "Brand expansion strategy, customer acquisition cost reduction, and team leadership."
+      }
+    ],
+    "recommended_courses": [
+      "Google Digital Marketing & E-commerce Professional Certificate",
+      "HubSpot Content Marketing & SEO Certification",
+      "Meta Certified Digital Marketing Associate"
+    ]
+  },
+  {
+    "id": "job_008",
+    "title": "Civil Engineer",
+    "description": "Design and manage civil infrastructure projects such as transportation networks, structural buildings, bridges, and stormwater management systems. Inspect field construction to comply with structural codes.",
+    "category": "Engineering",
+    "experience_level": "Entry-Level",
+    "salary_range": "30,000 - 48,000 PHP/month",
+    "location": "Cebu City, Philippines",
+    "skills_required": ["Civil Engineering", "Project Management", "Construction", "AutoCAD", "Safety Standards", "Structural Analysis"],
+    "job_type": "Full-time",
+    "key_responsibilities": [
+      "Create structural blueprints and 2D/3D CAD site designs",
+      "Conduct site inspections and monitor safety standard adherence",
+      "Calculate material requirements, cost estimates, and project timelines"
+    ],
+    "career_roadmap": [
+      {
+        "stage": "Junior Site Engineer",
+        "timeframe": "0 - 2 Years",
+        "focus": "Field inspection, quantity surveying, and CAD drafting support."
+      },
+      {
+        "stage": "Structural / Civil Engineer",
+        "timeframe": "2 - 5 Years",
+        "focus": "Structural modeling, permit processing, and project management."
+      },
+      {
+        "stage": "Project Director / Engineering Consultant",
+        "timeframe": "5+ Years",
+        "focus": "Mega-infrastructure planning, regulatory approval, and contract management."
+      }
+    ],
+    "recommended_courses": [
+      "AutoCAD Civil 3D Fundamentals",
+      "Project Management Professional (PMP) Basics",
+      "Structural Engineering Analysis & Design"
+    ]
+  },
+  {
+    "id": "job_009",
+    "title": "AI / Machine Learning Engineer",
+    "description": "Build, train, and deploy advanced artificial intelligence algorithms, neural networks, and NLP systems. Utilize PyTorch, TensorFlow, vector databases, and MLOps tools to bring AI solutions to life.",
+    "category": "Data & AI",
+    "experience_level": "Mid-Level",
+    "salary_range": "70,000 - 110,000 PHP/month",
+    "location": "Metro Manila, Philippines",
+    "skills_required": ["Python", "Machine Learning", "Deep Learning", "PyTorch", "TensorFlow", "NLP", "Vector Databases", "MLOps"],
+    "job_type": "Full-time",
+    "key_responsibilities": [
+      "Train large language models (LLMs) and neural networks on specialized datasets",
+      "Build RAG pipelines and vector similarity indexing for intelligent agents",
+      "Deploy models to cloud endpoints with Docker and Kubernetes"
+    ],
+    "career_roadmap": [
+      {
+        "stage": "ML Software Developer",
+        "timeframe": "0 - 2 Years",
+        "focus": "Data preprocessing, basic model training, API wrapping."
+      },
+      {
+        "stage": "AI / ML Engineer",
+        "timeframe": "2 - 5 Years",
+        "focus": "Custom neural architecture design, fine-tuning, RAG optimization, MLOps."
+      },
+      {
+        "stage": "Principal AI Architect",
+        "timeframe": "5+ Years",
+        "focus": "Generative AI roadmap, foundation model research, enterprise AI integration."
+      }
+    ],
+    "recommended_courses": [
+      "DeepLearning.AI Generative AI & RAG Specialization",
+      "PyTorch for Deep Learning Bootcamp",
+      "MLOps Specialization by Andrew Ng"
+    ]
+  },
+  {
+    "id": "job_010",
+    "title": "Cloud Infrastructure Engineer",
+    "description": "Design, deploy, and maintain high-availability cloud environments on AWS, Azure, or GCP. Implement infrastructure as code (Terraform), CI/CD pipelines, containerization (Docker, Kubernetes), and monitoring.",
+    "category": "Software Engineering",
+    "experience_level": "Mid-Level",
+    "salary_range": "55,000 - 90,000 PHP/month",
+    "location": "Makati City, Philippines",
+    "skills_required": ["Cloud Computing", "AWS", "Docker", "Kubernetes", "Terraform", "Linux", "CI/CD", "DevOps"],
+    "job_type": "Full-time",
+    "key_responsibilities": [
+      "Automate cloud resource provisioning using Terraform and Ansible",
+      "Maintain automated CI/CD build and release pipelines",
+      "Ensure 99.99% system uptime, disaster recovery, and auto-scaling performance"
+    ],
+    "career_roadmap": [
+      {
+        "stage": "Associate DevOps Engineer",
+        "timeframe": "0 - 2 Years",
+        "focus": "CI/CD maintenance, Docker container management, cloud administration."
+      },
+      {
+        "stage": "Cloud Solutions Architect",
+        "timeframe": "2 - 5 Years",
+        "focus": "Infrastructure automation, multi-cloud strategy, cost optimization."
+      },
+      {
+        "stage": "VP of Infrastructure & Operations",
+        "timeframe": "5+ Years",
+        "focus": "Enterprise cloud strategy, reliability engineering leadership."
+      }
+    ],
+    "recommended_courses": [
+      "AWS Certified Solutions Architect Associate",
+      "Docker & Kubernetes: The Complete Guide",
+      "Terraform Certified Associate Course"
+    ]
+  }
+]

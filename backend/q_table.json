@@ -1,0 +1,75 @@
+{
+  "2020114405": {
+    "last_state": "Data Analysis, Teamwork, Critical Thinking_Mobile Apps, Social Media, Construction",
+    "states": {
+      "Data Analysis, Teamwork, Critical Thinking_Mobile Apps, Social Media, Construction": {
+        "Social Media Manager": 0.55,
+        "Journalist": 0.55,
+        "Product Manager": 0.35
+      }
+    }
+  },
+  "2024180029": {
+    "last_state": "Python, C++_Game Development",
+    "states": {
+      "Python, Machine Learning_AI": {
+        "Data Scientist": 0.01,
+        "AI Researcher": 0.01
+      },
+      "Python_AI": {
+        "Data Scientist": 0.01
+      },
+      "Python, Java, C++_Startups": {
+        "Software Engineer": 0.01
+      },
+      "JavaScript_Startups": {
+        "AI Researcher": 0.01
+      },
+      "C++_AI": {
+        "AI Researcher": 0.01
+      },
+      "C++_Education": {
+        "Software Engineer": 0.01
+      },
+      "Java, C++_Robotics": {
+        "Software Engineer": 0.01
+      },
+      "JavaScript_Mobile Apps": {
+        "Social Media Manager": -0.01
+      },
+      "SQL_Healthcare": {
+        "Data Engineer": 0.01
+      },
+      "Python, C++_Game Development": {
+        "Game Developer": 0.01
+      }
+    }
+  },
+  "2024-10088": {
+    "last_state": "machine learning_python|ai & machine learning",
+    "skills_input": "Python, Machine Learning",
+    "interests_input": "AI & Machine Learning",
+    "saved_bookmarks": [],
+    "target_careers": [
+      "AI / Machine Learning Engineer"
+    ],
+    "states": {
+      "machine learning_python|ai & machine learning": {
+        "AI / Machine Learning Engineer": 0.018
+      }
+    }
+  },
+  "2024-180029": {
+    "last_state": "c++_data structures_git_machine learning_python_sql|ai & machine learning_robotics & mechanical systems_web & software development",
+    "skills_input": "Python, Data Structures, SQL, Machine Learning, C++, Git",
+    "interests_input": "AI & Machine Learning, Web & Software Development, Robotics & Mechanical Systems",
+    "saved_bookmarks": [],
+    "target_careers": [],
+    "states": {
+      "c++_data structures_git_machine learning_python_sql|ai & machine learning_robotics & mechanical systems_web & software development": {
+        "Civil Engineer": -0.0075,
+        "Software Engineer": 0.0075
+      }
+    }
+  }
+}
