@@ -166,7 +166,7 @@ function initUserSession(user) {
   if (user.interests) {
     interests = user.interests.split(',').map(i => i.trim()).filter(Boolean);
   } else {
-    interests = ['AI/ML'];
+    interests = ['Artificial Intelligence & Machine Learning (AI/ML)'];
   }
 
   renderTags(skillTagsDiv, skills, 'skills');
@@ -304,8 +304,8 @@ async function fetchRecommendations() {
   resultsDiv.innerHTML = `
     <div class="glass-card empty-state">
       <i class="fa-solid fa-spinner fa-spin"></i>
-      <h3>Analyzing Skills & Querying RAG Database...</h3>
-      <p>Matching Mapúa Manila & Makati degree programs and running RL Q-table score boosts.</p>
+      <h3>Analyzing Skills & Querying Vector Database...</h3>
+      <p>Matching top accredited Philippine universities and leading employer requirements.</p>
     </div>
   `;
 
@@ -351,7 +351,8 @@ function renderRecommendations(jobs) {
       j.title.toLowerCase().includes(searchQuery) ||
       j.description.toLowerCase().includes(searchQuery) ||
       j.category.toLowerCase().includes(searchQuery) ||
-      (j.mapua_degrees || []).some(d => d.toLowerCase().includes(searchQuery)) ||
+      (j.top_philippine_employers || []).some(e => e.toLowerCase().includes(searchQuery)) ||
+      (j.top_recommended_universities || []).some(u => u.toLowerCase().includes(searchQuery)) ||
       j.skills_required.some(s => s.toLowerCase().includes(searchQuery))
     );
   }
@@ -382,9 +383,8 @@ function renderRecommendations(jobs) {
     const matchedChips = job.matched_skills.map(s => `<span class="skill-chip matched"><i class="fa-solid fa-check"></i> ${s}</span>`).join(' ');
     const missingChips = job.missing_skills.map(s => `<span class="skill-chip missing"><i class="fa-solid fa-lightbulb"></i> ${s}</span>`).join(' ');
 
-    const mapuaDegreeChips = (job.mapua_degrees || []).map(d => `<span class="mapua-chip"><i class="fa-solid fa-graduation-cap"></i> ${d}</span>`).join(' ');
-    const mapuaTrackChips = (job.mapua_tracks || []).map(t => `<span class="tag-chip">${t}</span>`).join(' ');
-    const mapuaGradChips = (job.mapua_graduate_degrees || []).map(g => `<span class="tag-chip interest">${g}</span>`).join(' ');
+    const employerChips = (job.top_philippine_employers || []).map(e => `<span class="meta-chip category"><i class="fa-solid fa-building"></i> ${e}</span>`).join(' ');
+    const universityChips = (job.top_recommended_universities || []).map(u => `<span class="mapua-chip"><i class="fa-solid fa-university"></i> ${u}</span>`).join(' ');
     const sideProjectItems = (job.side_project_blueprints || []).map(p => `<li>${p}</li>`).join('');
 
     const stageAdviceText = job.stage_advice ? (job.stage_advice[currentStage] || job.stage_advice["student"]) : "";
@@ -419,11 +419,18 @@ function renderRecommendations(jobs) {
         </div>
       </div>
 
-      <!-- Mapúa Degree Alignment Box -->
+      <!-- Top Employers in PH -->
+      <div style="margin-bottom: 12px;">
+        <span style="font-size: 12px; font-weight: 600; color: var(--sky-blue); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px;">
+          <i class="fa-solid fa-building"></i> Top Hiring Employers in the Philippines:
+        </span>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px;">${employerChips}</div>
+      </div>
+
+      <!-- Accredited Universities Box -->
       <div class="mapua-degree-box">
-        <div class="mapua-degree-header"><i class="fa-solid fa-university"></i> Recommended Mapúa University Programs (Manila & Makati):</div>
-        <div>${mapuaDegreeChips}</div>
-        ${mapuaTrackChips ? `<div style="margin-top: 6px; font-size: 12px;"><strong>Specialization Tracks:</strong> ${mapuaTrackChips}</div>` : ''}
+        <div class="mapua-degree-header"><i class="fa-solid fa-university"></i> Recommended Accredited Universities (CHED COE, ABET, THE/QS):</div>
+        <div>${universityChips}</div>
       </div>
 
       <!-- Stage-Specific Advisory Banner -->
@@ -503,13 +510,6 @@ function renderRecommendations(jobs) {
           ${sideProjectItems || '<li>Build a domain project related to your core skills.</li>'}
         </ul>
 
-        ${mapuaGradChips ? `
-          <div style="margin-bottom: 14px;">
-            <h5 style="color: var(--sky-blue); margin-bottom: 4px;"><i class="fa-solid fa-award"></i> Mapúa Graduate Studies Pathway (MS / MBA):</h5>
-            <div>${mapuaGradChips}</div>
-          </div>
-        ` : ''}
-
         <h4 style="color: var(--amber-gold); margin-bottom: 8px;"><i class="fa-solid fa-road"></i> Career Progression Pathway</h4>
         <div class="roadmap-timeline">
           ${roadmapSteps || '<p>Standard industry progression applies.</p>'}
@@ -533,7 +533,7 @@ function toggleRoadmap(id) {
   if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
 }
 
-// --- Cardi AI Assistant Chat Widget ---
+// --- AI Career Advisor Chat Widget ---
 function toggleCardiChat() {
   cardiDrawer.style.display = cardiDrawer.style.display === 'none' ? 'flex' : 'none';
 }
@@ -543,7 +543,6 @@ async function sendCardiMessage() {
   const text = input.value.trim();
   if (!text) return;
 
-  // Add User Message Bubble
   const userMsg = document.createElement('div');
   userMsg.className = 'cardi-message user';
   userMsg.textContent = text;
@@ -551,10 +550,9 @@ async function sendCardiMessage() {
   input.value = '';
   cardiMessages.scrollTop = cardiMessages.scrollHeight;
 
-  // Loading indicator
   const botMsg = document.createElement('div');
   botMsg.className = 'cardi-message bot';
-  botMsg.innerHTML = '🔴💛 <em>Cardi is thinking...</em>';
+  botMsg.innerHTML = '🤖 <em>AI Advisor is analyzing...</em>';
   cardiMessages.appendChild(botMsg);
   cardiMessages.scrollTop = cardiMessages.scrollHeight;
 
@@ -574,7 +572,7 @@ async function sendCardiMessage() {
     botMsg.innerHTML = data.reply.replace(/\n/g, '<br>');
 
   } catch (err) {
-    botMsg.innerHTML = '🔴💛 <strong>Cardi:</strong> Sorry, I could not connect to my knowledge base right now.';
+    botMsg.innerHTML = '🤖 <strong>AI Advisor:</strong> Sorry, I could not connect to my knowledge base right now.';
   }
   cardiMessages.scrollTop = cardiMessages.scrollHeight;
 }
@@ -622,22 +620,22 @@ async function sendFeedback(jobTitle, feedbackType) {
 // --- Career Quiz Modal ---
 const QUIZ_QUESTIONS = [
   {
-    question: "What is your primary technical or professional domain?",
+    question: "What is your primary professional or academic interest domain?",
     options: [
-      { text: "Software & Web Development", skills: ["Python", "JavaScript", "C++"], interests: ["Web Development"] },
-      { text: "Artificial Intelligence & Data Science", skills: ["Python", "TensorFlow", "Machine Learning"], interests: ["AI/ML"] },
-      { text: "User Interface & Product Design", skills: ["UX Design", "Figma", "UI Design"], interests: ["UI/UX Design"] },
-      { text: "Cybersecurity & IT Infrastructure", skills: ["Network Security", "Linux", "Encryption"], interests: ["Cybersecurity"] },
-      { text: "Mechanical or Civil Engineering", skills: ["CAD Software", "SolidWorks", "AutoCAD"], interests: ["Mechanical Systems"] }
+      { text: "Medicine & Healthcare (Clinical, Patient Care, Diagnostics)", skills: ["Clinical Diagnosis", "Patient Care"], interests: ["Medicine & Healthcare"] },
+      { text: "Law & Legal Services (Corporate Law, Litigation, Compliance)", skills: ["Legal Research", "Corporate Law"], interests: ["Law & Legal Services"] },
+      { text: "Artificial Intelligence & Data Science", skills: ["Python", "TensorFlow", "Machine Learning"], interests: ["Artificial Intelligence & Machine Learning (AI/ML)"] },
+      { text: "Architecture & Built Environment (Building Design, BIM)", skills: ["Architectural Design", "AutoCAD"], interests: ["Architecture & Built Environment"] },
+      { text: "Engineering & Infrastructure (Civil, Mechanical, Electrical)", skills: ["CAD Software", "Civil Engineering"], interests: ["Civil & Structural Engineering"] }
     ]
   },
   {
-    question: "What type of daily problem-solving excites you most?",
+    question: "What type of workplace impact excites you most?",
     options: [
-      { text: "Building neural networks & AI data pipelines", skills: ["PyTorch", "Data Analysis"], interests: ["AI/ML"] },
-      { text: "Designing elegant user interfaces & screen wireframes", skills: ["Adobe XD", "Wireframing"], interests: ["UI/UX Design"] },
-      { text: "Architecting cloud systems & securing networks", skills: ["Cloud Computing", "Docker"], interests: ["Cloud & DevOps"] },
-      { text: "Analyzing financial risk & market forecasts", skills: ["Financial Analysis", "Excel"], interests: ["Fintech & Investment"] }
+      { text: "Diagnosing illnesses and advancing patient outcomes at top medical centers", skills: ["Pharmacology"], interests: ["Medicine & Healthcare"] },
+      { text: "Handling corporate M&A deals and court litigation at top law firms", skills: ["Litigation"], interests: ["Law & Legal Services"] },
+      { text: "Designing sustainable skyscrapers and urban developments", skills: ["Revit"], interests: ["Architecture & Built Environment"] },
+      { text: "Building neural networks and AI models for tech unicorns", skills: ["PyTorch"], interests: ["Artificial Intelligence & Machine Learning (AI/ML)"] }
     ]
   }
 ];
@@ -702,7 +700,7 @@ function selectQuizOption(optIndex) {
   renderQuizQuestion();
 }
 
-// --- Salary Charts Modal (Chart.js) ---
+// --- Salary Charts Modal ---
 function openChartsModal() {
   chartsModal.style.display = 'flex';
   renderSalaryChart();
@@ -762,7 +760,7 @@ function renderSalaryChart() {
   });
 }
 
-// --- Export Career Roadmap PDF (jsPDF) ---
+// --- Export PDF ---
 function exportRoadmapPDF(jobTitle) {
   const job = currentRecommendations.find(j => j.title === jobTitle);
   if (!job) return;
@@ -773,7 +771,7 @@ function exportRoadmapPDF(jobTitle) {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(20);
   doc.setTextColor(220, 38, 38);
-  doc.text("Career Path & Mapúa Academic Report", 20, 20);
+  doc.text("Career Path & Academic Guidance Report", 20, 20);
 
   doc.setFontSize(12);
   doc.setTextColor(50, 50, 50);
@@ -785,12 +783,19 @@ function exportRoadmapPDF(jobTitle) {
   doc.line(20, 45, 190, 45);
 
   doc.setFont("helvetica", "bold");
-  doc.text("Recommended Mapúa Programs:", 20, 55);
+  doc.text("Top Hiring Philippine Employers:", 20, 55);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
-  doc.text((job.mapua_degrees || []).join(', ') || 'N/A', 20, 62);
+  doc.text((job.top_philippine_employers || []).join(', ') || 'N/A', 20, 62);
 
-  let currentY = 72;
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(12);
+  doc.text("Recommended Accredited Universities:", 20, 72);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(10);
+  doc.text((job.top_recommended_universities || []).join(', ') || 'N/A', 20, 79);
+
+  let currentY = 90;
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(12);
@@ -814,21 +819,8 @@ function exportRoadmapPDF(jobTitle) {
     currentY += 6;
   });
 
-  currentY += 6;
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(12);
-  doc.text("Career Progression Pathway:", 20, currentY);
-  currentY += 8;
-
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  (job.career_roadmap || []).forEach(step => {
-    doc.text(`• ${step.stage} (${step.timeframe}): ${step.focus}`, 20, currentY);
-    currentY += 7;
-  });
-
-  doc.save(`${job.title.replace(/\s+/g, '_')}_Mapua_Career_Roadmap.pdf`);
-  showToast(`Exported Mapúa Career PDF for ${job.title}!`, 'success');
+  doc.save(`${job.title.replace(/\s+/g, '_')}_Career_Roadmap.pdf`);
+  showToast(`Exported PDF for ${job.title}!`, 'success');
 }
 
 // --- RL Modal ---

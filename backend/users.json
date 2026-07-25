@@ -1,0 +1,88 @@
+{
+  "user_0c99ecab": {
+    "user_id": "user_0c99ecab",
+    "username": "test_user",
+    "username_clean": "test_user",
+    "email": "justindeleon.occ@gmail.com",
+    "email_clean": "justindeleon.occ@gmail.com",
+    "full_name": "Test",
+    "password_hash": "aadb7ebb57508756690e2a98bae255d1:17015ee082fae5031524fb716642bf9baecb60f374175d76978c063ee5f7a484",
+    "skills": "Python, Machine Learning, TensorFlow, PyTorch, Data Analysis",
+    "interests": "AI & Machine Learning, Web & Software Development, AI/ML",
+    "saved_bookmarks": [],
+    "target_careers": [
+      "Software Engineer"
+    ],
+    "quiz_completed": false
+  },
+  "user_alex_ai": {
+    "user_id": "user_alex_ai",
+    "username": "alex_ai",
+    "username_clean": "alex_ai",
+    "email": "alex@example.com",
+    "email_clean": "alex@example.com",
+    "full_name": "Alex Rivera",
+    "password_hash": "7ecf93cdedecdfd67fa07d19c25ab8c8:dcef3f0b01a5f75d5d22b20278372c76b944f5166f72a755bdcc5bcb5ec4f8e1",
+    "skills": "Python, TensorFlow, Machine Learning",
+    "interests": "AI/ML, Data Science",
+    "saved_bookmarks": [],
+    "target_careers": [],
+    "quiz_completed": true
+  },
+  "user_maria_eng": {
+    "user_id": "user_maria_eng",
+    "username": "maria_eng",
+    "username_clean": "maria_eng",
+    "email": "maria@example.com",
+    "email_clean": "maria@example.com",
+    "full_name": "Maria Santos",
+    "password_hash": "a7536770b7eab665b6dfc74119f9fb35:3e7f6c58af8e5dc31d0e8c4ebdf69aaf2c37db092daf931de92afbb58697296a",
+    "skills": "CAD Software, SolidWorks, AutoCAD",
+    "interests": "Mechanical Systems, Engineering",
+    "saved_bookmarks": [],
+    "target_careers": [],
+    "quiz_completed": true
+  },
+  "user_dr_cruz": {
+    "user_id": "user_dr_cruz",
+    "username": "dr_cruz",
+    "username_clean": "dr_cruz",
+    "email": "cruz@example.com",
+    "email_clean": "cruz@example.com",
+    "full_name": "Dr. Christian Cruz",
+    "password_hash": "6cf77557cd457f2d379697a16f3add8f:6a8373b9a1b985f8e587d7f4fc4241773b1d2db5f3198c0102773461b890cca6",
+    "skills": "Clinical Medicine, Diagnostics, Patient Care",
+    "interests": "Medicine, Healthcare",
+    "saved_bookmarks": [],
+    "target_careers": [],
+    "quiz_completed": true
+  },
+  "user_atty_santos": {
+    "user_id": "user_atty_santos",
+    "username": "atty_santos",
+    "username_clean": "atty_santos",
+    "email": "atty@example.com",
+    "email_clean": "atty@example.com",
+    "full_name": "Atty. Sophia Santos",
+    "password_hash": "5e1359f62ceffc5f382e79af6504e2d6:b0e3074c460712d66a0e1e5461f76de36f4954dd4d7277892258b6eb61035ff3",
+    "skills": "Legal Research, Corporate Law, Litigation",
+    "interests": "Law, Legal Services",
+    "saved_bookmarks": [],
+    "target_careers": [],
+    "quiz_completed": true
+  },
+  "user_arch_reyes": {
+    "user_id": "user_arch_reyes",
+    "username": "arch_reyes",
+    "username_clean": "arch_reyes",
+    "email": "reyes@example.com",
+    "email_clean": "reyes@example.com",
+    "full_name": "Arch. Marco Reyes",
+    "password_hash": "ecef05a3a6861efd7921bb046b55e95b:323aec49d7ae41853faf7834082db82a409ad55111241952bb31916ea9873d2b",
+    "skills": "Architectural Design, AutoCAD, Revit, 3D Modeling",
+    "interests": "Architecture, Urban Planning",
+    "saved_bookmarks": [],
+    "target_careers": [],
+    "quiz_completed": true
+  }
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Career Path Navigator - Mapúa Academic & Career Guidance</title>
+  <title>Career Path Navigator - Academic & Career Guidance</title>
 
   <!-- Google Fonts: Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
       <i class="fa-solid fa-compass-drafting brand-icon"></i>
       <div>
         <span class="brand-title">Career Path Navigator</span>
-        <span class="brand-subtitle">Mapúa Manila & Makati Academic Guidance</span>
+        <span class="brand-subtitle">Philippine Academic & Employer Guidance</span>
       </div>
     </div>
 
@@ -76,7 +76,7 @@
           <i class="fa-solid fa-graduation-cap"></i>
         </div>
         <h2>Career Path Navigator</h2>
-        <p>Personalized career exploration aligned with Mapúa University Manila & Makati degree programs.</p>
+        <p>Personalized career exploration mapped to accredited Philippine universities and top hiring employers.</p>
       </div>
 
       <!-- Auth Tabs: Sign In vs Sign Up -->
@@ -98,9 +98,11 @@
         </div>
 
         <div class="quick-students">
-          <span>Demo Accounts:</span>
-          <button type="button" class="chip-btn" onclick="quickDemoLogin('alex_ai', 'password123')">Alex (AI & Data)</button>
-          <button type="button" class="chip-btn" onclick="quickDemoLogin('maria_eng', 'password123')">Maria (Engineering)</button>
+          <span>Working Demo Accounts (Password: <code>password123</code>):</span>
+          <button type="button" class="chip-btn" onclick="quickDemoLogin('alex_ai', 'password123')">Alex (AI/Tech)</button>
+          <button type="button" class="chip-btn" onclick="quickDemoLogin('dr_cruz', 'password123')">Dr. Cruz (Medicine)</button>
+          <button type="button" class="chip-btn" onclick="quickDemoLogin('atty_santos', 'password123')">Atty. Santos (Law)</button>
+          <button type="button" class="chip-btn" onclick="quickDemoLogin('arch_reyes', 'password123')">Arch. Reyes (Architecture)</button>
         </div>
 
         <button type="submit" class="btn-primary full-width">
@@ -164,14 +166,12 @@
           <div class="quick-chips-container">
             <button class="quick-chip" onclick="quickAddSkill('Python')">+ Python</button>
             <button class="quick-chip" onclick="quickAddSkill('TensorFlow')">+ TensorFlow</button>
-            <button class="quick-chip" onclick="quickAddSkill('PyTorch')">+ PyTorch</button>
-            <button class="quick-chip" onclick="quickAddSkill('Machine Learning')">+ Machine Learning</button>
-            <button class="quick-chip" onclick="quickAddSkill('SQL')">+ SQL</button>
-            <button class="quick-chip" onclick="quickAddSkill('UX Design')">+ UX Design</button>
-            <button class="quick-chip" onclick="quickAddSkill('Figma')">+ Figma</button>
-            <button class="quick-chip" onclick="quickAddSkill('CAD Software')">+ CAD Software</button>
-            <button class="quick-chip" onclick="quickAddSkill('Cloud Computing')">+ Cloud</button>
-            <button class="quick-chip" onclick="quickAddSkill('Financial Analysis')">+ Finance</button>
+            <button class="quick-chip" onclick="quickAddSkill('Clinical Medicine')">+ Clinical Med</button>
+            <button class="quick-chip" onclick="quickAddSkill('Legal Research')">+ Legal Research</button>
+            <button class="quick-chip" onclick="quickAddSkill('Architectural Design')">+ Architecture</button>
+            <button class="quick-chip" onclick="quickAddSkill('Financial Auditing')">+ Financial Audit</button>
+            <button class="quick-chip" onclick="quickAddSkill('CAD Software')">+ CAD</button>
+            <button class="quick-chip" onclick="quickAddSkill('Network Security')">+ Security</button>
           </div>
         </div>
 
@@ -179,13 +179,13 @@
         <div class="input-section">
           <label for="skill-input"><i class="fa-solid fa-code"></i> Technical Skills:</label>
           <div class="input-with-button">
-            <input type="text" id="skill-input" list="skills-list" placeholder="Type a skill (e.g. Python, TensorFlow, C++)">
+            <input type="text" id="skill-input" list="skills-list" placeholder="Type a skill (e.g. Python, Legal Research, Clinical Medicine)">
             <button type="button" class="btn-add" onclick="addSkill()">Add</button>
           </div>
           <datalist id="skills-list">
             <option value="Python"><option value="TensorFlow"><option value="PyTorch"><option value="Java"><option value="C++">
-            <option value="Machine Learning"><option value="Deep Learning"><option value="SQL"><option value="Figma">
-            <option value="UX Design"><option value="CAD Software"><option value="Financial Analysis"><option value="SEO">
+            <option value="Machine Learning"><option value="Clinical Diagnosis"><option value="Legal Research"><option value="Architectural Design">
+            <option value="Financial Auditing"><option value="CAD Software"><option value="Civil Engineering"><option value="Network Security">
           </datalist>
           <div class="tag-list" id="skill-tags"></div>
         </div>
@@ -194,13 +194,20 @@
         <div class="input-section">
           <label for="interest-input"><i class="fa-solid fa-heart"></i> Career Interests & Fields:</label>
           <div class="input-with-button">
-            <input type="text" id="interest-input" list="interests-list" placeholder="Type an interest (e.g. AI/ML, UX, Startups)">
+            <input type="text" id="interest-input" list="interests-list" placeholder="Type an interest (e.g. AI/ML, Medicine, Law)">
             <button type="button" class="btn-add" onclick="addInterest()">Add</button>
           </div>
           <datalist id="interests-list">
-            <option value="AI/ML"><option value="AI & Machine Learning"><option value="Web & Software Development">
-            <option value="Cybersecurity"><option value="UI/UX Design"><option value="Cloud & DevOps">
-            <option value="Mechanical Systems"><option value="Fintech & Investment"><option value="Digital Growth">
+            <option value="Artificial Intelligence & Machine Learning (AI/ML)">
+            <option value="Web & Software Development">
+            <option value="Medicine & Healthcare">
+            <option value="Law & Legal Services">
+            <option value="Architecture & Built Environment">
+            <option value="Cybersecurity & IT Security">
+            <option value="Financial Analysis & Investment">
+            <option value="Accounting & Auditing (CPA)">
+            <option value="Civil & Structural Engineering">
+            <option value="Mechanical & Manufacturing Engineering">
           </datalist>
           <div class="tag-list" id="interest-tags"></div>
         </div>
@@ -218,7 +225,7 @@
           <div class="controls-top">
             <div class="search-box">
               <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" id="search-filter" placeholder="Search career titles, degree programs, or keywords..." oninput="filterRecommendations()">
+              <input type="text" id="search-filter" placeholder="Search career titles, top employers, or degree programs..." oninput="filterRecommendations()">
             </div>
 
             <div class="select-box">
@@ -237,10 +244,11 @@
             <button class="tab-btn active" data-category="All" onclick="setCategoryFilter('All', this)">All Careers</button>
             <button class="tab-btn" data-category="Data & AI" onclick="setCategoryFilter('Data & AI', this)">Data & AI</button>
             <button class="tab-btn" data-category="Software Engineering" onclick="setCategoryFilter('Software Engineering', this)">Software</button>
-            <button class="tab-btn" data-category="Design & Product" onclick="setCategoryFilter('Design & Product', this)">Design</button>
+            <button class="tab-btn" data-category="Medicine & Healthcare" onclick="setCategoryFilter('Medicine & Healthcare', this)">Medicine</button>
+            <button class="tab-btn" data-category="Law & Legal Services" onclick="setCategoryFilter('Law & Legal Services', this)">Law</button>
+            <button class="tab-btn" data-category="Architecture & Design" onclick="setCategoryFilter('Architecture & Design', this)">Architecture</button>
             <button class="tab-btn" data-category="Engineering" onclick="setCategoryFilter('Engineering', this)">Engineering</button>
-            <button class="tab-btn" data-category="Cybersecurity & IT" onclick="setCategoryFilter('Cybersecurity & IT', this)">Cybersecurity</button>
-            <button class="tab-btn" data-category="Finance & Business" onclick="setCategoryFilter('Finance & Business', this)">Finance</button>
+            <button class="tab-btn" data-category="Finance & Business" onclick="setCategoryFilter('Finance & Business', this)">Finance & Accounting</button>
           </div>
         </div>
 
@@ -254,7 +262,7 @@
           <div class="empty-state glass-card">
             <i class="fa-solid fa-compass"></i>
             <h3>Ready to Explore Your Career Path?</h3>
-            <p>Add your skills and interests in the left panel to generate Mapúa-aligned job recommendations.</p>
+            <p>Add your skills and interests in the left panel to generate recommendations mapped to top Philippine companies and accredited universities.</p>
           </div>
         </div>
       </section>
@@ -262,20 +270,20 @@
     </div>
   </main>
 
-  <!-- Floating Cardi AI Assistant Chat Widget -->
+  <!-- Floating AI Assistant Chat Widget -->
   <div id="cardi-chat-widget" class="cardi-widget-container">
     <button id="cardi-fab" class="cardi-fab-button" onclick="toggleCardiChat()">
-      <div class="cardi-avatar">🔴💛</div>
-      <span class="cardi-fab-label">Ask Cardi AI</span>
+      <div class="cardi-avatar"><i class="fa-solid fa-robot"></i></div>
+      <span class="cardi-fab-label">AI Career Advisor</span>
     </button>
 
     <div id="cardi-chat-drawer" class="cardi-drawer glass-card" style="display: none;">
       <div class="cardi-drawer-header">
         <div class="cardi-header-title">
-          <span class="cardi-avatar-sm">🔴💛</span>
+          <span class="cardi-avatar-sm"><i class="fa-solid fa-robot"></i></span>
           <div>
-            <strong>Cardi</strong>
-            <span class="cardi-status-text">Mapúa AI Career Advisor</span>
+            <strong>AI Career Advisor</strong>
+            <span class="cardi-status-text">Philippine Academic & Employer Intelligence</span>
           </div>
         </div>
         <button class="modal-close" onclick="toggleCardiChat()">&times;</button>
@@ -283,13 +291,13 @@
 
       <div id="cardi-chat-messages" class="cardi-messages-container">
         <div class="cardi-message bot">
-          🔴💛 <strong>Hi! I'm Cardi, your Mapúa AI Career Advisor!</strong><br>
-          Ask me anything about Mapúa Manila & Makati degree programs, tracks, electives, side projects, or career shifts!
+          🤖 <strong>Hi! I am your AI Career Advisor.</strong><br>
+          Ask me anything about accredited Philippine universities (CHED COE, THE/QS, ABET), top hiring companies, or career shifts!
         </div>
       </div>
 
       <form class="cardi-chat-input-bar" onsubmit="event.preventDefault(); sendCardiMessage();">
-        <input type="text" id="cardi-input" placeholder="Ask Cardi a question..." autocomplete="off">
+        <input type="text" id="cardi-input" placeholder="Ask a question..." autocomplete="off">
         <button type="submit" class="btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
       </form>
     </div>

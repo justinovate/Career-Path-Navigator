@@ -19,8 +19,17 @@ SYNONYM_MAP = {
     "ux/ui": ["ux design", "ui design", "figma", "adobe xd", "wireframing", "prototyping"],
     "devops": ["cloud computing", "aws", "docker", "kubernetes", "terraform", "ci/cd", "linux"],
     "cloud": ["cloud computing", "aws", "docker", "kubernetes", "terraform", "devops"],
-    "finance": ["financial analysis", "excel", "financial modeling", "risk assessment", "accounting"],
-    "seo": ["seo", "content marketing", "google analytics", "ppc", "digital marketing"],
+    "medicine": ["medical doctor", "physician", "clinical diagnosis", "patient care", "surgery", "pharmacology", "healthcare"],
+    "med": ["medical doctor", "physician", "clinical diagnosis", "patient care", "healthcare"],
+    "law": ["corporate lawyer", "legal counsel", "legal research", "corporate law", "litigation", "contract drafting"],
+    "legal": ["corporate lawyer", "legal counsel", "legal research", "corporate law", "litigation"],
+    "architecture": ["architectural design", "autocad", "revit", "3d modeling", "registered architect", "building codes"],
+    "archi": ["architectural design", "autocad", "revit", "3d modeling", "registered architect"],
+    "cpa": ["certified public accountant", "financial auditing", "taxation law", "ifrs", "accounting software"],
+    "accounting": ["certified public accountant", "financial auditing", "taxation law", "ifrs", "excel", "accounting"],
+    "finance": ["financial analysis", "excel", "financial modeling", "risk assessment", "investment banking"],
+    "civil": ["civil engineering", "project management", "construction", "autocad", "structural analysis"],
+    "mechanical": ["mechanical engineering", "cad software", "solidworks", "thermodynamics", "materials science"]
 }
 
 def load_jobs():
@@ -83,7 +92,6 @@ def expand_user_terms(user_skills, user_interests):
     for term in all_raw:
         if term in SYNONYM_MAP:
             expanded.update(SYNONYM_MAP[term])
-        # Partial key check
         for key, syns in SYNONYM_MAP.items():
             if key in term or term in key:
                 expanded.update(syns)
@@ -101,14 +109,12 @@ def calculate_skill_match(user_skills, expanded_terms, job_skills, job_category,
     for j_skill in job_skills:
         j_lower = j_skill.lower()
         found = False
-        # Direct user skill match
         for u_lower, u_orig in user_skills_lower.items():
             if u_lower == j_lower or u_lower in j_lower or j_lower in u_lower:
                 matched.append(j_skill)
                 found = True
                 break
         if not found:
-            # Check expanded terms
             for exp_term in expanded_terms:
                 if exp_term == j_lower or exp_term in j_lower or j_lower in exp_term:
                     matched.append(j_skill)
@@ -117,17 +123,15 @@ def calculate_skill_match(user_skills, expanded_terms, job_skills, job_category,
         if not found:
             missing.append(j_skill)
             
-    # Skill Score: weighted by direct matched skills + domain coverage
     matched_count = len(matched)
     total_required = len(job_skills)
     
     if matched_count > 0:
-        base_match_score = (matched_count / min(4, total_required))  # 1 to 4 matches yields 100%
+        base_match_score = (matched_count / min(3, total_required))
         base_match_score = min(1.0, base_match_score)
     else:
         base_match_score = 0.0
         
-    # Domain / Category alignment boost
     category_boost = 0.0
     for term in expanded_terms:
         if term in job_category.lower() or term in job_title.lower():
@@ -142,16 +146,16 @@ def generate_rag_reason(title, matched_skills, missing_skills, user_interests, c
     if matched_skills:
         reasons.append(f"Strongly leverages your skills in {', '.join(matched_skills[:3])}.")
     else:
-        reasons.append(f"Presents an exciting opportunity in the {category} domain.")
+        reasons.append(f"Presents an excellent opportunity in the {category} domain.")
         
     matching_interests = [i for i in user_interests if i.lower() in category.lower() or i.lower() in title.lower()]
     if matching_interests:
         reasons.append(f"Directly matches your interest in {', '.join(matching_interests)}.")
         
     if composite_score >= 80:
-        reasons.append("Top-tier RAG match based on your technical skillset and career domain.")
+        reasons.append("Top-tier match based on your skillset and target domain.")
     elif composite_score >= 60:
-        reasons.append("High contextual vector alignment with your specified career preferences.")
+        reasons.append("High contextual vector alignment with your career preferences.")
 
     if missing_skills:
         reasons.append(f"Next skills to acquire: {', '.join(missing_skills[:2])}.")
@@ -168,7 +172,6 @@ def recommend_jobs(skills, interests, student_id, category_filter=None, experien
     user_interests = parse_input_tokens(interests)
     expanded_terms = expand_user_terms(user_skills, user_interests)
     
-    # Query text for vector retrieval
     query_text = f"Title: {', '.join(user_interests)} {', '.join(user_skills)}. Category: {', '.join(user_interests)}. Skills: {', '.join(expanded_terms)}."
     
     query_vec = tfidf_vectorizer.transform([query_text])
@@ -193,21 +196,17 @@ def recommend_jobs(skills, interests, student_id, category_filter=None, experien
         if experience_filter and experience_filter.lower() != "all" and experience_filter.lower() not in exp_level.lower():
             continue
             
-        semantic_score = float(semantic_sims[idx])  # 0.0 to 1.0
+        semantic_score = float(semantic_sims[idx])
         
-        # Skill & Category match calculation
         skill_score, matched_skills, missing_skills = calculate_skill_match(
             user_skills, expanded_terms, job.get("skills_required", []), job_category, title
         )
         
-        # RL Adjustment
         rl_adjustment = float(state_data.get(title, 0.0))
         
-        # Composite Match Score: 50% Skill/Category match + 40% RAG Semantic similarity + 10% RL Boost
         rl_boost_norm = max(-0.25, min(0.25, rl_adjustment))
         composite_raw = (0.50 * skill_score) + (0.40 * min(1.0, semantic_score * 1.8)) + (0.10 * (0.5 + rl_boost_norm))
         
-        # Boost top relevant category matches (e.g. AI/ML query for AI/ML Engineer)
         if any(t in title.lower() or t in job_category.lower() for t in expanded_terms):
             composite_raw += 0.15
 
@@ -232,6 +231,9 @@ def recommend_jobs(skills, interests, student_id, category_filter=None, experien
             "skills_required": job.get("skills_required", []),
             "matched_skills": matched_skills,
             "missing_skills": missing_skills,
+            "top_philippine_employers": job.get("top_philippine_employers", []),
+            "top_recommended_universities": job.get("top_recommended_universities", []),
+            "mapua_degrees": job.get("mapua_degrees", []),
             "overall_score": overall_percentage,
             "semantic_score": round(semantic_score * 100, 1),
             "skill_score": round(skill_score * 100, 1),
@@ -240,6 +242,8 @@ def recommend_jobs(skills, interests, student_id, category_filter=None, experien
             "key_responsibilities": job.get("key_responsibilities", []),
             "career_roadmap": job.get("career_roadmap", []),
             "recommended_courses": job.get("recommended_courses", []),
+            "side_project_blueprints": job.get("side_project_blueprints", []),
+            "stage_advice": job.get("stage_advice", {}),
             "state_key": canonical_state
         })
         

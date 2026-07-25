@@ -3,75 +3,54 @@ import os
 import re
 from job_recommender import recommend_jobs, load_jobs
 
-MAPUA_FAQS = {
-  "campuses": "Mapúa University operates two main campuses: **Manila Campus** (Intramuros - Engineering, Architecture, IT, Media Studies) and **Makati Campus** (Gil Puyat & Pablo Ocampo - IT/CS, Data Science, Business/ETYSB, Health Sciences).",
-  "grading": "Mapúa operates on a **Quaterm (Quarterly)** academic calendar with 4 terms per academic year, enabling accelerated degree completion.",
-  "programs": "Mapúa offers top-tier ABET-accredited programs in Computer Science, IT, Computer Engineering, Civil, Mechanical, EE, ECE, Chemical, Data Science, Business Intelligence, Multimedia Arts, Nursing, and Graduate Studies.",
-  "graduate": "Mapúa School of Graduate Studies offers MS Computer Science (MS CS), MS Artificial Intelligence (MS AI), MS Cybersecurity, Master of Engineering (M.Eng), and Master of Business Administration (MBA)."
+UNIVERSITY_GUIDANCE = {
+  "tech_eng": "For **Technology & Engineering**, top accredited Philippine institutions include **Mapúa University** (ABET Accredited & CHED COE), **UP Diliman (UPD)**, **De La Salle University (DLSU)**, **MSU-IIT** (CHED COE), and **UST**.",
+  "medicine": "For **Medicine & Healthcare**, top institutions include **UP Manila (UPM)** (#1 THE/QS Ranked), **UST Faculty of Medicine & Surgery**, **Ateneo School of Medicine & Public Health (ASMPH)**, and **Mapúa School of Health Sciences**.",
+  "law": "For **Law & Legal Studies**, top law schools in the Philippines based on Bar examination performance include **UP Law (UPD)**, **Ateneo Law School (ALS)**, **San Beda University College of Law**, and **DLSU College of Law**.",
+  "archi": "For **Architecture & Built Environment**, top CHED Centers of Excellence include **UST College of Architecture**, **Mapúa University School of Architecture**, and **UP Diliman College of Architecture**.",
+  "business": "For **Business, Accountancy & Finance**, leading accredited schools include **UP Diliman Virata School of Business**, **Ateneo de Manila (ADMU)**, **DLSU**, **UST**, and **Mapúa ETYSB**."
 }
 
 def ask_cardi(user_message, user_skills="", user_interests="", user_stage="student"):
   msg = user_message.lower().strip()
   
-  # Check direct FAQ triggers
-  if any(w in msg for w in ["campus", "location", "intramuros", "makati", "manila"]):
+  if any(w in msg for w in ["law", "attorney", "lawyer", "bar exam"]):
     return {
-      "sender": "Cardi",
-      "reply": f"🔴💛 **Hi! Cardi here!** {MAPUA_FAQS['campuses']}\n\nDo you want to know which campus offers your specific degree program?"
+      "sender": "AI Advisor",
+      "reply": f"⚖️ **Top Philippine Law Schools & Pathways:**\n\n{UNIVERSITY_GUIDANCE['law']}\n\nKey hiring employers in corporate law include **ACCRA Law**, **SyCipLaw**, **Romulo Mabanta Law**, and corporate legal departments at **San Miguel Corporation** and **Ayala Corporation**."
     }
-    
-  if any(w in msg for w in ["quaterm", "quarter", "term", "grading"]):
+
+  if any(w in msg for w in ["medicine", "doctor", "physician", "med", "hospital", "nmat"]):
     return {
-      "sender": "Cardi",
-      "reply": f"🔴💛 **Cardi's Mapúa Tip:** {MAPUA_FAQS['grading']} It's fast-paced, so building strong study habits early is key!"
+      "sender": "AI Advisor",
+      "reply": f"⚕️ **Top Philippine Medical Schools & Hospitals:**\n\n{UNIVERSITY_GUIDANCE['medicine']}\n\nLeading healthcare employers include **St. Luke's Medical Center**, **The Medical City**, **Makati Medical Center**, and **Philippine General Hospital (PGH)**."
     }
-    
-  if any(w in msg for w in ["master", "graduate", "ms", "mba", "postgraduate"]):
+
+  if any(w in msg for w in ["architect", "archi", "building", "revit"]):
     return {
-      "sender": "Cardi",
-      "reply": f"🔴💛 **Mapúa Graduate Studies:** {MAPUA_FAQS['graduate']}\n\nThese programs are perfect if you're a career shifter or looking to specialize in AI, Cybersecurity, or Tech Leadership!"
+      "sender": "AI Advisor",
+      "reply": f"🏛️ **Top Philippine Architecture Schools & Firms:**\n\n{UNIVERSITY_GUIDANCE['archi']}\n\nLeading real estate & architectural employers include **Ayala Land Inc. (ALI)**, **Megaworld**, **DMCI Homes**, **Palafox Associates**, and **SM Prime Holdings**."
+    }
+
+  if any(w in msg for w in ["engineering", "mechanical", "civil", "tech", "computer science", "ai", "data"]):
+    return {
+      "sender": "AI Advisor",
+      "reply": f"🏗️ **Top Philippine Engineering & Technology Institutions:**\n\n{UNIVERSITY_GUIDANCE['tech_eng']}\n\nTop hiring tech & engineering employers include **GCash (Mynt)**, **Globe Telecom**, **Canva PH**, **Macquarie Group**, **Meralco**, **First Gen**, and **Accenture PH**."
     }
 
   # Fetch RAG Job Recommendations for Context
-  query_skills = user_skills or "Python, Machine Learning"
-  query_interests = user_interests or "AI/ML, Software Development"
-  
-  recs = recommend_jobs(query_skills, query_interests, "cardi_query")
+  recs = recommend_jobs(user_skills or "Python, Data Analysis", user_interests or "AI/ML, Business", "advisor_query")
   top_job = recs[0] if recs else None
   
-  # Contextual Cardi advice based on query intent
-  if any(w in msg for w in ["elective", "track", "specialization", "major"]):
-    if top_job:
-      degrees = ", ".join(top_job.get("mapua_degrees", []))
-      tracks = ", ".join(top_job.get("mapua_tracks", []))
-      return {
-        "sender": "Cardi",
-        "reply": f"🔴💛 **Cardi's Track Recommendation for {top_job['title']}:**\n\n- **Recommended Degree:** {degrees}\n- **Specialization Tracks:** {tracks}\n- **Top Electives to Pick:** Data Structures, Machine Learning, Systems Architecture.\n\nWould you like side project ideas for your portfolio?"
-      }
-
-  if any(w in msg for w in ["freshman", "applicant", "entrance", "apply", "enroll"]):
-    return {
-      "sender": "Cardi",
-      "reply": "🔴💛 **Welcome to Mapúa! Cardi's Freshman Guide:**\n\n1. Prepare in Mathematics (Calculus/Algebra) and basic Programming.\n2. Apply for your desired campus: Manila (Engineering & IT) or Makati (CS/AI, Data Science, Business, Health).\n3. Join Mapúa student chapters (ACM, IEEE, ICpEP, PICE) during orientation week!"
-    }
-
-  if any(w in msg for w in ["project", "portfolio", "side project", "capstone"]):
-    if top_job:
-      projects = "\n• ".join(top_job.get("side_project_blueprints", []))
-      return {
-        "sender": "Cardi",
-        "reply": f"🔴💛 **Cardi's Top Side Project Blueprints for {top_job['title']}:**\n\n• {projects}\n\nBuilding these will make your GitHub profile pop for recruiters!"
-      }
-
-  # Default friendly Cardi response with RAG recommendation synthesis
   if top_job:
-    degrees = ", ".join(top_job.get("mapua_degrees", [])[:2])
+    top_employers = ", ".join(top_job.get("top_philippine_employers", [])[:3])
+    top_unis = ", ".join(top_job.get("top_recommended_universities", [])[:2])
     return {
-      "sender": "Cardi",
-      "reply": f"🔴💛 **Hi! Cardi here, your Mapúa AI Career Advisor!**\n\nBased on your profile, your top career match is **{top_job['title']}** ({top_job['overall_score']}% match)!\n\n- **Recommended Mapúa Program:** {degrees}\n- **RAG Insight:** {top_job['rag_reason']}\n\nAsk me anything about Mapúa tracks, electives, side projects, or career shifts!"
+      "sender": "AI Advisor",
+      "reply": f"🤖 **AI Career Advisor Analysis:**\n\nBased on your skillset and interests, your top match is **{top_job['title']}** ({top_job['overall_score']}% match)!\n\n- **Top Philippine Employers:** {top_employers}\n- **Recommended Universities:** {top_unis}\n- **RAG Insight:** {top_job['rag_reason']}\n\nAsk me any question about top Philippine universities, hiring companies, or career transitions!"
     }
 
   return {
-    "sender": "Cardi",
-    "reply": "🔴💛 **Hi! Cardi here!** Ask me any question about Mapúa University programs, specialization tracks, side projects, or career advice!"
+    "sender": "AI Advisor",
+    "reply": "🤖 **Hi! I am your AI Career Advisor.** Ask me any question about top accredited Philippine universities (based on CHED COE, ABET, THE, and QS rankings), hiring employers, degree specialization tracks, or career transitions!"
   }

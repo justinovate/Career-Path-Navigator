@@ -71,5 +71,19 @@
         "Software Engineer": 0.0075
       }
     }
+  },
+  "user_0c99ecab": {
+    "last_state": "data analysis_machine learning_python_pytorch_tensorflow|ai & machine learning_ai/ml_web & software development",
+    "skills_input": "Python, Machine Learning, TensorFlow, PyTorch, Data Analysis",
+    "interests_input": "AI & Machine Learning, Web & Software Development, AI/ML",
+    "saved_bookmarks": [],
+    "target_careers": [
+      "Software Engineer"
+    ],
+    "states": {
+      "data analysis_machine learning_python_pytorch_tensorflow|ai & machine learning_ai/ml_web & software development": {
+        "Software Engineer": 0.018
+      }
+    }
   }
 }
