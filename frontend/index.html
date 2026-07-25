@@ -27,7 +27,7 @@
       <i class="fa-solid fa-compass-drafting brand-icon"></i>
       <div>
         <span class="brand-title">Career Path Navigator</span>
-        <span class="brand-subtitle">Philippine Academic & Employer Guidance</span>
+        <span class="brand-subtitle">Philippine Academic & Career Intelligence</span>
       </div>
     </div>
 
@@ -43,8 +43,8 @@
         </select>
       </div>
 
-      <button class="nav-btn accent-btn" onclick="openQuizModal()">
-        <i class="fa-solid fa-clipboard-question"></i> Career Quiz
+      <button class="nav-btn accent-btn" onclick="openAdaptiveQuizModal()">
+        <i class="fa-solid fa-brain"></i> Adaptive AI Quiz
       </button>
 
       <button class="nav-btn secondary" onclick="openChartsModal()">
@@ -52,7 +52,7 @@
       </button>
 
       <button id="rl-insights-btn" class="nav-btn secondary" onclick="openRLModal()">
-        <i class="fa-solid fa-brain"></i> RL Insights
+        <i class="fa-solid fa-graduation-cap"></i> RL Insights
       </button>
 
       <div class="student-badge">
@@ -76,7 +76,7 @@
           <i class="fa-solid fa-graduation-cap"></i>
         </div>
         <h2>Career Path Navigator</h2>
-        <p>Personalized career exploration mapped to accredited Philippine universities and top hiring employers.</p>
+        <p>Personalized career guidance mapped to accredited Philippine universities and top employers.</p>
       </div>
 
       <!-- Auth Tabs: Sign In vs Sign Up -->
@@ -146,7 +146,7 @@
         
         <!-- Life-Stage Selector Pills -->
         <div class="stage-selector-container">
-          <label class="section-label"><i class="fa-solid fa-user-graduate"></i> Select Your Current Life-Stage:</label>
+          <label class="section-label"><i class="fa-solid fa-user-graduate"></i> Select Your Life-Stage:</label>
           <div class="stage-pills">
             <button class="stage-pill" data-stage="freshman" onclick="setLifeStage('freshman', this)">🎓 Incoming Freshman</button>
             <button class="stage-pill active" data-stage="student" onclick="setLifeStage('student', this)">📚 Enrolled Student</button>
@@ -220,14 +220,18 @@
       <!-- Right Panel: Recommendation Feed & Filters -->
       <section class="main-content">
 
-        <!-- Controls Header: Search & Category Filters -->
+        <!-- Controls Header: Rebuilt Functional Search & Filters -->
         <div class="glass-card controls-card">
-          <div class="controls-top">
-            <div class="search-box">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" id="search-filter" placeholder="Search career titles, top employers, or degree programs..." oninput="filterRecommendations()">
+          <div class="search-bar-row">
+            <div class="search-input-wrapper">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" id="search-filter" placeholder="Search career titles, degrees, top universities, or hiring companies..." onkeyup="if(event.key==='Enter') performSearch();">
+              <button type="button" id="clear-search-btn" class="clear-search-btn" style="display: none;" onclick="clearSearch()">&times;</button>
             </div>
-
+            <button type="button" id="search-btn" class="btn-primary search-action-btn" onclick="performSearch()">
+              <i class="fa-solid fa-magnifying-glass"></i> Search Careers
+            </button>
+            
             <div class="select-box">
               <label for="experience-filter">Experience:</label>
               <select id="experience-filter" onchange="fetchRecommendations()">
@@ -303,11 +307,11 @@
     </div>
   </div>
 
-  <!-- Modal 1: Career Assessment Quiz -->
+  <!-- Modal 1: Adaptive AI Career Quiz -->
   <div id="quiz-modal" class="modal-overlay" style="display: none;">
     <div class="modal-card glass-card">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-clipboard-question"></i> 5-Minute Career Assessment Quiz</h3>
+        <h3><i class="fa-solid fa-brain"></i> Dynamic Adaptive AI Career Quiz</h3>
         <button class="modal-close" onclick="closeQuizModal()">&times;</button>
       </div>
       <div class="modal-body" id="quiz-body">
@@ -334,7 +338,7 @@
   <div id="rl-modal" class="modal-overlay" style="display: none;">
     <div class="modal-card glass-card">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-brain"></i> Reinforcement Learning Q-Table Preferences</h3>
+        <h3><i class="fa-solid fa-graduation-cap"></i> Reinforcement Learning Q-Table Preferences</h3>
         <button class="modal-close" onclick="closeRLModal()">&times;</button>
       </div>
       <div class="modal-body" id="rl-modal-content">

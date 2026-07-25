@@ -7,12 +7,10 @@
     "email_clean": "justindeleon.occ@gmail.com",
     "full_name": "Test",
     "password_hash": "aadb7ebb57508756690e2a98bae255d1:17015ee082fae5031524fb716642bf9baecb60f374175d76978c063ee5f7a484",
-    "skills": "Python, Machine Learning, TensorFlow, PyTorch, Data Analysis",
-    "interests": "AI & Machine Learning, Web & Software Development, AI/ML",
+    "skills": "Python, TensorFlow, CAD Software, Civil Engineering, PyTorch",
+    "interests": "Artificial Intelligence & Machine Learning (AI/ML), Civil & Structural Engineering",
     "saved_bookmarks": [],
-    "target_careers": [
-      "Software Engineer"
-    ],
+    "target_careers": [],
     "quiz_completed": false
   },
   "user_alex_ai": {

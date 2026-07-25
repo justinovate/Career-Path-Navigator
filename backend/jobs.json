@@ -13,14 +13,19 @@
     "skills_required": ["Python", "Machine Learning", "Deep Learning", "PyTorch", "TensorFlow", "NLP", "Vector Databases", "MLOps"],
     "job_type": "Full-time",
     "top_philippine_employers": ["GCash (Mynt)", "Canva Philippines", "Globe Telecom", "Macquarie Group Manila", "Accenture PH", "SM Investments"],
+    "recommended_degrees": [
+      "BS Computer Science (AI & Machine Learning Track)",
+      "BS Data Science",
+      "BS Applied Mathematics / Statistics",
+      "MS Artificial Intelligence (MS AI)"
+    ],
     "top_recommended_universities": [
       "Mapúa University (ABET Accredited & CHED COE in CS / IT)",
-      "UP Diliman (UPD - CHED COE in Computer Science)",
+      "UP Diliman (UPD - CHED Center of Excellence in Computer Science)",
       "De La Salle University (DLSU - THE/QS Ranked in CS)",
       "MSU-IIT (CHED Center of Excellence in IT)",
-      "Ateneo de Manila University (ADMU)"
+      "Ateneo de Manila University (ADMU - Department of Information Systems)"
     ],
-    "mapua_degrees": ["BS Computer Science (CS) - AI Track (Manila & Makati)", "BS Data Science (DS) - Makati"],
     "side_project_blueprints": [
       "Build a RAG AI Question-Answering Agent using Vector Databases and PyTorch",
       "Train a Custom Computer Vision Model for Real-Time Object Detection",
@@ -29,7 +34,7 @@
     "certifications_and_licenses": ["DeepLearning.AI TensorFlow Developer", "AWS Certified Machine Learning Specialty"],
     "stage_advice": {
       "freshman": "Master Linear Algebra, Multivariable Calculus, and Python fundamentals during 1st year.",
-      "college_student": "Focus on Neural Networks, Natural Language Processing, and Computer Vision electives.",
+      "student": "Focus on Neural Networks, Natural Language Processing, and Computer Vision electives.",
       "job_seeker": "Publish a machine learning side project on GitHub or Kaggle highlighting LLM fine-tuning and RAG.",
       "career_shifter": "Enroll in MS Artificial Intelligence (MS AI) or complete Andrew Ng's Deep Learning Specialization."
     },
@@ -59,13 +64,19 @@
     "skills_required": ["Python", "R", "Machine Learning", "Statistics", "Data Visualization", "SQL", "Pandas", "Scikit-Learn"],
     "job_type": "Full-time",
     "top_philippine_employers": ["BDO Unibank", "BPI", "Globe Telecom", "Smart Communications", "SGV & Co. (EY)", "Canva PH"],
-    "top_recommended_universities": [
-      "Mapúa University (BS Data Science & BS BIA)",
-      "UP Diliman (UPD - School of Statistics & CS)",
-      "De La Salle University (DLSU - Data Science)",
-      "Ateneo de Manila University (ADMU - Math/CS)"
+    "recommended_degrees": [
+      "BS Data Science",
+      "BS Statistics / Applied Math",
+      "BS Business Intelligence & Analytics",
+      "BS Computer Science"
     ],
-    "mapua_degrees": ["BS Data Science (DS) - Makati", "BS Business Intelligence & Analytics (BS BIA) - ETYSB Makati"],
+    "top_recommended_universities": [
+      "UP Diliman (UPD - School of Statistics & CS)",
+      "Mapúa University (BS Data Science & BS BIA)",
+      "De La Salle University (DLSU - Data Science)",
+      "Ateneo de Manila University (ADMU - Math/CS)",
+      "Silliman University (CHED COE in IT)"
+    ],
     "side_project_blueprints": [
       "Analyze Customer Churn with Predictive Classification & Power BI Dashboards",
       "Build a Real-Time Stock Market Forecasting Tool in Python",
@@ -74,7 +85,7 @@
     "certifications_and_licenses": ["Google Data Analytics Professional Certificate", "IBM Data Science Professional Certificate"],
     "stage_advice": {
       "freshman": "Strengthen your knowledge in Probability & Statistics, Excel, and SQL during 1st year.",
-      "college_student": "Focus on Pandas, Scikit-Learn, data visualization, and exploratory data analysis.",
+      "student": "Focus on Pandas, Scikit-Learn, data visualization, and exploratory data analysis.",
       "job_seeker": "Create a portfolio showing end-to-end data analysis from raw data cleaning to executive dashboard insights.",
       "career_shifter": "Enroll in MS CS or complete Google Data Analytics Professional Certificate."
     },
@@ -104,14 +115,20 @@
     "skills_required": ["Clinical Diagnosis", "Patient Care", "Internal Medicine", "Surgery", "Pharmacology", "Medical Ethics"],
     "job_type": "Full-time",
     "top_philippine_employers": ["St. Luke's Medical Center", "The Medical City", "Makati Medical Center", "Philippine General Hospital (PGH)", "Asian Hospital"],
+    "recommended_degrees": [
+      "Doctor of Medicine (MD)",
+      "BS Biology (Pre-Med Track)",
+      "BS Health Sciences / Nursing / MedTech",
+      "BS Medical Laboratory Science"
+    ],
     "top_recommended_universities": [
       "UP Manila (UPM - College of Medicine - #1 THE/QS Med in PH)",
-      "UST (Faculty of Medicine & Surgery - CHED COE)",
+      "UST (Faculty of Medicine & Surgery - CHED Center of Excellence)",
       "Ateneo School of Medicine & Public Health (ASMPH)",
-      "Mapúa School of Health Sciences (BS Health Sciences / Pre-Med)",
-      "De La Salle Medical and Health Sciences Institute (DLSMHSI)"
+      "Mapúa School of Health Sciences (BS Health Sciences / Biology)",
+      "De La Salle Medical and Health Sciences Institute (DLSMHSI)",
+      "Saint Louis University (SLU Baguio - High PLE Board Passing Rate)"
     ],
-    "mapua_degrees": ["BS Biology (Pre-Med Track) - Makati", "BS Health Sciences - Makati"],
     "side_project_blueprints": [
       "Conduct Clinical Public Health Research on Community Disease Prevention",
       "Publish a Medical Case Study Review in an Accredited Medical Journal",
@@ -124,7 +141,7 @@
     ],
     "stage_advice": {
       "freshman": "Maintain a high GPA in your Pre-Med bachelor degree (Biology, Health Sciences, Nursing, MedTech).",
-      "college_student": "Prepare early for the National Medical Admission Test (NMAT) targeting 90+ percentile for top medical schools.",
+      "student": "Prepare early for the National Medical Admission Test (NMAT) targeting 90+ percentile for top medical schools.",
       "job_seeker": "Complete 1-year Post-Graduate Internship (PGI) at top hospitals and pass the Physician Licensure Examination.",
       "career_shifter": "Complete required Pre-Med science prerequisites and sit for the NMAT exam."
     },
@@ -154,14 +171,20 @@
     "skills_required": ["Legal Research", "Corporate Law", "Contract Drafting", "Litigation", "Regulatory Compliance", "Negotiation"],
     "job_type": "Full-time",
     "top_philippine_employers": ["ACCRA Law", "SyCip Salazar Hernandez & Gatmaitan (SyCipLaw)", "Romulo Mabanta Law", "SGV & Co. Legal", "San Miguel Corporation", "Ayala Corporation"],
+    "recommended_degrees": [
+      "Juris Doctor (JD / LLB)",
+      "BS Legal Management (Pre-Law)",
+      "BA Political Science",
+      "BS Business Administration (Pre-Law Track)"
+    ],
     "top_recommended_universities": [
       "UP Law (UP Diliman - #1 Philippine Bar Exam Performance)",
       "Ateneo Law School (ALS - Rockwell Campus)",
-      "San Beda University College of Law",
+      "San Beda University College of Law (Consistent Top Bar Passing Rate)",
       "De La Salle University Tañada-Diokno School of Law",
-      "UST Faculty of Civil Law"
+      "UST Faculty of Civil Law",
+      "Mapúa University (Pre-Law Business Programs)"
     ],
-    "mapua_degrees": ["BS Business Administration (Pre-Law Track) - Makati", "BS Legal Management"],
     "side_project_blueprints": [
       "Draft a Comprehensive Data Privacy & Cybersecurity Compliance Policy for FinTech",
       "Publish a Jurisprudential Analysis on Corporate Mergers and Philippine Competition Law",
@@ -174,7 +197,7 @@
     ],
     "stage_advice": {
       "freshman": "Maintain high academic standing in Pre-Law (Legal Management, Political Science, Business, Accountancy).",
-      "college_student": "Prepare for the Law School Admission Test (PhiLSAT / UP LAE / Ateneo LAE). Develop speed-reading and critical writing.",
+      "student": "Prepare for the Law School Admission Test (PhiLSAT / UP LAE / Ateneo LAE). Develop speed-reading and critical writing.",
       "job_seeker": "Graduate Juris Doctor (JD / LLB), pass the Philippine Bar Examination, and join a top law firm or corporate legal department.",
       "career_shifter": "Enroll in evening/working student Juris Doctor (JD) programs at UP, Ateneo, or San Beda."
     },
@@ -204,13 +227,19 @@
     "skills_required": ["Architectural Design", "AutoCAD", "Revit", "3D Modeling", "Building Codes", "Sustainable Design", "Urban Planning"],
     "job_type": "Full-time",
     "top_philippine_employers": ["Ayala Land Inc. (ALI)", "Megaworld Corporation", "DMCI Homes", "Palafox Associates", "SM Prime Holdings", "Aidea Philippines"],
+    "recommended_degrees": [
+      "BS Architecture (BS Archi)",
+      "BS Environmental Planning & Design",
+      "BS Interior Architecture",
+      "Master of Architecture (M.Arch)"
+    ],
     "top_recommended_universities": [
       "UST (College of Architecture - CHED Center of Excellence)",
       "Mapúa University (School of Architecture - Renowned Board Exam Performance)",
       "UP Diliman (UPD College of Architecture)",
-      "De La Salle-College of Saint Benilde (CSB Design)"
+      "De La Salle-College of Saint Benilde (CSB Design)",
+      "University of San Carlos (USC Cebu - Top Architecture Board Performance)"
     ],
-    "mapua_degrees": ["BS Architecture (BS Archi) - Manila", "BS Environmental & Sanitary Engineering"],
     "side_project_blueprints": [
       "Design a Sustainable Micro-Housing Development with 3D BIM Models in Revit",
       "Develop an Urban Redevelopment Blueprint for Transit-Oriented Mixed-Use Hubs",
@@ -223,7 +252,7 @@
     ],
     "stage_advice": {
       "freshman": "Master freehand architectural sketching, spatial composition, and 2D drafting principles in 1st year.",
-      "college_student": "Build proficiency in Building Information Modeling (BIM / Revit). Participate in international architectural design competitions.",
+      "student": "Build proficiency in Building Information Modeling (BIM / Revit). Participate in international architectural design competitions.",
       "job_seeker": "Complete 2 years of diversified architectural apprenticeship under a licensed Architect and pass the ALE Board Exam.",
       "career_shifter": "Enroll in BS Architecture or Master of Architecture programs."
     },
@@ -253,14 +282,20 @@
     "skills_required": ["Financial Auditing", "Taxation Law", "IFRS / PFRS", "Accounting Software", "Excel", "Financial Reporting", "Risk Assessment"],
     "job_type": "Full-time",
     "top_philippine_employers": ["SGV & Co. (EY Philippines)", "PwC Philippines (Isla Lipana)", "Deloitte Philippines (Navarro Amper)", "KPMG Philippines (R.G. Manabat)", "BDO Unibank", "Ayala Corporation"],
+    "recommended_degrees": [
+      "BS Accountancy (BS A)",
+      "BS Management Accounting",
+      "BS Accounting Information Systems",
+      "BS Business Intelligence & Analytics"
+    ],
     "top_recommended_universities": [
-      "UP Diliman (UPD - Virata School of Business - CHED COE in Accountancy)",
+      "UP Diliman (UPD - Virata School of Business - CHED Center of Excellence)",
       "UST (AMV College of Accountancy - Top CPA Board Passing Rate)",
       "De La Salle University (DLSU - Accountancy)",
       "Mapúa University (ETY School of Business - BS Accountancy)",
-      "Ateneo de Manila University (ADMU)"
+      "Ateneo de Manila University (ADMU)",
+      "University of San Carlos (USC Cebu - Consistent Top CPA Board Performers)"
     ],
-    "mapua_degrees": ["BS Accountancy (BS A) - ETYSB Makati", "BS Business Intelligence & Analytics"],
     "side_project_blueprints": [
       "Conduct a Complete Financial Statement & Internal Control Audit Case Study",
       "Develop an Automated Corporate Tax Computation Template in Excel/Python",
@@ -273,7 +308,7 @@
     ],
     "stage_advice": {
       "freshman": "Master Financial Accounting fundamentals, debit/credit rules, and Philippine tax principles in 1st year.",
-      "college_student": "Maintain high retention grades in advanced financial accounting, auditing problems, and business law courses.",
+      "student": "Maintain high retention grades in advanced financial accounting, auditing problems, and business law courses.",
       "job_seeker": "Review intensively for and pass the Philippine CPA Board Examination. Join a Big 4 auditing firm (SGV, PwC, Deloitte, KPMG).",
       "career_shifter": "Complete BS Accountancy bridge programs or pursue CMA/CIA international certifications."
     },
@@ -303,14 +338,19 @@
     "skills_required": ["Python", "Java", "C++", "Algorithms", "Data Structures", "Git", "REST APIs"],
     "job_type": "Full-time",
     "top_philippine_employers": ["Canva Philippines", "GCash (Mynt)", "Globe Telecom", "Macquarie Group", "Accenture PH", "Thinking Machines"],
+    "recommended_degrees": [
+      "BS Computer Science",
+      "BS Information Technology",
+      "BS Computer Engineering",
+      "BS Software Engineering"
+    ],
     "top_recommended_universities": [
       "Mapúa University (ABET Accredited & CHED COE in CS / IT)",
-      "UP Diliman (UPD - CHED COE in Computer Science)",
+      "UP Diliman (UPD - CHED Center of Excellence in Computer Science)",
       "De La Salle University (DLSU - THE/QS Ranked in CS)",
       "MSU-IIT (CHED Center of Excellence in IT)",
       "Ateneo de Manila University (ADMU)"
     ],
-    "mapua_degrees": ["BS Computer Science (CS) - Manila & Makati", "BS Information Technology (IT) - Manila & Makati"],
     "side_project_blueprints": [
       "Build a Full-Stack Microservices API with Python FastAPI and PostgreSQL",
       "Develop an Open-Source Developer CLI Tool with Git Integration",
@@ -319,7 +359,7 @@
     "certifications_and_licenses": ["AWS Certified Developer Associate", "Meta Back-End Developer Certificate"],
     "stage_advice": {
       "freshman": "Focus on building a rock-solid foundation in Python, C++, and discrete mathematics during 1st year.",
-      "college_student": "Select the Software Engineering Track. Focus on Data Structures & Algorithms coursework and hackathons.",
+      "student": "Select the Software Engineering Track. Focus on Data Structures & Algorithms coursework and hackathons.",
       "job_seeker": "Polish your Capstone project into a live production web service. Prepare for leetcode coding interviews.",
       "career_shifter": "Enroll in MS Computer Science (MS CS) or complete intensive full-stack development certificates."
     },
@@ -349,13 +389,18 @@
     "skills_required": ["Network Security", "Encryption", "Risk Assessment", "Incident Response", "Linux", "Penetration Testing", "SIEM Tools"],
     "job_type": "Full-time",
     "top_philippine_employers": ["Globe Telecom", "Smart Communications", "BDO Unibank", "Trend Micro PH", "Macquarie Group", "Accenture PH"],
+    "recommended_degrees": [
+      "BS Information Technology (Cybersecurity Track)",
+      "BS Computer Science (Information Security)",
+      "BS Cybersecurity",
+      "MS Cybersecurity"
+    ],
     "top_recommended_universities": [
       "Mapúa University (BS IT Cybersecurity Track - Manila & Makati)",
       "De La Salle University (DLSU)",
       "UP Diliman (UPD)",
       "MSU-IIT (Center of Excellence in IT)"
     ],
-    "mapua_degrees": ["BS Information Technology (IT) - Cybersecurity Track - Manila & Makati"],
     "side_project_blueprints": [
       "Set Up a Virtual Cyber Home Lab for Penetration Testing and Packet Analysis",
       "Build a Python Automated Vulnerability Scanner for Web Server Hardening",
@@ -364,7 +409,7 @@
     "certifications_and_licenses": ["CompTIA Security+", "Certified Ethical Hacker (CEH)", "Cisco CCNA Security"],
     "stage_advice": {
       "freshman": "Focus on Computer Networks, Linux command line, and Operating Systems during 1st year.",
-      "college_student": "Enroll in Cybersecurity Track. Compete in Capture The Flag (CTF) competitions.",
+      "student": "Enroll in Cybersecurity Track. Compete in Capture The Flag (CTF) competitions.",
       "job_seeker": "Earn your CompTIA Security+ or CCNA certification. Document your hands-on penetration testing home lab.",
       "career_shifter": "Enroll in MS Cybersecurity or earn CompTIA Security+."
     },
@@ -394,14 +439,19 @@
     "skills_required": ["Mechanical Engineering", "CAD Software", "SolidWorks", "Materials Science", "Problem Solving", "Thermodynamics"],
     "job_type": "Full-time",
     "top_philippine_employers": ["Meralco", "First Gen Corporation", "Aboitiz Power", "Texas Instruments PH", "San Miguel Corporation", "Monde Nissin"],
+    "recommended_degrees": [
+      "BS Mechanical Engineering (BS ME)",
+      "BS Manufacturing Engineering",
+      "BS Mechatronics Engineering",
+      "Master of Engineering (M.Eng ME)"
+    ],
     "top_recommended_universities": [
-      "Mapúa University (ABET Accredited & CHED COE in Mechanical Engineering)",
+      "Mapúa University (ABET Accredited & CHED Center of Excellence in Mechanical Engineering)",
       "UP Diliman (UPD - CHED COE in Mechanical Engineering)",
       "MSU-IIT (CHED Center of Excellence in Mechanical Engineering)",
       "De La Salle University (DLSU - Mechanical Engineering)",
       "UST (Faculty of Engineering)"
     ],
-    "mapua_degrees": ["BS Mechanical Engineering (BS ME) - Manila", "BS Manufacturing Engineering - Manila"],
     "side_project_blueprints": [
       "Design a 3D Mechanical Assembly and Motion Simulation in SolidWorks",
       "Perform Stress and Thermal Finite Element Analysis (FEA) on Structural Components",
@@ -413,7 +463,7 @@
     ],
     "stage_advice": {
       "freshman": "Master Statics, Dynamics, Physics, and 2D/3D CAD drafting software during 1st year.",
-      "college_student": "Focus on SolidWorks, thermodynamics, and fluid mechanics coursework.",
+      "student": "Focus on SolidWorks, thermodynamics, and fluid mechanics coursework.",
       "job_seeker": "Pass the Philippine Mechanical Engineer Board Examination. Prepare your CAD design portfolio.",
       "career_shifter": "Enroll in Master of Engineering (M.Eng ME) or pursue SolidWorks CSWA/CSWP certifications."
     },
@@ -443,6 +493,12 @@
     "skills_required": ["Civil Engineering", "Project Management", "Construction", "AutoCAD", "Safety Standards", "Structural Analysis"],
     "job_type": "Full-time",
     "top_philippine_employers": ["Makati Development Corp (MDC)", "EEI Corporation", "Megawide Construction", "Ayala Land Inc.", "DMCI Holdings"],
+    "recommended_degrees": [
+      "BS Civil Engineering (BS CE)",
+      "BS Environmental & Sanitary Engineering",
+      "BS Structural Engineering",
+      "Master of Engineering (M.Eng CE)"
+    ],
     "top_recommended_universities": [
       "Mapúa University (ABET Accredited & Top Passing Rate in Civil Engineering Board)",
       "UP Diliman (UPD - Institute of Civil Engineering)",
@@ -450,7 +506,6 @@
       "MSU-IIT (CHED Center of Excellence in Civil Engineering)",
       "UST (Faculty of Engineering)"
     ],
-    "mapua_degrees": ["BS Civil Engineering (BS CE) - Manila", "BS Environmental & Sanitary Engineering"],
     "side_project_blueprints": [
       "Create 3D Structural Models and Load Calculations for a Multi-Story Building",
       "Develop a Site Construction Timeline and Budget Estimator in Primavera/MS Project",
@@ -462,7 +517,7 @@
     ],
     "stage_advice": {
       "freshman": "Master Engineering Mathematics, Surveying, and AutoCAD basics during 1st year.",
-      "college_student": "Focus on Structural Analysis, Reinforced Concrete Design, and Construction Management.",
+      "student": "Focus on Structural Analysis, Reinforced Concrete Design, and Construction Management.",
       "job_seeker": "Review for and pass the Philippine Civil Engineer Board Exam. Prepare your structural portfolio.",
       "career_shifter": "Enroll in Master of Engineering (M.Eng CE) or earn CAPM/PMP certifications."
     },

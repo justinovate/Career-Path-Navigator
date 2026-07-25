@@ -14,11 +14,6 @@ SYNONYM_MAP = {
     "ai/ml": ["ai", "ml", "machine learning", "artificial intelligence", "deep learning", "data & ai", "pytorch", "tensorflow"],
     "tensorflow": ["tensorflow", "machine learning", "deep learning", "python", "pytorch", "ai"],
     "pytorch": ["pytorch", "machine learning", "deep learning", "python", "tensorflow", "ai"],
-    "ux": ["ux design", "ui design", "figma", "adobe xd", "wireframing", "prototyping", "user research"],
-    "ui": ["ui design", "ux design", "figma", "adobe xd", "wireframing", "prototyping"],
-    "ux/ui": ["ux design", "ui design", "figma", "adobe xd", "wireframing", "prototyping"],
-    "devops": ["cloud computing", "aws", "docker", "kubernetes", "terraform", "ci/cd", "linux"],
-    "cloud": ["cloud computing", "aws", "docker", "kubernetes", "terraform", "devops"],
     "medicine": ["medical doctor", "physician", "clinical diagnosis", "patient care", "surgery", "pharmacology", "healthcare"],
     "med": ["medical doctor", "physician", "clinical diagnosis", "patient care", "healthcare"],
     "law": ["corporate lawyer", "legal counsel", "legal research", "corporate law", "litigation", "contract drafting"],
@@ -47,7 +42,9 @@ def prepare_vector_index(jobs):
     texts = []
     for job in jobs:
         skills_str = " ".join(job.get("skills_required", []))
-        text = f"Title: {job['title']} {job['title']}. Category: {job.get('category', '')}. Skills: {skills_str}. Description: {job['description']}"
+        degrees_str = " ".join(job.get("recommended_degrees", []))
+        unis_str = " ".join(job.get("top_recommended_universities", []))
+        text = f"Title: {job['title']} {job['title']}. Category: {job.get('category', '')}. Skills: {skills_str}. Degrees: {degrees_str}. Unis: {unis_str}. Description: {job['description']}"
         texts.append(text)
         
     tfidf_vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1, 2))
@@ -146,19 +143,19 @@ def generate_rag_reason(title, matched_skills, missing_skills, user_interests, c
     if matched_skills:
         reasons.append(f"Strongly leverages your skills in {', '.join(matched_skills[:3])}.")
     else:
-        reasons.append(f"Presents an excellent opportunity in the {category} domain.")
+        reasons.append(f"Presents an excellent career path in {category}.")
         
     matching_interests = [i for i in user_interests if i.lower() in category.lower() or i.lower() in title.lower()]
     if matching_interests:
-        reasons.append(f"Directly matches your interest in {', '.join(matching_interests)}.")
+        reasons.append(f"Directly aligns with your interest in {', '.join(matching_interests)}.")
         
     if composite_score >= 80:
-        reasons.append("Top-tier match based on your skillset and target domain.")
+        reasons.append("Top match based on your skills and target domain.")
     elif composite_score >= 60:
-        reasons.append("High contextual vector alignment with your career preferences.")
+        reasons.append("High contextual vector alignment.")
 
     if missing_skills:
-        reasons.append(f"Next skills to acquire: {', '.join(missing_skills[:2])}.")
+        reasons.append(f"Next recommended skills to acquire: {', '.join(missing_skills[:2])}.")
         
     return " ".join(reasons)
 
@@ -232,8 +229,8 @@ def recommend_jobs(skills, interests, student_id, category_filter=None, experien
             "matched_skills": matched_skills,
             "missing_skills": missing_skills,
             "top_philippine_employers": job.get("top_philippine_employers", []),
+            "recommended_degrees": job.get("recommended_degrees", []),
             "top_recommended_universities": job.get("top_recommended_universities", []),
-            "mapua_degrees": job.get("mapua_degrees", []),
             "overall_score": overall_percentage,
             "semantic_score": round(semantic_score * 100, 1),
             "skill_score": round(skill_score * 100, 1),

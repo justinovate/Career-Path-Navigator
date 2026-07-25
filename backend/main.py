@@ -3,7 +3,7 @@ from flask_cors import CORS
 import os
 from job_recommender import recommend_jobs, update_rl, load_qtable, load_jobs
 from auth import register_user, authenticate_user, get_user_profile, update_user_profile
-from ai_assistant import ask_cardi
+from ai_assistant import ask_cardi, generate_adaptive_quiz_question
 
 frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend'))
 
@@ -18,7 +18,17 @@ def index():
 def health():
     return jsonify({"status": "ok", "message": "Career Path Navigator API is running."})
 
-# --- Cardi AI Assistant Endpoint ---
+# --- Dynamic Adaptive AI Quiz Endpoint ---
+@app.route('/api/quiz/next_question', methods=['POST'])
+def quiz_next_question():
+    data = request.get_json() or {}
+    previous_answers = data.get("previous_answers", [])
+    step = data.get("step", 0)
+    
+    question_data = generate_adaptive_quiz_question(step, previous_answers)
+    return jsonify(question_data)
+
+# --- AI Assistant Endpoint ---
 @app.route('/api/ai_chat', methods=['POST'])
 def ai_chat():
     data = request.get_json() or {}
@@ -129,7 +139,6 @@ def feedback():
     if not student_id or not action:
         return jsonify({"error": "user_id and action (job title) are required."}), 400
 
-    print(f"FEEDBACK RECEIVED | ID: {student_id} | Action: {action} | Type: {feedback_type}")
     result = update_rl(student_id, skills, interests, action, feedback_type)
     return jsonify({'message': 'RL model updated successfully', 'result': result})
 

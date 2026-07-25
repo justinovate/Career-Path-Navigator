@@ -18,6 +18,10 @@ let savedBookmarks = [];
 let targetCareers = [];
 let salaryChartInstance = null;
 
+// Adaptive Quiz State
+let quizStep = 0;
+let quizPreviousAnswers = [];
+
 // DOM Elements
 const loginScreen = document.getElementById('login-screen');
 const topBar = document.getElementById('top-bar');
@@ -282,7 +286,7 @@ async function saveUserProfileState() {
   }
 }
 
-// --- Category & Search Filters ---
+// --- Category & Rebuilt Search Filters ---
 function setCategoryFilter(category, btnElement) {
   activeCategoryFilter = category;
   document.querySelectorAll('#category-tabs .tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -290,8 +294,26 @@ function setCategoryFilter(category, btnElement) {
   fetchRecommendations();
 }
 
-function filterRecommendations() {
-  searchQuery = document.getElementById('search-filter').value.toLowerCase().trim();
+function performSearch() {
+  const input = document.getElementById('search-filter');
+  const clearBtn = document.getElementById('clear-search-btn');
+  searchQuery = input.value.toLowerCase().trim();
+
+  if (searchQuery) {
+    clearBtn.style.display = 'block';
+  } else {
+    clearBtn.style.display = 'none';
+  }
+
+  renderRecommendations(currentRecommendations);
+}
+
+function clearSearch() {
+  const input = document.getElementById('search-filter');
+  const clearBtn = document.getElementById('clear-search-btn');
+  input.value = '';
+  searchQuery = '';
+  clearBtn.style.display = 'none';
   renderRecommendations(currentRecommendations);
 }
 
@@ -351,8 +373,9 @@ function renderRecommendations(jobs) {
       j.title.toLowerCase().includes(searchQuery) ||
       j.description.toLowerCase().includes(searchQuery) ||
       j.category.toLowerCase().includes(searchQuery) ||
-      (j.top_philippine_employers || []).some(e => e.toLowerCase().includes(searchQuery)) ||
+      (j.recommended_degrees || []).some(d => d.toLowerCase().includes(searchQuery)) ||
       (j.top_recommended_universities || []).some(u => u.toLowerCase().includes(searchQuery)) ||
+      (j.top_philippine_employers || []).some(e => e.toLowerCase().includes(searchQuery)) ||
       j.skills_required.some(s => s.toLowerCase().includes(searchQuery))
     );
   }
@@ -364,8 +387,8 @@ function renderRecommendations(jobs) {
     resultsDiv.innerHTML = `
       <div class="glass-card empty-state">
         <i class="fa-solid fa-folder-open"></i>
-        <h3>No Careers Match Your Search</h3>
-        <p>Try selecting "All Careers" or adjusting your search filters.</p>
+        <h3>No Careers Match Your Search "${searchQuery}"</h3>
+        <p>Try searching for a different keyword or click "Clear Search".</p>
       </div>
     `;
     return;
@@ -384,7 +407,8 @@ function renderRecommendations(jobs) {
     const missingChips = job.missing_skills.map(s => `<span class="skill-chip missing"><i class="fa-solid fa-lightbulb"></i> ${s}</span>`).join(' ');
 
     const employerChips = (job.top_philippine_employers || []).map(e => `<span class="meta-chip category"><i class="fa-solid fa-building"></i> ${e}</span>`).join(' ');
-    const universityChips = (job.top_recommended_universities || []).map(u => `<span class="mapua-chip"><i class="fa-solid fa-university"></i> ${u}</span>`).join(' ');
+    const degreeChips = (job.recommended_degrees || []).map(d => `<span class="degree-chip"><i class="fa-solid fa-graduation-cap"></i> ${d}</span>`).join(' ');
+    const universityChips = (job.top_recommended_universities || []).map(u => `<span class="university-chip"><i class="fa-solid fa-university"></i> ${u}</span>`).join(' ');
     const sideProjectItems = (job.side_project_blueprints || []).map(p => `<li>${p}</li>`).join('');
 
     const stageAdviceText = job.stage_advice ? (job.stage_advice[currentStage] || job.stage_advice["student"]) : "";
@@ -419,46 +443,36 @@ function renderRecommendations(jobs) {
         </div>
       </div>
 
+      <!-- Prominent 1: Recommended Degrees Callout Box -->
+      <div class="prominent-degree-box">
+        <div class="prominent-header"><i class="fa-solid fa-graduation-cap"></i> Recommended Degree Programs to Pursue:</div>
+        <div>${degreeChips || '<span class="degree-chip">Bachelor degree in relevant domain</span>'}</div>
+      </div>
+
+      <!-- Prominent 2: Top Accredited Universities Callout Box -->
+      <div class="prominent-university-box">
+        <div class="uni-header"><i class="fa-solid fa-university"></i> Top Accredited Philippine Universities (CHED COE, ABET, THE/QS):</div>
+        <div>${universityChips || '<span class="university-chip">Top CHED Accredited Universities</span>'}</div>
+      </div>
+
       <!-- Top Employers in PH -->
-      <div style="margin-bottom: 12px;">
-        <span style="font-size: 12px; font-weight: 600; color: var(--sky-blue); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px;">
+      <div style="margin-bottom: 14px;">
+        <span style="font-size: 12px; font-weight: 700; color: var(--sky-blue); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px;">
           <i class="fa-solid fa-building"></i> Top Hiring Employers in the Philippines:
         </span>
         <div style="display: flex; flex-wrap: wrap; gap: 6px;">${employerChips}</div>
       </div>
 
-      <!-- Accredited Universities Box -->
-      <div class="mapua-degree-box">
-        <div class="mapua-degree-header"><i class="fa-solid fa-university"></i> Recommended Accredited Universities (CHED COE, ABET, THE/QS):</div>
-        <div>${universityChips}</div>
-      </div>
-
       <!-- Stage-Specific Advisory Banner -->
       ${stageAdviceText ? `
-        <div style="background: rgba(245, 158, 11, 0.1); border-left: 3px solid var(--amber-gold); padding: 10px 14px; border-radius: 6px; font-size: 13px; margin-bottom: 14px;">
+        <div style="background: rgba(251, 191, 36, 0.12); border-left: 4px solid var(--amber-gold); padding: 12px 16px; border-radius: 6px; font-size: 13.5px; margin-bottom: 16px; color: #ffffff;">
           <strong style="color: var(--amber-gold);"><i class="fa-solid fa-user-graduate"></i> Stage Guidance (${currentStage.replace('_', ' ').toUpperCase()}):</strong> ${stageAdviceText}
         </div>
       ` : ''}
 
-      <!-- Multi-Score Breakdown Bar -->
-      <div class="score-breakdown-bar">
-        <div class="score-item">
-          <span class="score-item-title">Semantic Vector RAG: <strong>${job.semantic_score}%</strong></span>
-          <div class="progress-bar-bg"><div class="progress-bar-fill semantic" style="width: ${job.semantic_score}%;"></div></div>
-        </div>
-        <div class="score-item">
-          <span class="score-item-title">Skill Match: <strong>${job.skill_score}%</strong></span>
-          <div class="progress-bar-bg"><div class="progress-bar-fill skill" style="width: ${job.skill_score}%;"></div></div>
-        </div>
-        <div class="score-item">
-          <span class="score-item-title">RL Preference Boost: <strong>${job.rl_score > 0 ? '+' : ''}${job.rl_score}</strong></span>
-          <div class="progress-bar-bg"><div class="progress-bar-fill rl" style="width: ${Math.min(100, Math.max(10, (job.rl_score + 0.25) * 200))}%;"></div></div>
-        </div>
-      </div>
-
       <!-- RAG Personalized Reason -->
       <div class="rag-reason-box">
-        <div class="rag-reason-header"><i class="fa-solid fa-wand-magic-sparkles"></i> Why This Role Fits You (RAG Insights):</div>
+        <div class="rag-reason-header"><i class="fa-solid fa-wand-magic-sparkles"></i> Why This Role Fits You (RAG Rationale):</div>
         <p>${job.rag_reason}</p>
       </div>
 
@@ -577,6 +591,95 @@ async function sendCardiMessage() {
   cardiMessages.scrollTop = cardiMessages.scrollHeight;
 }
 
+// --- Dynamic Adaptive AI Quiz ---
+function openAdaptiveQuizModal() {
+  quizModal.style.display = 'flex';
+  quizStep = 0;
+  quizPreviousAnswers = [];
+  fetchAdaptiveQuizQuestion();
+}
+
+function closeQuizModal() {
+  quizModal.style.display = 'none';
+}
+
+async function fetchAdaptiveQuizQuestion() {
+  quizBody.innerHTML = `
+    <div style="text-align: center; padding: 30px;">
+      <i class="fa-solid fa-spinner fa-spin" style="font-size: 32px; color: var(--sky-blue); margin-bottom: 12px;"></i>
+      <p>Generating adaptive AI question...</p>
+    </div>
+  `;
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/quiz/next_question`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        step: quizStep,
+        previous_answers: quizPreviousAnswers
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.is_complete) {
+      quizBody.innerHTML = `
+        <div style="text-align: center; padding: 20px;">
+          <i class="fa-solid fa-circle-check" style="font-size: 48px; color: var(--emerald-green); margin-bottom: 16px;"></i>
+          <h3>Adaptive AI Assessment Complete!</h3>
+          <p style="color: var(--text-muted); margin-bottom: 20px;">${data.message}</p>
+          <button class="btn-primary" onclick="closeQuizModal(); fetchRecommendations();">View Personalized Recommendations</button>
+        </div>
+      `;
+      return;
+    }
+
+    const optsHtml = data.options.map((opt, i) => `
+      <button class="stage-pill" style="margin-bottom: 8px; width: 100%; text-align: left; padding: 12px; font-size: 14px;" onclick='selectAdaptiveOption(${JSON.stringify(opt)})'>
+        ${opt.label}
+      </button>
+    `).join('');
+
+    quizBody.innerHTML = `
+      <p style="font-size: 12px; color: var(--amber-gold); margin-bottom: 8px;">Adaptive Step ${data.step + 1} of ${data.total_steps}</p>
+      <h3 style="margin-bottom: 16px; color: #ffffff;">${data.question}</h3>
+      <div>${optsHtml}</div>
+    `;
+
+  } catch (err) {
+    console.error('Quiz fetch error:', err);
+    quizBody.innerHTML = `<p style="color: var(--crimson-red);">Could not load adaptive quiz question.</p>`;
+  }
+}
+
+function selectAdaptiveOption(option) {
+  quizPreviousAnswers.push(option);
+
+  if (option.add_skills) {
+    option.add_skills.forEach(s => {
+      if (!skills.some(existing => existing.toLowerCase() === s.toLowerCase())) {
+        skills.push(s);
+      }
+    });
+  }
+
+  if (option.add_interests) {
+    option.add_interests.forEach(i => {
+      if (!interests.some(existing => existing.toLowerCase() === i.toLowerCase())) {
+        interests.push(i);
+      }
+    });
+  }
+
+  renderTags(skillTagsDiv, skills, 'skills');
+  renderTags(interestTagsDiv, interests, 'interests');
+  saveUserProfileState();
+
+  quizStep++;
+  fetchAdaptiveQuizQuestion();
+}
+
 // --- RL Feedback Call ---
 async function sendFeedback(jobTitle, feedbackType) {
   const skillsText = skills.join(', ');
@@ -617,89 +720,6 @@ async function sendFeedback(jobTitle, feedbackType) {
   }
 }
 
-// --- Career Quiz Modal ---
-const QUIZ_QUESTIONS = [
-  {
-    question: "What is your primary professional or academic interest domain?",
-    options: [
-      { text: "Medicine & Healthcare (Clinical, Patient Care, Diagnostics)", skills: ["Clinical Diagnosis", "Patient Care"], interests: ["Medicine & Healthcare"] },
-      { text: "Law & Legal Services (Corporate Law, Litigation, Compliance)", skills: ["Legal Research", "Corporate Law"], interests: ["Law & Legal Services"] },
-      { text: "Artificial Intelligence & Data Science", skills: ["Python", "TensorFlow", "Machine Learning"], interests: ["Artificial Intelligence & Machine Learning (AI/ML)"] },
-      { text: "Architecture & Built Environment (Building Design, BIM)", skills: ["Architectural Design", "AutoCAD"], interests: ["Architecture & Built Environment"] },
-      { text: "Engineering & Infrastructure (Civil, Mechanical, Electrical)", skills: ["CAD Software", "Civil Engineering"], interests: ["Civil & Structural Engineering"] }
-    ]
-  },
-  {
-    question: "What type of workplace impact excites you most?",
-    options: [
-      { text: "Diagnosing illnesses and advancing patient outcomes at top medical centers", skills: ["Pharmacology"], interests: ["Medicine & Healthcare"] },
-      { text: "Handling corporate M&A deals and court litigation at top law firms", skills: ["Litigation"], interests: ["Law & Legal Services"] },
-      { text: "Designing sustainable skyscrapers and urban developments", skills: ["Revit"], interests: ["Architecture & Built Environment"] },
-      { text: "Building neural networks and AI models for tech unicorns", skills: ["PyTorch"], interests: ["Artificial Intelligence & Machine Learning (AI/ML)"] }
-    ]
-  }
-];
-
-let currentQuizIndex = 0;
-
-function openQuizModal() {
-  quizModal.style.display = 'flex';
-  currentQuizIndex = 0;
-  renderQuizQuestion();
-}
-
-function closeQuizModal() {
-  quizModal.style.display = 'none';
-}
-
-function renderQuizQuestion() {
-  if (currentQuizIndex >= QUIZ_QUESTIONS.length) {
-    quizBody.innerHTML = `
-      <div style="text-align: center; padding: 20px;">
-        <i class="fa-solid fa-circle-check" style="font-size: 48px; color: var(--emerald-green); margin-bottom: 16px;"></i>
-        <h3>Assessment Complete!</h3>
-        <p style="color: var(--text-muted); margin-bottom: 20px;">Your skills and career interests have been updated based on your responses.</p>
-        <button class="btn-primary" onclick="closeQuizModal(); fetchRecommendations();">View Updated Recommendations</button>
-      </div>
-    `;
-    return;
-  }
-
-  const q = QUIZ_QUESTIONS[currentQuizIndex];
-  const optsHtml = q.options.map((opt, i) => `
-    <button class="quiz-opt-btn" onclick="selectQuizOption(${i})">${opt.text}</button>
-  `).join('');
-
-  quizBody.innerHTML = `
-    <p style="font-size: 12px; color: var(--amber-gold); margin-bottom: 8px;">Question ${currentQuizIndex + 1} of ${QUIZ_QUESTIONS.length}</p>
-    <div class="quiz-question-title">${q.question}</div>
-    <div class="quiz-options">${optsHtml}</div>
-  `;
-}
-
-function selectQuizOption(optIndex) {
-  const opt = QUIZ_QUESTIONS[currentQuizIndex].options[optIndex];
-  
-  opt.skills.forEach(s => {
-    if (!skills.some(existing => existing.toLowerCase() === s.toLowerCase())) {
-      skills.push(s);
-    }
-  });
-
-  opt.interests.forEach(i => {
-    if (!interests.some(existing => existing.toLowerCase() === i.toLowerCase())) {
-      interests.push(i);
-    }
-  });
-
-  renderTags(skillTagsDiv, skills, 'skills');
-  renderTags(interestTagsDiv, interests, 'interests');
-  saveUserProfileState();
-
-  currentQuizIndex++;
-  renderQuizQuestion();
-}
-
 // --- Salary Charts Modal ---
 function openChartsModal() {
   chartsModal.style.display = 'flex';
@@ -733,8 +753,8 @@ function renderSalaryChart() {
         {
           label: 'Max Salary (k PHP/mo)',
           data: maxSalaries,
-          backgroundColor: 'rgba(245, 158, 11, 0.6)',
-          borderColor: '#f59e0b',
+          backgroundColor: 'rgba(251, 191, 36, 0.6)',
+          borderColor: '#fbbf24',
           borderWidth: 1
         }
       ]
@@ -745,12 +765,12 @@ function renderSalaryChart() {
       scales: {
         y: {
           beginAtZero: true,
-          grid: { color: 'rgba(255, 255, 255, 0.05)' },
-          ticks: { color: '#94a3b8' }
+          grid: { color: 'rgba(255, 255, 255, 0.1)' },
+          ticks: { color: '#ffffff' }
         },
         x: {
           grid: { display: false },
-          ticks: { color: '#94a3b8', font: { size: 11 } }
+          ticks: { color: '#ffffff', font: { size: 11 } }
         }
       },
       plugins: {
@@ -783,14 +803,14 @@ function exportRoadmapPDF(jobTitle) {
   doc.line(20, 45, 190, 45);
 
   doc.setFont("helvetica", "bold");
-  doc.text("Top Hiring Philippine Employers:", 20, 55);
+  doc.text("Recommended Degree Programs:", 20, 55);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
-  doc.text((job.top_philippine_employers || []).join(', ') || 'N/A', 20, 62);
+  doc.text((job.recommended_degrees || []).join(', ') || 'N/A', 20, 62);
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(12);
-  doc.text("Recommended Accredited Universities:", 20, 72);
+  doc.text("Top Recommended Accredited Universities:", 20, 72);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
   doc.text((job.top_recommended_universities || []).join(', ') || 'N/A', 20, 79);
