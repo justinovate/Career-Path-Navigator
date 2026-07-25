@@ -117,5 +117,6 @@ def get_jobs():
     return jsonify(jobs)
 
 if __name__ == '__main__':
-    print("Starting Career Path Navigator Backend & Web App Server on port 5000...")
-    app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=False)
+    port = int(os.environ.get("PORT", 5000))
+    print(f"Starting Career Path Navigator Server on port {port}...")
+    app.run(host='0.0.0.0', port=port, debug=False)
