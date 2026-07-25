@@ -1,5 +1,5 @@
 // ==========================================================================
-// Career Path Navigator - Client Application Logic
+// Career Path Navigator - Minimalist Client Application Logic
 // ==========================================================================
 
 const API_BASE_URL = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
@@ -16,11 +16,11 @@ let searchQuery = '';
 let currentRecommendations = [];
 let savedBookmarks = [];
 let targetCareers = [];
-let salaryChartInstance = null;
 
-// Adaptive Quiz State
+// Adaptive Quiz Memory State
 let quizStep = 0;
 let quizPreviousAnswers = [];
+let currentQuizData = null;
 
 // DOM Elements
 const loginScreen = document.getElementById('login-screen');
@@ -33,18 +33,15 @@ const resultsDiv = document.getElementById('results');
 const resultsHeader = document.getElementById('results-header');
 const resultsCount = document.getElementById('results-count');
 const toastContainer = document.getElementById('toast-container');
-const rlModal = document.getElementById('rl-modal');
-const rlModalContent = document.getElementById('rl-modal-content');
 const quizModal = document.getElementById('quiz-modal');
 const quizBody = document.getElementById('quiz-body');
-const chartsModal = document.getElementById('charts-modal');
 const cardiDrawer = document.getElementById('cardi-chat-drawer');
 const cardiMessages = document.getElementById('cardi-chat-messages');
 
 // Initialize on Load
 window.addEventListener('DOMContentLoaded', () => {
-  const savedTheme = localStorage.getItem('cpn_theme') || 'mapua';
-  changeTheme(savedTheme);
+  const savedTheme = localStorage.getItem('cpn_theme') || 'dark';
+  applyThemeMode(savedTheme);
 
   const savedUser = localStorage.getItem('cpn_user');
   if (savedUser) {
@@ -57,13 +54,24 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// --- Theme Switcher ---
-function changeTheme(themeName) {
-  document.documentElement.setAttribute('data-theme', themeName);
-  document.body.setAttribute('data-theme', themeName);
-  localStorage.setItem('cpn_theme', themeName);
-  const themeSelect = document.getElementById('theme-selector');
-  if (themeSelect) themeSelect.value = themeName;
+// --- Minimalist 2-Mode Theme Switcher (Dark / Light) ---
+function toggleThemeMode() {
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = current === 'dark' ? 'light' : 'dark';
+  applyThemeMode(next);
+}
+
+function applyThemeMode(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  document.body.setAttribute('data-theme', theme);
+  localStorage.setItem('cpn_theme', theme);
+  
+  const label = document.getElementById('theme-toggle-label');
+  if (label) {
+    label.innerHTML = theme === 'dark'
+      ? '<i class="fa-solid fa-sun"></i> Light Mode'
+      : '<i class="fa-solid fa-moon"></i> Dark Mode';
+  }
 }
 
 // --- Life Stage Selector ---
@@ -286,7 +294,7 @@ async function saveUserProfileState() {
   }
 }
 
-// --- Category & Rebuilt Search Filters ---
+// --- Category & Search Filters ---
 function setCategoryFilter(category, btnElement) {
   activeCategoryFilter = category;
   document.querySelectorAll('#category-tabs .tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -407,23 +415,19 @@ function renderRecommendations(jobs) {
     const missingChips = job.missing_skills.map(s => `<span class="skill-chip missing"><i class="fa-solid fa-lightbulb"></i> ${s}</span>`).join(' ');
 
     const employerChips = (job.top_philippine_employers || []).map(e => `<span class="meta-chip category"><i class="fa-solid fa-building"></i> ${e}</span>`).join(' ');
-    const degreeChips = (job.recommended_degrees || []).map(d => `<span class="degree-chip"><i class="fa-solid fa-graduation-cap"></i> ${d}</span>`).join(' ');
-    const universityChips = (job.top_recommended_universities || []).map(u => `<span class="university-chip"><i class="fa-solid fa-university"></i> ${u}</span>`).join(' ');
-    const sideProjectItems = (job.side_project_blueprints || []).map(p => `<li>${p}</li>`).join('');
+    
+    // Explicit Degree Chips & University Chips
+    const degreesList = job.recommended_degrees && job.recommended_degrees.length > 0
+      ? job.recommended_degrees
+      : ["Bachelor Degree in relevant domain"];
+    const universitiesList = job.top_recommended_universities && job.top_recommended_universities.length > 0
+      ? job.top_recommended_universities
+      : ["Top CHED Accredited Universities"];
 
+    const degreeChips = degreesList.map(d => `<span class="degree-chip"><i class="fa-solid fa-graduation-cap"></i> ${d}</span>`).join(' ');
+    const universityChips = universitiesList.map(u => `<span class="university-chip"><i class="fa-solid fa-university"></i> ${u}</span>`).join(' ');
+    
     const stageAdviceText = job.stage_advice ? (job.stage_advice[currentStage] || job.stage_advice["student"]) : "";
-
-    const roadmapSteps = (job.career_roadmap || []).map(step => `
-      <div class="roadmap-step">
-        <div>
-          <span class="step-stage">${step.stage}</span>
-          <span class="step-time">${step.timeframe}</span>
-        </div>
-        <div class="step-focus">${step.focus}</div>
-      </div>
-    `).join('');
-
-    const recommendedCourses = (job.recommended_courses || []).map(c => `<li>${c}</li>`).join('');
 
     card.innerHTML = `
       <div class="job-header">
@@ -446,13 +450,13 @@ function renderRecommendations(jobs) {
       <!-- Prominent 1: Recommended Degrees Callout Box -->
       <div class="prominent-degree-box">
         <div class="prominent-header"><i class="fa-solid fa-graduation-cap"></i> Recommended Degree Programs to Pursue:</div>
-        <div>${degreeChips || '<span class="degree-chip">Bachelor degree in relevant domain</span>'}</div>
+        <div>${degreeChips}</div>
       </div>
 
       <!-- Prominent 2: Top Accredited Universities Callout Box -->
       <div class="prominent-university-box">
         <div class="uni-header"><i class="fa-solid fa-university"></i> Top Accredited Philippine Universities (CHED COE, ABET, THE/QS):</div>
-        <div>${universityChips || '<span class="university-chip">Top CHED Accredited Universities</span>'}</div>
+        <div>${universityChips}</div>
       </div>
 
       <!-- Top Employers in PH -->
@@ -465,16 +469,10 @@ function renderRecommendations(jobs) {
 
       <!-- Stage-Specific Advisory Banner -->
       ${stageAdviceText ? `
-        <div style="background: rgba(251, 191, 36, 0.12); border-left: 4px solid var(--amber-gold); padding: 12px 16px; border-radius: 6px; font-size: 13.5px; margin-bottom: 16px; color: #ffffff;">
+        <div style="background: rgba(251, 191, 36, 0.12); border-left: 4px solid var(--amber-gold); padding: 10px 14px; border-radius: 6px; font-size: 13px; margin-bottom: 14px; color: var(--text-main);">
           <strong style="color: var(--amber-gold);"><i class="fa-solid fa-user-graduate"></i> Stage Guidance (${currentStage.replace('_', ' ').toUpperCase()}):</strong> ${stageAdviceText}
         </div>
       ` : ''}
-
-      <!-- RAG Personalized Reason -->
-      <div class="rag-reason-box">
-        <div class="rag-reason-header"><i class="fa-solid fa-wand-magic-sparkles"></i> Why This Role Fits You (RAG Rationale):</div>
-        <p>${job.rag_reason}</p>
-      </div>
 
       <!-- Skill Gap Analysis -->
       <div class="skill-gap-section">
@@ -490,7 +488,7 @@ function renderRecommendations(jobs) {
 
       <p class="job-desc" style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 16px;">${job.description}</p>
 
-      <!-- Feedback Actions & Roadmap Toggle -->
+      <!-- Feedback Actions -->
       <div class="job-actions">
         <div class="feedback-buttons">
           <button class="action-btn like" onclick="sendFeedback('${job.title}', 'like')">
@@ -503,38 +501,9 @@ function renderRecommendations(jobs) {
             <i class="fa-solid fa-bookmark"></i> ${isBookmarked ? 'Saved' : 'Bookmark'}
           </button>
           <button class="action-btn target ${isTarget ? 'targeted' : ''}" onclick="sendFeedback('${job.title}', 'target')">
-            <i class="fa-solid fa-bullseye"></i> ${isTarget ? 'Target Goal' : 'Set as Goal'}
+            <i class="fa-solid fa-bullseye"></i> ${isTarget ? 'Target Goal' : 'Set Goal'}
           </button>
         </div>
-
-        <div style="display: flex; gap: 8px;">
-          <button class="action-btn pdf" onclick="exportRoadmapPDF('${job.title}')">
-            <i class="fa-solid fa-file-pdf"></i> Export PDF
-          </button>
-          <button class="action-btn secondary" onclick="toggleRoadmap('roadmap-${index}')">
-            <i class="fa-solid fa-route"></i> Roadmap & Projects
-          </button>
-        </div>
-      </div>
-
-      <!-- Expandable Career Roadmap & Portfolio Projects -->
-      <div id="roadmap-${index}" class="roadmap-expandable" style="display: none;">
-        <h4 style="color: var(--amber-gold); margin-bottom: 8px;"><i class="fa-solid fa-laptop-code"></i> Portfolio Side Project Blueprints:</h4>
-        <ul style="padding-left: 20px; font-size: 13px; color: var(--text-main); margin-bottom: 14px;">
-          ${sideProjectItems || '<li>Build a domain project related to your core skills.</li>'}
-        </ul>
-
-        <h4 style="color: var(--amber-gold); margin-bottom: 8px;"><i class="fa-solid fa-road"></i> Career Progression Pathway</h4>
-        <div class="roadmap-timeline">
-          ${roadmapSteps || '<p>Standard industry progression applies.</p>'}
-        </div>
-
-        ${recommendedCourses ? `
-          <div style="margin-top: 14px;">
-            <h5 style="color: var(--sky-blue); margin-bottom: 6px;"><i class="fa-solid fa-graduation-cap"></i> Recommended Certifications:</h5>
-            <ul style="padding-left: 20px; font-size: 13px; color: var(--text-muted);">${recommendedCourses}</ul>
-          </div>
-        ` : ''}
       </div>
     `;
 
@@ -542,12 +511,7 @@ function renderRecommendations(jobs) {
   });
 }
 
-function toggleRoadmap(id) {
-  const el = document.getElementById(id);
-  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
-}
-
-// --- AI Career Advisor Chat Widget ---
+// --- Context-Aware AI Career Advisor Chat Widget ---
 function toggleCardiChat() {
   cardiDrawer.style.display = cardiDrawer.style.display === 'none' ? 'flex' : 'none';
 }
@@ -566,7 +530,7 @@ async function sendCardiMessage() {
 
   const botMsg = document.createElement('div');
   botMsg.className = 'cardi-message bot';
-  botMsg.innerHTML = '🤖 <em>AI Advisor is analyzing...</em>';
+  botMsg.innerHTML = '🤖 <em>AI Advisor is analyzing your question...</em>';
   cardiMessages.appendChild(botMsg);
   cardiMessages.scrollTop = cardiMessages.scrollHeight;
 
@@ -621,29 +585,29 @@ async function fetchAdaptiveQuizQuestion() {
       })
     });
 
-    const data = await response.json();
+    currentQuizData = await response.json();
 
-    if (data.is_complete) {
+    if (currentQuizData.is_complete) {
       quizBody.innerHTML = `
         <div style="text-align: center; padding: 20px;">
           <i class="fa-solid fa-circle-check" style="font-size: 48px; color: var(--emerald-green); margin-bottom: 16px;"></i>
           <h3>Adaptive AI Assessment Complete!</h3>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">${data.message}</p>
+          <p style="color: var(--text-muted); margin-bottom: 20px;">${currentQuizData.message}</p>
           <button class="btn-primary" onclick="closeQuizModal(); fetchRecommendations();">View Personalized Recommendations</button>
         </div>
       `;
       return;
     }
 
-    const optsHtml = data.options.map((opt, i) => `
-      <button class="stage-pill" style="margin-bottom: 8px; width: 100%; text-align: left; padding: 12px; font-size: 14px;" onclick='selectAdaptiveOption(${JSON.stringify(opt)})'>
+    const optsHtml = currentQuizData.options.map((opt, i) => `
+      <button class="stage-pill" style="margin-bottom: 8px; width: 100%; text-align: left; padding: 12px; font-size: 14px;" onclick="selectAdaptiveOptionByIndex(${i})">
         ${opt.label}
       </button>
     `).join('');
 
     quizBody.innerHTML = `
-      <p style="font-size: 12px; color: var(--amber-gold); margin-bottom: 8px;">Adaptive Step ${data.step + 1} of ${data.total_steps}</p>
-      <h3 style="margin-bottom: 16px; color: #ffffff;">${data.question}</h3>
+      <p style="font-size: 12px; color: var(--amber-gold); margin-bottom: 8px;">Adaptive Step ${currentQuizData.step + 1} of ${currentQuizData.total_steps}</p>
+      <h3 style="margin-bottom: 16px; color: var(--text-main);">${currentQuizData.question}</h3>
       <div>${optsHtml}</div>
     `;
 
@@ -653,7 +617,10 @@ async function fetchAdaptiveQuizQuestion() {
   }
 }
 
-function selectAdaptiveOption(option) {
+function selectAdaptiveOptionByIndex(index) {
+  if (!currentQuizData || !currentQuizData.options || !currentQuizData.options[index]) return;
+  const option = currentQuizData.options[index];
+  
   quizPreviousAnswers.push(option);
 
   if (option.add_skills) {
@@ -718,189 +685,6 @@ async function sendFeedback(jobTitle, feedbackType) {
     console.error('Feedback error:', err);
     showToast(`Feedback recorded locally for ${jobTitle}.`, 'info');
   }
-}
-
-// --- Salary Charts Modal ---
-function openChartsModal() {
-  chartsModal.style.display = 'flex';
-  renderSalaryChart();
-}
-
-function closeChartsModal() {
-  chartsModal.style.display = 'none';
-}
-
-function renderSalaryChart() {
-  const ctx = document.getElementById('salaryChart').getContext('2d');
-  if (salaryChartInstance) salaryChartInstance.destroy();
-
-  const labels = currentRecommendations.slice(0, 6).map(j => j.title);
-  const minSalaries = currentRecommendations.slice(0, 6).map(j => (j.salary_min || 35000) / 1000);
-  const maxSalaries = currentRecommendations.slice(0, 6).map(j => (j.salary_max || 60000) / 1000);
-
-  salaryChartInstance = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [
-        {
-          label: 'Min Salary (k PHP/mo)',
-          data: minSalaries,
-          backgroundColor: 'rgba(220, 38, 38, 0.6)',
-          borderColor: '#dc2626',
-          borderWidth: 1
-        },
-        {
-          label: 'Max Salary (k PHP/mo)',
-          data: maxSalaries,
-          backgroundColor: 'rgba(251, 191, 36, 0.6)',
-          borderColor: '#fbbf24',
-          borderWidth: 1
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-          grid: { color: 'rgba(255, 255, 255, 0.1)' },
-          ticks: { color: '#ffffff' }
-        },
-        x: {
-          grid: { display: false },
-          ticks: { color: '#ffffff', font: { size: 11 } }
-        }
-      },
-      plugins: {
-        legend: { labels: { color: '#ffffff' } }
-      }
-    }
-  });
-}
-
-// --- Export PDF ---
-function exportRoadmapPDF(jobTitle) {
-  const job = currentRecommendations.find(j => j.title === jobTitle);
-  if (!job) return;
-
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(20);
-  doc.setTextColor(220, 38, 38);
-  doc.text("Career Path & Academic Guidance Report", 20, 20);
-
-  doc.setFontSize(12);
-  doc.setTextColor(50, 50, 50);
-  doc.text(`Role: ${job.title} (${job.overall_score}% Match)`, 20, 32);
-  doc.text(`Category: ${job.category} | Salary: ${job.salary_range}`, 20, 40);
-
-  doc.setLineWidth(0.5);
-  doc.setDrawColor(200, 200, 200);
-  doc.line(20, 45, 190, 45);
-
-  doc.setFont("helvetica", "bold");
-  doc.text("Recommended Degree Programs:", 20, 55);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  doc.text((job.recommended_degrees || []).join(', ') || 'N/A', 20, 62);
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(12);
-  doc.text("Top Recommended Accredited Universities:", 20, 72);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  doc.text((job.top_recommended_universities || []).join(', ') || 'N/A', 20, 79);
-
-  let currentY = 90;
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(12);
-  doc.text("Why This Role Fits You (RAG Rationale):", 20, currentY);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  const splitReason = doc.splitTextToSize(job.rag_reason, 170);
-  doc.text(splitReason, 20, currentY + 7);
-
-  currentY += 7 + (splitReason.length * 5) + 8;
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(12);
-  doc.text("Portfolio Side Project Blueprints:", 20, currentY);
-  currentY += 8;
-
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  (job.side_project_blueprints || []).forEach(p => {
-    doc.text(`• ${p}`, 20, currentY);
-    currentY += 6;
-  });
-
-  doc.save(`${job.title.replace(/\s+/g, '_')}_Career_Roadmap.pdf`);
-  showToast(`Exported PDF for ${job.title}!`, 'success');
-}
-
-// --- RL Modal ---
-async function openRLModal() {
-  rlModal.style.display = 'flex';
-  rlModalContent.innerHTML = '<p><i class="fa-solid fa-spinner fa-spin"></i> Fetching Q-Table metrics...</p>';
-
-  const userId = currentUser ? currentUser.user_id : 'Guest';
-
-  try {
-    const response = await fetch(`${API_BASE_URL}/student/${userId}`);
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const data = await response.json();
-    
-    const bookmarksList = (data.saved_bookmarks || []).map(b => `<span class="tag-chip">${b}</span>`).join(' ');
-    const targetsList = (data.target_careers || []).map(t => `<span class="tag-chip interest">${t}</span>`).join(' ');
-
-    const prefRows = (data.learned_preferences || []).map(p => `
-      <tr>
-        <td style="padding: 8px; border-bottom: 1px solid var(--border-glass); font-size: 13px;">${p.job_title}</td>
-        <td style="padding: 8px; border-bottom: 1px solid var(--border-glass); font-size: 13px; color: ${p.q_value >= 0 ? 'var(--emerald-green)' : 'var(--crimson-red)'}; font-weight: bold;">
-          ${p.q_value > 0 ? '+' : ''}${p.q_value}
-        </td>
-      </tr>
-    `).join('');
-
-    rlModalContent.innerHTML = `
-      <div style="margin-bottom: 16px;">
-        <h4 style="color: var(--amber-gold); margin-bottom: 6px;">Saved Target Goals & Bookmarks:</h4>
-        <p style="font-size: 13px; margin-bottom: 6px;"><strong>Target Careers:</strong> ${targetsList || 'None set yet'}</p>
-        <p style="font-size: 13px;"><strong>Bookmarks:</strong> ${bookmarksList || 'None saved yet'}</p>
-      </div>
-
-      <div>
-        <h4 style="color: var(--sky-blue); margin-bottom: 8px;">Learned Q-Table Adaptations:</h4>
-        ${prefRows ? `
-          <table style="width: 100%; text-align: left; border-collapse: collapse;">
-            <thead>
-              <tr style="color: var(--text-muted); font-size: 12px;">
-                <th style="padding: 6px;">Career Title</th>
-                <th style="padding: 6px;">Learned Q-Value Adjustment</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${prefRows}
-            </tbody>
-          </table>
-        ` : '<p style="font-size: 13px; color: var(--text-muted);">No Q-value adjustments stored for current state yet. Provide feedback using 👍, 👎, 🔖, 🎯 buttons to train your RL agent.</p>'}
-      </div>
-    `;
-
-  } catch (err) {
-    console.error('RL Modal fetch error:', err);
-    rlModalContent.innerHTML = '<p style="color: var(--crimson-red);">Could not load Q-Table stats from server.</p>';
-  }
-}
-
-function closeRLModal() {
-  rlModal.style.display = 'none';
 }
 
 // --- Toast Helper ---

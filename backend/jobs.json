@@ -15,12 +15,13 @@
     "top_philippine_employers": ["GCash (Mynt)", "Canva Philippines", "Globe Telecom", "Macquarie Group Manila", "Accenture PH", "SM Investments"],
     "recommended_degrees": [
       "BS Computer Science (AI & Machine Learning Track)",
+      "BS Computer Engineering (BS CpE)",
       "BS Data Science",
       "BS Applied Mathematics / Statistics",
       "MS Artificial Intelligence (MS AI)"
     ],
     "top_recommended_universities": [
-      "Mapúa University (ABET Accredited & CHED COE in CS / IT)",
+      "Mapúa University (ABET Accredited & CHED Center of Excellence in CS / IT)",
       "UP Diliman (UPD - CHED Center of Excellence in Computer Science)",
       "De La Salle University (DLSU - THE/QS Ranked in CS)",
       "MSU-IIT (CHED Center of Excellence in IT)",
@@ -49,57 +50,6 @@
       { "stage": "Principal AI Architect", "timeframe": "5+ Years", "focus": "Generative AI roadmap, foundation model research, enterprise integration." }
     ],
     "recommended_courses": ["DeepLearning.AI Generative AI & RAG Specialization", "PyTorch for Deep Learning Bootcamp"]
-  },
-  {
-    "id": "job_002",
-    "title": "Data Scientist",
-    "description": "Extract valuable business intelligence and actionable insights from structured and unstructured data using Python, R, machine learning, and statistical analytics. Build predictive models and data dashboards.",
-    "category": "Data & AI",
-    "experience_level": "Mid-Level",
-    "salary_range": "60,000 - 100,000 PHP/month",
-    "salary_min": 60000,
-    "salary_max": 100000,
-    "market_growth_rate": 28,
-    "location": "Quezon City, Philippines",
-    "skills_required": ["Python", "R", "Machine Learning", "Statistics", "Data Visualization", "SQL", "Pandas", "Scikit-Learn"],
-    "job_type": "Full-time",
-    "top_philippine_employers": ["BDO Unibank", "BPI", "Globe Telecom", "Smart Communications", "SGV & Co. (EY)", "Canva PH"],
-    "recommended_degrees": [
-      "BS Data Science",
-      "BS Statistics / Applied Math",
-      "BS Business Intelligence & Analytics",
-      "BS Computer Science"
-    ],
-    "top_recommended_universities": [
-      "UP Diliman (UPD - School of Statistics & CS)",
-      "Mapúa University (BS Data Science & BS BIA)",
-      "De La Salle University (DLSU - Data Science)",
-      "Ateneo de Manila University (ADMU - Math/CS)",
-      "Silliman University (CHED COE in IT)"
-    ],
-    "side_project_blueprints": [
-      "Analyze Customer Churn with Predictive Classification & Power BI Dashboards",
-      "Build a Real-Time Stock Market Forecasting Tool in Python",
-      "Develop an NLP Sentiment Analyzer for Philippine E-Commerce Reviews"
-    ],
-    "certifications_and_licenses": ["Google Data Analytics Professional Certificate", "IBM Data Science Professional Certificate"],
-    "stage_advice": {
-      "freshman": "Strengthen your knowledge in Probability & Statistics, Excel, and SQL during 1st year.",
-      "student": "Focus on Pandas, Scikit-Learn, data visualization, and exploratory data analysis.",
-      "job_seeker": "Create a portfolio showing end-to-end data analysis from raw data cleaning to executive dashboard insights.",
-      "career_shifter": "Enroll in MS CS or complete Google Data Analytics Professional Certificate."
-    },
-    "key_responsibilities": [
-      "Develop predictive machine learning models and regression pipelines",
-      "Clean, explore, and analyze high-dimensional business data",
-      "Communicate data insights to stakeholders using clear visualizations"
-    ],
-    "career_roadmap": [
-      { "stage": "Junior Data Analyst", "timeframe": "0 - 2 Years", "focus": "Data cleaning, SQL querying, and descriptive analytics dashboards." },
-      { "stage": "Data Scientist", "timeframe": "2 - 4 Years", "focus": "Feature engineering, ML modeling, hypothesis testing, and model deployment." },
-      { "stage": "Lead AI / Data Architect", "timeframe": "5+ Years", "focus": "Design enterprise AI strategy, MLOps infrastructure, and deep learning models." }
-    ],
-    "recommended_courses": ["IBM Data Science Professional Certificate", "Applied Machine Learning with Python"]
   },
   {
     "id": "job_011",
@@ -341,11 +291,11 @@
     "recommended_degrees": [
       "BS Computer Science",
       "BS Information Technology",
-      "BS Computer Engineering",
+      "BS Computer Engineering (BS CpE)",
       "BS Software Engineering"
     ],
     "top_recommended_universities": [
-      "Mapúa University (ABET Accredited & CHED COE in CS / IT)",
+      "Mapúa University (ABET Accredited & CHED Center of Excellence in CS / IT)",
       "UP Diliman (UPD - CHED Center of Excellence in Computer Science)",
       "De La Salle University (DLSU - THE/QS Ranked in CS)",
       "MSU-IIT (CHED Center of Excellence in IT)",
@@ -376,6 +326,57 @@
     "recommended_courses": ["Meta Back-End Developer Certificate", "Algorithms & System Design Masterclass"]
   },
   {
+    "id": "job_002",
+    "title": "Data Scientist",
+    "description": "Extract valuable business intelligence and actionable insights from structured and unstructured data using Python, R, machine learning, and statistical analytics. Build predictive models and data dashboards.",
+    "category": "Data & AI",
+    "experience_level": "Mid-Level",
+    "salary_range": "60,000 - 100,000 PHP/month",
+    "salary_min": 60000,
+    "salary_max": 100000,
+    "market_growth_rate": 28,
+    "location": "Quezon City, Philippines",
+    "skills_required": ["Python", "R", "Machine Learning", "Statistics", "Data Visualization", "SQL", "Pandas", "Scikit-Learn"],
+    "job_type": "Full-time",
+    "top_philippine_employers": ["BDO Unibank", "BPI", "Globe Telecom", "Smart Communications", "SGV & Co. (EY)", "Canva PH"],
+    "recommended_degrees": [
+      "BS Data Science",
+      "BS Statistics / Applied Math",
+      "BS Business Intelligence & Analytics",
+      "BS Computer Science"
+    ],
+    "top_recommended_universities": [
+      "UP Diliman (UPD - School of Statistics & CS)",
+      "Mapúa University (BS Data Science & BS BIA)",
+      "De La Salle University (DLSU - Data Science)",
+      "Ateneo de Manila University (ADMU - Math/CS)",
+      "Silliman University (CHED Center of Excellence in IT)"
+    ],
+    "side_project_blueprints": [
+      "Analyze Customer Churn with Predictive Classification & Power BI Dashboards",
+      "Build a Real-Time Stock Market Forecasting Tool in Python",
+      "Develop an NLP Sentiment Analyzer for Philippine E-Commerce Reviews"
+    ],
+    "certifications_and_licenses": ["Google Data Analytics Professional Certificate", "IBM Data Science Professional Certificate"],
+    "stage_advice": {
+      "freshman": "Strengthen your knowledge in Probability & Statistics, Excel, and SQL during 1st year.",
+      "student": "Focus on Pandas, Scikit-Learn, data visualization, and exploratory data analysis.",
+      "job_seeker": "Create a portfolio showing end-to-end data analysis from raw data cleaning to executive dashboard insights.",
+      "career_shifter": "Enroll in MS CS or complete Google Data Analytics Professional Certificate."
+    },
+    "key_responsibilities": [
+      "Develop predictive machine learning models and regression pipelines",
+      "Clean, explore, and analyze high-dimensional business data",
+      "Communicate data insights to stakeholders using clear visualizations"
+    ],
+    "career_roadmap": [
+      { "stage": "Junior Data Analyst", "timeframe": "0 - 2 Years", "focus": "Data cleaning, SQL querying, and descriptive analytics dashboards." },
+      { "stage": "Data Scientist", "timeframe": "2 - 4 Years", "focus": "Feature engineering, ML modeling, hypothesis testing, and model deployment." },
+      { "stage": "Lead AI / Data Architect", "timeframe": "5+ Years", "focus": "Design enterprise AI strategy, MLOps infrastructure, and deep learning models." }
+    ],
+    "recommended_courses": ["IBM Data Science Professional Certificate", "Applied Machine Learning with Python"]
+  },
+  {
     "id": "job_004",
     "title": "Cybersecurity Analyst",
     "description": "Protect IT networks, cloud infrastructure, and sensitive data from cyber threats. Monitor security incidents, conduct vulnerability assessments, implement firewall protocols, and perform incident response.",
@@ -396,7 +397,7 @@
       "MS Cybersecurity"
     ],
     "top_recommended_universities": [
-      "Mapúa University (BS IT Cybersecurity Track - Manila & Makati)",
+      "Mapúa University (BS IT Cybersecurity Track)",
       "De La Salle University (DLSU)",
       "UP Diliman (UPD)",
       "MSU-IIT (Center of Excellence in IT)"
@@ -447,7 +448,7 @@
     ],
     "top_recommended_universities": [
       "Mapúa University (ABET Accredited & CHED Center of Excellence in Mechanical Engineering)",
-      "UP Diliman (UPD - CHED COE in Mechanical Engineering)",
+      "UP Diliman (UPD - CHED Center of Excellence in Mechanical Engineering)",
       "MSU-IIT (CHED Center of Excellence in Mechanical Engineering)",
       "De La Salle University (DLSU - Mechanical Engineering)",
       "UST (Faculty of Engineering)"

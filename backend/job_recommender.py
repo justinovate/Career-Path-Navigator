@@ -16,6 +16,7 @@ SYNONYM_MAP = {
     "pytorch": ["pytorch", "machine learning", "deep learning", "python", "tensorflow", "ai"],
     "medicine": ["medical doctor", "physician", "clinical diagnosis", "patient care", "surgery", "pharmacology", "healthcare"],
     "med": ["medical doctor", "physician", "clinical diagnosis", "patient care", "healthcare"],
+    "healthcare": ["medical doctor", "physician", "clinical diagnosis", "patient care", "healthcare"],
     "law": ["corporate lawyer", "legal counsel", "legal research", "corporate law", "litigation", "contract drafting"],
     "legal": ["corporate lawyer", "legal counsel", "legal research", "corporate law", "litigation"],
     "architecture": ["architectural design", "autocad", "revit", "3d modeling", "registered architect", "building codes"],
@@ -33,7 +34,6 @@ def load_jobs():
             return json.load(f)
     return []
 
-job_data = load_jobs()
 tfidf_vectorizer = None
 job_tfidf_matrix = None
 
@@ -49,8 +49,6 @@ def prepare_vector_index(jobs):
         
     tfidf_vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1, 2))
     job_tfidf_matrix = tfidf_vectorizer.fit_transform(texts)
-
-prepare_vector_index(job_data)
 
 def load_qtable():
     if os.path.exists(QTABLE_PATH):
@@ -123,19 +121,16 @@ def calculate_skill_match(user_skills, expanded_terms, job_skills, job_category,
     matched_count = len(matched)
     total_required = len(job_skills)
     
-    if matched_count > 0:
-        base_match_score = (matched_count / min(3, total_required))
-        base_match_score = min(1.0, base_match_score)
-    else:
-        base_match_score = 0.0
+    base_match_score = (matched_count / max(1, min(3, total_required)))
+    base_match_score = min(1.0, base_match_score)
         
     category_boost = 0.0
     for term in expanded_terms:
         if term in job_category.lower() or term in job_title.lower():
-            category_boost = 0.35
+            category_boost = 0.45
             break
             
-    final_skill_score = min(1.0, (0.75 * base_match_score) + category_boost)
+    final_skill_score = min(1.0, (0.65 * base_match_score) + category_boost)
     return final_skill_score, matched, missing
 
 def generate_rag_reason(title, matched_skills, missing_skills, user_interests, category, composite_score):
@@ -160,10 +155,8 @@ def generate_rag_reason(title, matched_skills, missing_skills, user_interests, c
     return " ".join(reasons)
 
 def recommend_jobs(skills, interests, student_id, category_filter=None, experience_filter=None):
-    global job_data, tfidf_vectorizer, job_tfidf_matrix
-    if not job_data:
-        job_data = load_jobs()
-        prepare_vector_index(job_data)
+    job_data = load_jobs()
+    prepare_vector_index(job_data)
         
     user_skills = parse_input_tokens(skills)
     user_interests = parse_input_tokens(interests)
@@ -205,7 +198,7 @@ def recommend_jobs(skills, interests, student_id, category_filter=None, experien
         composite_raw = (0.50 * skill_score) + (0.40 * min(1.0, semantic_score * 1.8)) + (0.10 * (0.5 + rl_boost_norm))
         
         if any(t in title.lower() or t in job_category.lower() for t in expanded_terms):
-            composite_raw += 0.15
+            composite_raw += 0.20
 
         overall_percentage = round(min(98, max(25, composite_raw * 100)))
         
