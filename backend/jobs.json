@@ -12,32 +12,108 @@
     "location": "Metro Manila, Philippines",
     "skills_required": ["Python", "Java", "C++", "Algorithms", "Data Structures", "Git", "REST APIs"],
     "job_type": "Full-time",
+    "mapua_degrees": [
+      "BS Computer Science (CS) - Manila & Makati",
+      "BS Information Technology (IT) - Manila & Makati",
+      "BS Computer Engineering (CpE) - Manila"
+    ],
+    "mapua_tracks": [
+      "Software Engineering Track (BS CS)",
+      "Mobile & Web Application Development (BS IT)",
+      "Systems Software Track (BS CpE)"
+    ],
+    "mapua_graduate_degrees": [
+      "Master of Science in Computer Science (MS CS) - Mapúa Graduate Studies",
+      "Master of Engineering in Computer Engineering (M.Eng CpE)"
+    ],
+    "side_project_blueprints": [
+      "Build a Full-Stack Microservices API with Python FastAPI and PostgreSQL",
+      "Develop an Open-Source Developer CLI Tool with Git Integration",
+      "Create a Real-Time Collaborative Whiteboard App with WebSockets"
+    ],
+    "certifications_and_licenses": [
+      "AWS Certified Developer Associate",
+      "Meta Back-End Developer Certificate",
+      "Oracle Certified Professional Java Programmer"
+    ],
+    "stage_advice": {
+      "freshman": "Focus on building a rock-solid foundation in Python, C++, and discrete mathematics during your 1st year at Mapúa. Join Mapúa ACM or ICpEP student chapters early.",
+      "college_student": "Select the Software Engineering Track. Focus on Data Structures & Algorithms coursework, maintain a clean GitHub profile, and participate in local hackathons.",
+      "job_seeker": "Polish your Capstone project into a live production web service. Prepare for technical leetcode-style coding interviews and system design questions.",
+      "career_shifter": "Enroll in Mapúa MS Computer Science (MS CS) or complete intensive full-stack software development professional certificates."
+    },
     "key_responsibilities": [
       "Write clean, maintainable, and efficient code",
       "Collaborate with cross-functional teams to define software requirements",
       "Debug, test, and deploy applications to production environments"
     ],
     "career_roadmap": [
-      {
-        "stage": "Junior Software Engineer",
-        "timeframe": "0 - 2 Years",
-        "focus": "Master core syntax, version control, unit testing, and component architecture."
-      },
-      {
-        "stage": "Mid-Level Engineer",
-        "timeframe": "2 - 5 Years",
-        "focus": "Lead feature implementations, perform code reviews, and optimize system performance."
-      },
-      {
-        "stage": "Senior / Tech Lead",
-        "timeframe": "5+ Years",
-        "focus": "Architect distributed systems, mentor junior engineers, and drive tech stack decisions."
-      }
+      { "stage": "Junior Software Engineer", "timeframe": "0 - 2 Years", "focus": "Master syntax, version control, unit testing, and component architecture." },
+      { "stage": "Mid-Level Engineer", "timeframe": "2 - 5 Years", "focus": "Lead feature implementations, code reviews, and system optimization." },
+      { "stage": "Senior / Tech Lead", "timeframe": "5+ Years", "focus": "Architect distributed systems, mentor engineers, and drive tech stack decisions." }
     ],
     "recommended_courses": [
       "Meta Back-End Developer Professional Certificate",
       "Algorithms and Data Structures Masterclass",
       "Clean Code & System Design Fundamentals"
+    ]
+  },
+  {
+    "id": "job_009",
+    "title": "AI / Machine Learning Engineer",
+    "description": "Build, train, and deploy advanced artificial intelligence algorithms, neural networks, and NLP systems. Utilize PyTorch, TensorFlow, vector databases, and MLOps tools to bring AI solutions to life.",
+    "category": "Data & AI",
+    "experience_level": "Mid-Level",
+    "salary_range": "70,000 - 110,000 PHP/month",
+    "salary_min": 70000,
+    "salary_max": 110000,
+    "market_growth_rate": 35,
+    "location": "Metro Manila, Philippines",
+    "skills_required": ["Python", "Machine Learning", "Deep Learning", "PyTorch", "TensorFlow", "NLP", "Vector Databases", "MLOps"],
+    "job_type": "Full-time",
+    "mapua_degrees": [
+      "BS Computer Science (CS) - Specialization in AI - Manila & Makati",
+      "BS Data Science (DS) - Makati",
+      "BS Computer Engineering (CpE) - Manila"
+    ],
+    "mapua_tracks": [
+      "Artificial Intelligence & Machine Learning Track (BS CS)",
+      "Deep Learning & Big Data Analytics (BS DS)"
+    ],
+    "mapua_graduate_degrees": [
+      "Master of Science in Artificial Intelligence (MS AI) - Mapúa Graduate Studies",
+      "Master of Science in Computer Science (MS CS) - AI Research Track"
+    ],
+    "side_project_blueprints": [
+      "Build a RAG AI Question-Answering Agent using Vector Databases and PyTorch",
+      "Train a Custom Computer Vision Model for Real-Time Object Detection",
+      "Develop an MLOps Pipeline for Automated Model Training and Cloud Deployment"
+    ],
+    "certifications_and_licenses": [
+      "DeepLearning.AI TensorFlow Developer Certificate",
+      "AWS Certified Machine Learning Specialty",
+      "Google Cloud Professional Machine Learning Engineer"
+    ],
+    "stage_advice": {
+      "freshman": "Master Linear Algebra, Multivariable Calculus, and Python fundamentals during your freshman year at Mapúa.",
+      "college_student": "Enroll in the Mapúa BS CS AI Specialization Track. Take electives in Neural Networks, Natural Language Processing, and Computer Vision.",
+      "job_seeker": "Publish a machine learning side project on GitHub or Kaggle. Highlight your experience in fine-tuning LLMs and RAG architecture on your resume.",
+      "career_shifter": "Enroll in Mapúa Master of Science in Artificial Intelligence (MS AI) or complete Andrew Ng's Deep Learning Specialization."
+    },
+    "key_responsibilities": [
+      "Train large language models (LLMs) and neural networks on specialized datasets",
+      "Build RAG pipelines and vector similarity indexing for intelligent agents",
+      "Deploy models to cloud endpoints with Docker and Kubernetes"
+    ],
+    "career_roadmap": [
+      { "stage": "ML Software Developer", "timeframe": "0 - 2 Years", "focus": "Data preprocessing, basic model training, API wrapping." },
+      { "stage": "AI / ML Engineer", "timeframe": "2 - 5 Years", "focus": "Custom neural architecture design, fine-tuning, RAG optimization, MLOps." },
+      { "stage": "Principal AI Architect", "timeframe": "5+ Years", "focus": "Generative AI roadmap, foundation model research, enterprise AI integration." }
+    ],
+    "recommended_courses": [
+      "DeepLearning.AI Generative AI & RAG Specialization",
+      "PyTorch for Deep Learning Bootcamp",
+      "MLOps Specialization by Andrew Ng"
     ]
   },
   {
@@ -53,27 +129,45 @@
     "location": "Quezon City, Philippines",
     "skills_required": ["Python", "R", "Machine Learning", "Statistics", "Data Visualization", "SQL", "Pandas", "Scikit-Learn"],
     "job_type": "Full-time",
+    "mapua_degrees": [
+      "BS Data Science (DS) - Makati",
+      "BS Business Intelligence & Analytics (BS BIA) - ETYSB Makati",
+      "BS Computer Science (CS) - Data Science Track - Manila"
+    ],
+    "mapua_tracks": [
+      "Data Science & Predictive Modeling (BS DS)",
+      "Business Intelligence & Analytics (BS BIA)",
+      "Statistical Computing Track (BS CS)"
+    ],
+    "mapua_graduate_degrees": [
+      "Master of Science in Computer Science (MS CS)",
+      "Master of Business Administration (MBA) - Business Analytics Track"
+    ],
+    "side_project_blueprints": [
+      "Analyze E-commerce Customer Churn with Predictive Regression & Tableau Dashboards",
+      "Build a Real-Time Financial Stock Market Forecasting Tool in Python",
+      "Develop a Natural Language Processing Sentiment Analyzer for News Media"
+    ],
+    "certifications_and_licenses": [
+      "Google Data Analytics Professional Certificate",
+      "IBM Data Science Professional Certificate",
+      "Microsoft Certified: Power BI Data Analyst Associate"
+    ],
+    "stage_advice": {
+      "freshman": "Strengthen your knowledge in Probability & Statistics, Excel, and SQL during 1st year.",
+      "college_student": "Pursue BS Data Science or BS BIA at Mapúa. Focus on Pandas, Scikit-Learn, data visualization, and exploratory data analysis.",
+      "job_seeker": "Create a portfolio showing end-to-end data analysis from raw data cleaning to executive dashboard insights.",
+      "career_shifter": "Enroll in Mapúa MBA Business Analytics track or complete Google Data Analytics Professional Certificate."
+    },
     "key_responsibilities": [
       "Develop predictive machine learning models and regression pipelines",
       "Clean, explore, and analyze high-dimensional business data",
       "Communicate data insights to stakeholders using clear visualizations"
     ],
     "career_roadmap": [
-      {
-        "stage": "Junior Data Analyst",
-        "timeframe": "0 - 2 Years",
-        "focus": "Data cleaning, SQL querying, and descriptive analytics dashboards."
-      },
-      {
-        "stage": "Data Scientist",
-        "timeframe": "2 - 4 Years",
-        "focus": "Feature engineering, ML modeling, hypothesis testing, and model deployment."
-      },
-      {
-        "stage": "Lead AI / ML Architect",
-        "timeframe": "5+ Years",
-        "focus": "Design enterprise AI strategy, MLOps infrastructure, and deep learning models."
-      }
+      { "stage": "Junior Data Analyst", "timeframe": "0 - 2 Years", "focus": "Data cleaning, SQL querying, and descriptive analytics dashboards." },
+      { "stage": "Data Scientist", "timeframe": "2 - 4 Years", "focus": "Feature engineering, ML modeling, hypothesis testing, and model deployment." },
+      { "stage": "Lead AI / ML Architect", "timeframe": "5+ Years", "focus": "Design enterprise AI strategy, MLOps infrastructure, and deep learning models." }
     ],
     "recommended_courses": [
       "IBM Data Science Professional Certificate",
@@ -94,27 +188,44 @@
     "location": "Metro Manila, Philippines",
     "skills_required": ["UX Design", "UI Design", "Figma", "Adobe XD", "Wireframing", "Prototyping", "User Research"],
     "job_type": "Full-time",
+    "mapua_degrees": [
+      "BMMA (Bachelor of Multimedia Arts) - Manila & Makati",
+      "BS Entertainment & Multimedia Computing (BS EMC) - Manila",
+      "BS Digital Media Studies - Manila & Makati"
+    ],
+    "mapua_tracks": [
+      "Digital Media Design Track (BMMA)",
+      "Interactive Web & UI Design Track (BS EMC)",
+      "User Experience Research Track"
+    ],
+    "mapua_graduate_degrees": [
+      "Master of Science in Media Studies - Mapúa Graduate Studies"
+    ],
+    "side_project_blueprints": [
+      "Design a Complete Mobile Banking App Prototype & Design System in Figma",
+      "Conduct a Usability Audit & Redesign for a Popular Local E-Commerce Website",
+      "Create a Micro-Interaction Component Library for Web Applications"
+    ],
+    "certifications_and_licenses": [
+      "Google UX Design Professional Certificate",
+      "Figma UI/UX Master Certification",
+      "Nielsen Norman Group UX Certification"
+    ],
+    "stage_advice": {
+      "freshman": "Build design principles, typography, and color theory fundamentals during 1st year BMMA / Media Studies at Mapúa.",
+      "college_student": "Master Figma and Adobe Creative Suite. Conduct user research case studies and present interactive prototypes.",
+      "job_seeker": "Publish a Behance or Dribbble portfolio showcasing 3 detailed UI/UX case studies with user research documentation.",
+      "career_shifter": "Complete Google UX Design Professional Certificate and build a 3-project digital design portfolio."
+    },
     "key_responsibilities": [
       "Conduct user interviews, usability testing, and persona research",
       "Create high-fidelity interactive mockups and component libraries in Figma",
       "Collaborate closely with frontend developers to ensure pixel-perfect execution"
     ],
     "career_roadmap": [
-      {
-        "stage": "Junior UX/UI Designer",
-        "timeframe": "0 - 2 Years",
-        "focus": "Wireframing, UI polish, component library maintenance, and usability testing."
-      },
-      {
-        "stage": "Product Designer",
-        "timeframe": "2 - 5 Years",
-        "focus": "End-to-end product design, user flow optimization, and design system governance."
-      },
-      {
-        "stage": "Design Lead / UX Director",
-        "timeframe": "5+ Years",
-        "focus": "UX strategy, brand identity alignment, and managing design teams."
-      }
+      { "stage": "Junior UX/UI Designer", "timeframe": "0 - 2 Years", "focus": "Wireframing, UI polish, component library maintenance, and usability testing." },
+      { "stage": "Product Designer", "timeframe": "2 - 5 Years", "focus": "End-to-end product design, user flow optimization, and design system governance." },
+      { "stage": "Design Lead / UX Director", "timeframe": "5+ Years", "focus": "UX strategy, brand identity alignment, and managing design teams." }
     ],
     "recommended_courses": [
       "Google UX Design Professional Certificate",
@@ -135,27 +246,44 @@
     "location": "Pasig City, Philippines",
     "skills_required": ["Network Security", "Encryption", "Risk Assessment", "Incident Response", "Linux", "Penetration Testing", "SIEM Tools"],
     "job_type": "Full-time",
+    "mapua_degrees": [
+      "BS Information Technology (IT) - Cybersecurity Track - Manila & Makati",
+      "BS Computer Engineering (CpE) - Manila",
+      "BS Computer Science (CS) - Manila & Makati"
+    ],
+    "mapua_tracks": [
+      "Cybersecurity & Network Security Track (BS IT)",
+      "Embedded Systems Security Track (BS CpE)"
+    ],
+    "mapua_graduate_degrees": [
+      "Master of Science in Cybersecurity (MS Cybersecurity) - Mapúa Graduate Studies",
+      "Master of Science in Computer Science (MS CS)"
+    ],
+    "side_project_blueprints": [
+      "Set Up a Virtual Cyber Home Lab for Penetration Testing and Packet Analysis (Wireshark)",
+      "Build a Python Automated Vulnerability Scanner for Web Server Hardening",
+      "Implement a Secure Authentication & Encrypted Storage System"
+    ],
+    "certifications_and_licenses": [
+      "CompTIA Security+",
+      "Certified Ethical Hacker (CEH)",
+      "Cisco Certified Network Associate (CCNA Security)"
+    ],
+    "stage_advice": {
+      "freshman": "Focus on Computer Networks, Linux command line, and Operating Systems during 1st year.",
+      "college_student": "Enroll in the Mapúa BS IT Cybersecurity Track. Join the Mapúa IT Society and compete in Capture The Flag (CTF) competitions.",
+      "job_seeker": "Earn your CompTIA Security+ or CCNA certification. Document your hands-on penetration testing home lab work.",
+      "career_shifter": "Enroll in Mapúa Master of Science in Cybersecurity (MS Cybersecurity) or earn CompTIA Security+."
+    },
     "key_responsibilities": [
       "Monitor security event logs and analyze real-time threats",
       "Conduct vulnerability penetration testing and patch management",
       "Develop security compliance guidelines and employee security awareness training"
     ],
     "career_roadmap": [
-      {
-        "stage": "Security Operations Specialist",
-        "timeframe": "0 - 2 Years",
-        "focus": "SOC monitoring, log management, and baseline security compliance."
-      },
-      {
-        "stage": "Cybersecurity Analyst",
-        "timeframe": "2 - 5 Years",
-        "focus": "Threat hunting, incident response, penetration testing, and network hardening."
-      },
-      {
-        "stage": "Chief Information Security Officer (CISO)",
-        "timeframe": "5+ Years",
-        "focus": "Enterprise security policies, threat governance, and risk mitigation."
-      }
+      { "stage": "Security Operations Specialist", "timeframe": "0 - 2 Years", "focus": "SOC monitoring, log management, and baseline security compliance." },
+      { "stage": "Cybersecurity Analyst", "timeframe": "2 - 5 Years", "focus": "Threat hunting, incident response, penetration testing, and network hardening." },
+      { "stage": "Chief Information Security Officer (CISO)", "timeframe": "5+ Years", "focus": "Enterprise security policies, threat governance, and risk mitigation." }
     ],
     "recommended_courses": [
       "CompTIA Security+ Certification",
@@ -176,114 +304,49 @@
     "location": "Taguig City, Philippines",
     "skills_required": ["Mechanical Engineering", "CAD Software", "SolidWorks", "Materials Science", "Problem Solving", "Thermodynamics"],
     "job_type": "Full-time",
+    "mapua_degrees": [
+      "BS Mechanical Engineering (BS ME) - SOEA Manila",
+      "BS Manufacturing Engineering (BS MfgE) - SOEA Manila"
+    ],
+    "mapua_tracks": [
+      "Mechatronics & Robotics Track (BS ME)",
+      "Heating, Ventilation, Air Conditioning & Refrigeration (HVAC/R)",
+      "Power & Energy Engineering Track"
+    ],
+    "mapua_graduate_degrees": [
+      "Master of Engineering in Mechanical Engineering (M.Eng ME) - Mapúa Graduate Studies",
+      "Master of Science in Materials Science and Engineering"
+    ],
+    "side_project_blueprints": [
+      "Design a 3D Mechanical Assembly and Motion Simulation in SolidWorks",
+      "Perform Stress and Thermal Finite Element Analysis (FEA) on Structural Components",
+      "Build a Microcontroller-Based Mechatronic Robotic Arm Prototype"
+    ],
+    "certifications_and_licenses": [
+      "Philippine Mechanical Engineer Licensure Exam (Board Exam)",
+      "Certified SolidWorks Associate / Professional (CSWA / CSWP)",
+      "Certified Heating, Ventilating & Air Conditioning Specialist"
+    ],
+    "stage_advice": {
+      "freshman": "Master Statics, Dynamics, Physics, and 2D/3D CAD drafting software during 1st year SOEA at Mapúa.",
+      "college_student": "Join PSME (Philippine Society of Mechanical Engineers) Mapúa Student Chapter. Focus on SolidWorks and FEA analysis.",
+      "job_seeker": "Pass the Philippine Mechanical Engineer Board Examination. Prepare your CAD design portfolio for manufacturing firms.",
+      "career_shifter": "Enroll in Mapúa Master of Engineering (M.Eng ME) or pursue SolidWorks CSWA/CSWP professional certifications."
+    },
     "key_responsibilities": [
       "Develop 3D mechanical schematics and production blueprints",
       "Perform stress, thermal, and structural simulations using FEA software",
       "Supervise mechanical assembly testing and quality control inspections"
     ],
     "career_roadmap": [
-      {
-        "stage": "Assistant Mechanical Engineer",
-        "timeframe": "0 - 2 Years",
-        "focus": "CAD drafting, component tolerance checking, and testing assistance."
-      },
-      {
-        "stage": "Mechanical Design Engineer",
-        "timeframe": "2 - 5 Years",
-        "focus": "Product development, thermal modeling, and prototype validation."
-      },
-      {
-        "stage": "Principal Systems Engineer",
-        "timeframe": "5+ Years",
-        "focus": "Engineering project management, vendor management, and R&D strategy."
-      }
+      { "stage": "Assistant Mechanical Engineer", "timeframe": "0 - 2 Years", "focus": "CAD drafting, component tolerance checking, and testing assistance." },
+      { "stage": "Mechanical Design Engineer", "timeframe": "2 - 5 Years", "focus": "Product development, thermal modeling, and prototype validation." },
+      { "stage": "Principal Systems Engineer", "timeframe": "5+ Years", "focus": "Engineering project management, vendor management, and R&D strategy." }
     ],
     "recommended_courses": [
       "SolidWorks Mechanical Design Associate (CSWA)",
       "Finite Element Analysis for Engineers",
       "Fundamentals of Modern Manufacturing"
-    ]
-  },
-  {
-    "id": "job_006",
-    "title": "Financial Analyst",
-    "description": "Evaluate investment portfolios, analyze corporate financial metrics, build complex forecasting models in Excel, and generate strategic risk/reward reporting for executive decision-making.",
-    "category": "Finance & Business",
-    "experience_level": "Mid-Level",
-    "salary_range": "45,000 - 75,000 PHP/month",
-    "salary_min": 45000,
-    "salary_max": 75000,
-    "market_growth_rate": 16,
-    "location": "Metro Manila, Philippines",
-    "skills_required": ["Financial Analysis", "Excel", "Financial Modeling", "Risk Assessment", "Accounting", "Data Analysis", "Bloomberg Terminal"],
-    "job_type": "Full-time",
-    "key_responsibilities": [
-      "Build discounted cash flow (DCF) models and valuation forecasts",
-      "Analyze corporate balance sheets, cash flow statements, and market trends",
-      "Prepare investment thesis recommendations for portfolio managers"
-    ],
-    "career_roadmap": [
-      {
-        "stage": "Junior Financial Analyst",
-        "timeframe": "0 - 2 Years",
-        "focus": "Financial statement analysis, data entry, and variance reporting."
-      },
-      {
-        "stage": "Senior Financial Analyst",
-        "timeframe": "2 - 5 Years",
-        "focus": "Complex financial modeling, M&A evaluation, and capital budgeting."
-      },
-      {
-        "stage": "Finance Director / CFO",
-        "timeframe": "5+ Years",
-        "focus": "Corporate capital management, investor relations, and strategic growth."
-      }
-    ],
-    "recommended_courses": [
-      "CFA Level 1 Preparation Course",
-      "Financial Modeling & Valuation Analyst (FMVA)",
-      "Advanced Excel for Financial Engineers"
-    ]
-  },
-  {
-    "id": "job_007",
-    "title": "Digital Marketing Specialist",
-    "description": "Plan, run, and optimize omnichannel digital marketing campaigns spanning SEO, Google Ads (PPC), social media advertising, content creation, and analytics tracking to drive brand engagement.",
-    "category": "Marketing & Media",
-    "experience_level": "Mid-Level",
-    "salary_range": "32,000 - 55,000 PHP/month",
-    "salary_min": 32000,
-    "salary_max": 55000,
-    "market_growth_rate": 20,
-    "location": "Cebu City, Philippines",
-    "skills_required": ["SEO", "Content Marketing", "Google Analytics", "PPC", "Social Media", "Copywriting", "Email Campaigns"],
-    "job_type": "Full-time",
-    "key_responsibilities": [
-      "Optimize website content and metadata for search engine rankings",
-      "Manage Google Ads and Meta ad spend campaigns with ROI tracking",
-      "Analyze campaign conversion funnel performance using Google Analytics"
-    ],
-    "career_roadmap": [
-      {
-        "stage": "Digital Marketing Assistant",
-        "timeframe": "0 - 2 Years",
-        "focus": "Social media scheduling, blog drafting, and basic ad management."
-      },
-      {
-        "stage": "Digital Marketing Specialist",
-        "timeframe": "2 - 4 Years",
-        "focus": "PPC budget allocation, SEO audits, conversion rate optimization."
-      },
-      {
-        "stage": "Head of Growth Marketing",
-        "timeframe": "5+ Years",
-        "focus": "Brand expansion strategy, customer acquisition cost reduction, and team leadership."
-      }
-    ],
-    "recommended_courses": [
-      "Google Digital Marketing & E-commerce Professional Certificate",
-      "HubSpot Content Marketing & SEO Certification",
-      "Meta Certified Digital Marketing Associate"
     ]
   },
   {
@@ -299,27 +362,44 @@
     "location": "Cebu City, Philippines",
     "skills_required": ["Civil Engineering", "Project Management", "Construction", "AutoCAD", "Safety Standards", "Structural Analysis"],
     "job_type": "Full-time",
+    "mapua_degrees": [
+      "BS Civil Engineering (BS CE) - SOEA Manila",
+      "BS Environmental & Sanitary Engineering (BS EnSE) - SOEA Manila"
+    ],
+    "mapua_tracks": [
+      "Structural Engineering Track (BS CE)",
+      "Construction Engineering & Management Track",
+      "Transportation Engineering Track"
+    ],
+    "mapua_graduate_degrees": [
+      "Master of Engineering in Civil Engineering (M.Eng CE) - Mapúa Graduate Studies",
+      "Master of Science in Structural Engineering"
+    ],
+    "side_project_blueprints": [
+      "Create 3D Structural Models and Load Load Calculations for a Multi-Story Building",
+      "Develop a Site Construction Timeline and Budget Estimator in Primavera/MS Project",
+      "Design a Rainwater Harvesting & Stormwater Drainage System Blueprint"
+    ],
+    "certifications_and_licenses": [
+      "Philippine Civil Engineer Licensure Examination (Board Exam)",
+      "Project Management Professional (PMP / CAPM)",
+      "AutoCAD Civil 3D Professional Certification"
+    ],
+    "stage_advice": {
+      "freshman": "Master Engineering Mathematics, Surveying, and AutoCAD basics during 1st year at Mapúa SOEA Manila.",
+      "college_student": "Join PICE (Philippine Institute of Civil Engineers) Mapúa Student Chapter. Focus on Structural Analysis & Concrete Design.",
+      "job_seeker": "Review for and pass the Philippine Civil Engineer Board Exam. Prepare your structural portfolio and CAD drawings.",
+      "career_shifter": "Enroll in Mapúa Master of Engineering (M.Eng CE) or earn CAPM/PMP project management certifications."
+    },
     "key_responsibilities": [
       "Create structural blueprints and 2D/3D CAD site designs",
       "Conduct site inspections and monitor safety standard adherence",
       "Calculate material requirements, cost estimates, and project timelines"
     ],
     "career_roadmap": [
-      {
-        "stage": "Junior Site Engineer",
-        "timeframe": "0 - 2 Years",
-        "focus": "Field inspection, quantity surveying, and CAD drafting support."
-      },
-      {
-        "stage": "Structural / Civil Engineer",
-        "timeframe": "2 - 5 Years",
-        "focus": "Structural modeling, permit processing, and project management."
-      },
-      {
-        "stage": "Project Director / Engineering Consultant",
-        "timeframe": "5+ Years",
-        "focus": "Mega-infrastructure planning, regulatory approval, and contract management."
-      }
+      { "stage": "Junior Site Engineer", "timeframe": "0 - 2 Years", "focus": "Field inspection, quantity surveying, and CAD drafting support." },
+      { "stage": "Structural / Civil Engineer", "timeframe": "2 - 5 Years", "focus": "Structural modeling, permit processing, and project management." },
+      { "stage": "Project Director / Engineering Consultant", "timeframe": "5+ Years", "focus": "Mega-infrastructure planning, regulatory approval, and contract management." }
     ],
     "recommended_courses": [
       "AutoCAD Civil 3D Fundamentals",
@@ -328,85 +408,61 @@
     ]
   },
   {
-    "id": "job_009",
-    "title": "AI / Machine Learning Engineer",
-    "description": "Build, train, and deploy advanced artificial intelligence algorithms, neural networks, and NLP systems. Utilize PyTorch, TensorFlow, vector databases, and MLOps tools to bring AI solutions to life.",
-    "category": "Data & AI",
+    "id": "job_006",
+    "title": "Financial Analyst",
+    "description": "Evaluate investment portfolios, analyze corporate financial metrics, build complex forecasting models in Excel, and generate strategic risk/reward reporting for executive decision-making.",
+    "category": "Finance & Business",
     "experience_level": "Mid-Level",
-    "salary_range": "70,000 - 110,000 PHP/month",
-    "salary_min": 70000,
-    "salary_max": 110000,
-    "market_growth_rate": 35,
+    "salary_range": "45,000 - 75,000 PHP/month",
+    "salary_min": 45000,
+    "salary_max": 75000,
+    "market_growth_rate": 16,
     "location": "Metro Manila, Philippines",
-    "skills_required": ["Python", "Machine Learning", "Deep Learning", "PyTorch", "TensorFlow", "NLP", "Vector Databases", "MLOps"],
+    "skills_required": ["Financial Analysis", "Excel", "Financial Modeling", "Risk Assessment", "Accounting", "Data Analysis", "Bloomberg Terminal"],
     "job_type": "Full-time",
+    "mapua_degrees": [
+      "BS Business Administration (BS BA) - Financial Management Track - ETYSB Makati",
+      "BS Business Intelligence & Analytics (BS BIA) - ETYSB Makati",
+      "BS Accountancy (BS A) - ETYSB Makati"
+    ],
+    "mapua_tracks": [
+      "Financial Management & Corporate Finance (BS BA)",
+      "Business Intelligence & Data Analytics (BS BIA)"
+    ],
+    "mapua_graduate_degrees": [
+      "Master of Business Administration (MBA) - Mapúa ETY School of Business",
+      "Master of Science in Financial Engineering"
+    ],
+    "side_project_blueprints": [
+      "Build a Discounted Cash Flow (DCF) Financial Valuation Model in Advanced Excel",
+      "Analyze Public Stock Portfolio Returns using Python Financial Analytics",
+      "Create an Interactive Executive Financial Performance Dashboard in Power BI"
+    ],
+    "certifications_and_licenses": [
+      "Chartered Financial Analyst (CFA Level 1)",
+      "Financial Modeling & Valuation Analyst (FMVA)",
+      "Certified Public Accountant (CPA Licensure Exam for Accountancy graduates)"
+    ],
+    "stage_advice": {
+      "freshman": "Master Financial Accounting, Economics, and Advanced Excel formulas during 1st year ETYSB at Mapúa Makati.",
+      "college_student": "Participate in financial modeling competitions. Master DCF modeling, corporate finance, and Bloomberg terminals.",
+      "job_seeker": "Prepare a 3-statement financial model portfolio. Sit for the CFA Level 1 or FMVA certification exam.",
+      "career_shifter": "Enroll in the Mapúa MBA program or complete FMVA Financial Modeling certification."
+    },
     "key_responsibilities": [
-      "Train large language models (LLMs) and neural networks on specialized datasets",
-      "Build RAG pipelines and vector similarity indexing for intelligent agents",
-      "Deploy models to cloud endpoints with Docker and Kubernetes"
+      "Build discounted cash flow (DCF) models and valuation forecasts",
+      "Analyze corporate balance sheets, cash flow statements, and market trends",
+      "Prepare investment thesis recommendations for portfolio managers"
     ],
     "career_roadmap": [
-      {
-        "stage": "ML Software Developer",
-        "timeframe": "0 - 2 Years",
-        "focus": "Data preprocessing, basic model training, API wrapping."
-      },
-      {
-        "stage": "AI / ML Engineer",
-        "timeframe": "2 - 5 Years",
-        "focus": "Custom neural architecture design, fine-tuning, RAG optimization, MLOps."
-      },
-      {
-        "stage": "Principal AI Architect",
-        "timeframe": "5+ Years",
-        "focus": "Generative AI roadmap, foundation model research, enterprise AI integration."
-      }
+      { "stage": "Junior Financial Analyst", "timeframe": "0 - 2 Years", "focus": "Financial statement analysis, data entry, and variance reporting." },
+      { "stage": "Senior Financial Analyst", "timeframe": "2 - 5 Years", "focus": "Complex financial modeling, M&A evaluation, and capital budgeting." },
+      { "stage": "Finance Director / CFO", "timeframe": "5+ Years", "focus": "Corporate capital management, investor relations, and strategic growth." }
     ],
     "recommended_courses": [
-      "DeepLearning.AI Generative AI & RAG Specialization",
-      "PyTorch for Deep Learning Bootcamp",
-      "MLOps Specialization by Andrew Ng"
-    ]
-  },
-  {
-    "id": "job_010",
-    "title": "Cloud Infrastructure Engineer",
-    "description": "Design, deploy, and maintain high-availability cloud environments on AWS, Azure, or GCP. Implement infrastructure as code (Terraform), CI/CD pipelines, containerization (Docker, Kubernetes), and monitoring.",
-    "category": "Software Engineering",
-    "experience_level": "Mid-Level",
-    "salary_range": "55,000 - 90,000 PHP/month",
-    "salary_min": 55000,
-    "salary_max": 90000,
-    "market_growth_rate": 25,
-    "location": "Makati City, Philippines",
-    "skills_required": ["Cloud Computing", "AWS", "Docker", "Kubernetes", "Terraform", "Linux", "CI/CD", "DevOps"],
-    "job_type": "Full-time",
-    "key_responsibilities": [
-      "Automate cloud resource provisioning using Terraform and Ansible",
-      "Maintain automated CI/CD build and release pipelines",
-      "Ensure 99.99% system uptime, disaster recovery, and auto-scaling performance"
-    ],
-    "career_roadmap": [
-      {
-        "stage": "Associate DevOps Engineer",
-        "timeframe": "0 - 2 Years",
-        "focus": "CI/CD maintenance, Docker container management, cloud administration."
-      },
-      {
-        "stage": "Cloud Solutions Architect",
-        "timeframe": "2 - 5 Years",
-        "focus": "Infrastructure automation, multi-cloud strategy, cost optimization."
-      },
-      {
-        "stage": "VP of Infrastructure & Operations",
-        "timeframe": "5+ Years",
-        "focus": "Enterprise cloud strategy, reliability engineering leadership."
-      }
-    ],
-    "recommended_courses": [
-      "AWS Certified Solutions Architect Associate",
-      "Docker & Kubernetes: The Complete Guide",
-      "Terraform Certified Associate Course"
+      "CFA Level 1 Preparation Course",
+      "Financial Modeling & Valuation Analyst (FMVA)",
+      "Advanced Excel for Financial Engineers"
     ]
   }
 ]

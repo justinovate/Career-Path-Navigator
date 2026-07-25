@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="mapua">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Career Path Navigator - RAG & RL Powered Career Guidance</title>
+  <title>Career Path Navigator - Mapúa Academic & Career Guidance</title>
 
   <!-- Google Fonts: Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
   
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-theme="mapua">
 
   <!-- Top Navigation Header -->
   <header id="top-bar" class="top-nav" style="display: none;">
@@ -27,11 +27,22 @@
       <i class="fa-solid fa-compass-drafting brand-icon"></i>
       <div>
         <span class="brand-title">Career Path Navigator</span>
-        <span class="brand-subtitle">RAG Vector Search & RL Adaptation</span>
+        <span class="brand-subtitle">Mapúa Manila & Makati Academic Guidance</span>
       </div>
     </div>
 
     <div class="nav-right">
+      <!-- Theme Switcher Selector -->
+      <div class="theme-selector-box">
+        <i class="fa-solid fa-palette"></i>
+        <select id="theme-selector" onchange="changeTheme(this.value)">
+          <option value="mapua">🔴 Mapúa Cardinal Red & Gold</option>
+          <option value="indigo">🌌 Deep Indigo & Violet</option>
+          <option value="emerald">🌲 Cyber Emerald & Cyan</option>
+          <option value="light">☀️ Clean Academic Light</option>
+        </select>
+      </div>
+
       <button class="nav-btn accent-btn" onclick="openQuizModal()">
         <i class="fa-solid fa-clipboard-question"></i> Career Quiz
       </button>
@@ -62,10 +73,10 @@
     <section id="login-screen" class="glass-card login-card">
       <div class="login-header">
         <div class="login-logo">
-          <i class="fa-solid fa-compass-drafting"></i>
+          <i class="fa-solid fa-graduation-cap"></i>
         </div>
         <h2>Career Path Navigator</h2>
-        <p>Personalized career exploration powered by Retrieval-Augmented Generation & Reinforcement Learning.</p>
+        <p>Personalized career exploration aligned with Mapúa University Manila & Makati degree programs.</p>
       </div>
 
       <!-- Auth Tabs: Sign In vs Sign Up -->
@@ -87,7 +98,7 @@
         </div>
 
         <div class="quick-students">
-          <span>Demo Quick Login Accounts:</span>
+          <span>Demo Accounts:</span>
           <button type="button" class="chip-btn" onclick="quickDemoLogin('alex_ai', 'password123')">Alex (AI & Data)</button>
           <button type="button" class="chip-btn" onclick="quickDemoLogin('maria_eng', 'password123')">Maria (Engineering)</button>
         </div>
@@ -130,14 +141,26 @@
 
       <!-- Left Sidebar: Skill & Interest Builder -->
       <aside class="sidebar-panel glass-card">
+        
+        <!-- Life-Stage Selector Pills -->
+        <div class="stage-selector-container">
+          <label class="section-label"><i class="fa-solid fa-user-graduate"></i> Select Your Current Life-Stage:</label>
+          <div class="stage-pills">
+            <button class="stage-pill" data-stage="freshman" onclick="setLifeStage('freshman', this)">🎓 Incoming Freshman</button>
+            <button class="stage-pill active" data-stage="student" onclick="setLifeStage('student', this)">📚 Enrolled Student</button>
+            <button class="stage-pill" data-stage="job_seeker" onclick="setLifeStage('job_seeker', this)">💼 Job Seeker</button>
+            <button class="stage-pill" data-stage="career_shifter" onclick="setLifeStage('career_shifter', this)">🔄 Career Shifter</button>
+          </div>
+        </div>
+
         <div class="panel-header">
           <h3><i class="fa-solid fa-sliders"></i> Skill & Interest Profile</h3>
-          <p class="panel-desc">Specify your technical skills & career interests to trigger RAG vector search.</p>
+          <p class="panel-desc">Specify technical skills & interests to trigger RAG vector search.</p>
         </div>
 
         <!-- Quick Skill Chips Picker -->
         <div class="quick-skills-section">
-          <label class="section-label"><i class="fa-solid fa-bolt"></i> Popular Skill Quick-Add:</label>
+          <label class="section-label"><i class="fa-solid fa-bolt"></i> Quick-Add Skills:</label>
           <div class="quick-chips-container">
             <button class="quick-chip" onclick="quickAddSkill('Python')">+ Python</button>
             <button class="quick-chip" onclick="quickAddSkill('TensorFlow')">+ TensorFlow</button>
@@ -195,7 +218,7 @@
           <div class="controls-top">
             <div class="search-box">
               <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" id="search-filter" placeholder="Search career titles or keywords..." oninput="filterRecommendations()">
+              <input type="text" id="search-filter" placeholder="Search career titles, degree programs, or keywords..." oninput="filterRecommendations()">
             </div>
 
             <div class="select-box">
@@ -218,7 +241,6 @@
             <button class="tab-btn" data-category="Engineering" onclick="setCategoryFilter('Engineering', this)">Engineering</button>
             <button class="tab-btn" data-category="Cybersecurity & IT" onclick="setCategoryFilter('Cybersecurity & IT', this)">Cybersecurity</button>
             <button class="tab-btn" data-category="Finance & Business" onclick="setCategoryFilter('Finance & Business', this)">Finance</button>
-            <button class="tab-btn" data-category="Marketing & Media" onclick="setCategoryFilter('Marketing & Media', this)">Marketing</button>
           </div>
         </div>
 
@@ -232,13 +254,46 @@
           <div class="empty-state glass-card">
             <i class="fa-solid fa-compass"></i>
             <h3>Ready to Explore Your Career Path?</h3>
-            <p>Add your skills and interests in the left panel, or click a quick-add chip to generate instant RAG & RL powered job recommendations.</p>
+            <p>Add your skills and interests in the left panel to generate Mapúa-aligned job recommendations.</p>
           </div>
         </div>
       </section>
 
     </div>
   </main>
+
+  <!-- Floating Cardi AI Assistant Chat Widget -->
+  <div id="cardi-chat-widget" class="cardi-widget-container">
+    <button id="cardi-fab" class="cardi-fab-button" onclick="toggleCardiChat()">
+      <div class="cardi-avatar">🔴💛</div>
+      <span class="cardi-fab-label">Ask Cardi AI</span>
+    </button>
+
+    <div id="cardi-chat-drawer" class="cardi-drawer glass-card" style="display: none;">
+      <div class="cardi-drawer-header">
+        <div class="cardi-header-title">
+          <span class="cardi-avatar-sm">🔴💛</span>
+          <div>
+            <strong>Cardi</strong>
+            <span class="cardi-status-text">Mapúa AI Career Advisor</span>
+          </div>
+        </div>
+        <button class="modal-close" onclick="toggleCardiChat()">&times;</button>
+      </div>
+
+      <div id="cardi-chat-messages" class="cardi-messages-container">
+        <div class="cardi-message bot">
+          🔴💛 <strong>Hi! I'm Cardi, your Mapúa AI Career Advisor!</strong><br>
+          Ask me anything about Mapúa Manila & Makati degree programs, tracks, electives, side projects, or career shifts!
+        </div>
+      </div>
+
+      <form class="cardi-chat-input-bar" onsubmit="event.preventDefault(); sendCardiMessage();">
+        <input type="text" id="cardi-input" placeholder="Ask Cardi a question..." autocomplete="off">
+        <button type="submit" class="btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </div>
 
   <!-- Modal 1: Career Assessment Quiz -->
   <div id="quiz-modal" class="modal-overlay" style="display: none;">
@@ -248,7 +303,6 @@
         <button class="modal-close" onclick="closeQuizModal()">&times;</button>
       </div>
       <div class="modal-body" id="quiz-body">
-        <!-- Quiz Steps rendered via JS -->
       </div>
     </div>
   </div>

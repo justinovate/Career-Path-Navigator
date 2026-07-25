@@ -9,6 +9,7 @@ const API_BASE_URL = window.location.origin.includes('localhost') || window.loca
 let currentUser = null;
 let skills = [];
 let interests = [];
+let currentStage = 'student';
 let activeCategoryFilter = 'All';
 let activeExperienceFilter = 'All';
 let searchQuery = '';
@@ -33,9 +34,14 @@ const rlModalContent = document.getElementById('rl-modal-content');
 const quizModal = document.getElementById('quiz-modal');
 const quizBody = document.getElementById('quiz-body');
 const chartsModal = document.getElementById('charts-modal');
+const cardiDrawer = document.getElementById('cardi-chat-drawer');
+const cardiMessages = document.getElementById('cardi-chat-messages');
 
-// Check persistent session on load
+// Initialize on Load
 window.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('cpn_theme') || 'mapua';
+  changeTheme(savedTheme);
+
   const savedUser = localStorage.getItem('cpn_user');
   if (savedUser) {
     try {
@@ -46,6 +52,23 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+// --- Theme Switcher ---
+function changeTheme(themeName) {
+  document.documentElement.setAttribute('data-theme', themeName);
+  document.body.setAttribute('data-theme', themeName);
+  localStorage.setItem('cpn_theme', themeName);
+  const themeSelect = document.getElementById('theme-selector');
+  if (themeSelect) themeSelect.value = themeName;
+}
+
+// --- Life Stage Selector ---
+function setLifeStage(stage, btnElement) {
+  currentStage = stage;
+  document.querySelectorAll('.stage-pill').forEach(btn => btn.classList.remove('active'));
+  if (btnElement) btnElement.classList.add('active');
+  fetchRecommendations();
+}
 
 // --- Auth Tabs & Authentication ---
 function switchAuthTab(tab) {
@@ -263,9 +286,7 @@ async function saveUserProfileState() {
 function setCategoryFilter(category, btnElement) {
   activeCategoryFilter = category;
   document.querySelectorAll('#category-tabs .tab-btn').forEach(btn => btn.classList.remove('active'));
-  if (btnElement) {
-    btnElement.classList.add('active');
-  }
+  if (btnElement) btnElement.classList.add('active');
   fetchRecommendations();
 }
 
@@ -283,8 +304,8 @@ async function fetchRecommendations() {
   resultsDiv.innerHTML = `
     <div class="glass-card empty-state">
       <i class="fa-solid fa-spinner fa-spin"></i>
-      <h3>Searching Vector Database & Calculating RAG Scores...</h3>
-      <p>Expanding domain query terms and evaluating RL preference boosts.</p>
+      <h3>Analyzing Skills & Querying RAG Database...</h3>
+      <p>Matching Mapúa Manila & Makati degree programs and running RL Q-table score boosts.</p>
     </div>
   `;
 
@@ -299,6 +320,7 @@ async function fetchRecommendations() {
         student_id: userId,
         skills: skillsText,
         interests: interestsText,
+        user_stage: currentStage,
         category_filter: activeCategoryFilter,
         experience_filter: activeExperienceFilter
       })
@@ -329,6 +351,7 @@ function renderRecommendations(jobs) {
       j.title.toLowerCase().includes(searchQuery) ||
       j.description.toLowerCase().includes(searchQuery) ||
       j.category.toLowerCase().includes(searchQuery) ||
+      (j.mapua_degrees || []).some(d => d.toLowerCase().includes(searchQuery)) ||
       j.skills_required.some(s => s.toLowerCase().includes(searchQuery))
     );
   }
@@ -359,6 +382,13 @@ function renderRecommendations(jobs) {
     const matchedChips = job.matched_skills.map(s => `<span class="skill-chip matched"><i class="fa-solid fa-check"></i> ${s}</span>`).join(' ');
     const missingChips = job.missing_skills.map(s => `<span class="skill-chip missing"><i class="fa-solid fa-lightbulb"></i> ${s}</span>`).join(' ');
 
+    const mapuaDegreeChips = (job.mapua_degrees || []).map(d => `<span class="mapua-chip"><i class="fa-solid fa-graduation-cap"></i> ${d}</span>`).join(' ');
+    const mapuaTrackChips = (job.mapua_tracks || []).map(t => `<span class="tag-chip">${t}</span>`).join(' ');
+    const mapuaGradChips = (job.mapua_graduate_degrees || []).map(g => `<span class="tag-chip interest">${g}</span>`).join(' ');
+    const sideProjectItems = (job.side_project_blueprints || []).map(p => `<li>${p}</li>`).join('');
+
+    const stageAdviceText = job.stage_advice ? (job.stage_advice[currentStage] || job.stage_advice["student"]) : "";
+
     const roadmapSteps = (job.career_roadmap || []).map(step => `
       <div class="roadmap-step">
         <div>
@@ -388,6 +418,20 @@ function renderRecommendations(jobs) {
           <span class="score-label">Match Score</span>
         </div>
       </div>
+
+      <!-- Mapúa Degree Alignment Box -->
+      <div class="mapua-degree-box">
+        <div class="mapua-degree-header"><i class="fa-solid fa-university"></i> Recommended Mapúa University Programs (Manila & Makati):</div>
+        <div>${mapuaDegreeChips}</div>
+        ${mapuaTrackChips ? `<div style="margin-top: 6px; font-size: 12px;"><strong>Specialization Tracks:</strong> ${mapuaTrackChips}</div>` : ''}
+      </div>
+
+      <!-- Stage-Specific Advisory Banner -->
+      ${stageAdviceText ? `
+        <div style="background: rgba(245, 158, 11, 0.1); border-left: 3px solid var(--amber-gold); padding: 10px 14px; border-radius: 6px; font-size: 13px; margin-bottom: 14px;">
+          <strong style="color: var(--amber-gold);"><i class="fa-solid fa-user-graduate"></i> Stage Guidance (${currentStage.replace('_', ' ').toUpperCase()}):</strong> ${stageAdviceText}
+        </div>
+      ` : ''}
 
       <!-- Multi-Score Breakdown Bar -->
       <div class="score-breakdown-bar">
@@ -447,13 +491,25 @@ function renderRecommendations(jobs) {
             <i class="fa-solid fa-file-pdf"></i> Export PDF
           </button>
           <button class="action-btn secondary" onclick="toggleRoadmap('roadmap-${index}')">
-            <i class="fa-solid fa-route"></i> Roadmap
+            <i class="fa-solid fa-route"></i> Roadmap & Projects
           </button>
         </div>
       </div>
 
-      <!-- Expandable Career Roadmap -->
+      <!-- Expandable Career Roadmap & Portfolio Projects -->
       <div id="roadmap-${index}" class="roadmap-expandable" style="display: none;">
+        <h4 style="color: var(--amber-gold); margin-bottom: 8px;"><i class="fa-solid fa-laptop-code"></i> Portfolio Side Project Blueprints:</h4>
+        <ul style="padding-left: 20px; font-size: 13px; color: var(--text-main); margin-bottom: 14px;">
+          ${sideProjectItems || '<li>Build a domain project related to your core skills.</li>'}
+        </ul>
+
+        ${mapuaGradChips ? `
+          <div style="margin-bottom: 14px;">
+            <h5 style="color: var(--sky-blue); margin-bottom: 4px;"><i class="fa-solid fa-award"></i> Mapúa Graduate Studies Pathway (MS / MBA):</h5>
+            <div>${mapuaGradChips}</div>
+          </div>
+        ` : ''}
+
         <h4 style="color: var(--amber-gold); margin-bottom: 8px;"><i class="fa-solid fa-road"></i> Career Progression Pathway</h4>
         <div class="roadmap-timeline">
           ${roadmapSteps || '<p>Standard industry progression applies.</p>'}
@@ -475,6 +531,52 @@ function renderRecommendations(jobs) {
 function toggleRoadmap(id) {
   const el = document.getElementById(id);
   if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+// --- Cardi AI Assistant Chat Widget ---
+function toggleCardiChat() {
+  cardiDrawer.style.display = cardiDrawer.style.display === 'none' ? 'flex' : 'none';
+}
+
+async function sendCardiMessage() {
+  const input = document.getElementById('cardi-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  // Add User Message Bubble
+  const userMsg = document.createElement('div');
+  userMsg.className = 'cardi-message user';
+  userMsg.textContent = text;
+  cardiMessages.appendChild(userMsg);
+  input.value = '';
+  cardiMessages.scrollTop = cardiMessages.scrollHeight;
+
+  // Loading indicator
+  const botMsg = document.createElement('div');
+  botMsg.className = 'cardi-message bot';
+  botMsg.innerHTML = '🔴💛 <em>Cardi is thinking...</em>';
+  cardiMessages.appendChild(botMsg);
+  cardiMessages.scrollTop = cardiMessages.scrollHeight;
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/ai_chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: text,
+        skills: skills.join(', '),
+        interests: interests.join(', '),
+        user_stage: currentStage
+      })
+    });
+
+    const data = await response.json();
+    botMsg.innerHTML = data.reply.replace(/\n/g, '<br>');
+
+  } catch (err) {
+    botMsg.innerHTML = '🔴💛 <strong>Cardi:</strong> Sorry, I could not connect to my knowledge base right now.';
+  }
+  cardiMessages.scrollTop = cardiMessages.scrollHeight;
 }
 
 // --- RL Feedback Call ---
@@ -626,15 +728,15 @@ function renderSalaryChart() {
         {
           label: 'Min Salary (k PHP/mo)',
           data: minSalaries,
-          backgroundColor: 'rgba(99, 102, 241, 0.6)',
-          borderColor: '#6366f1',
+          backgroundColor: 'rgba(220, 38, 38, 0.6)',
+          borderColor: '#dc2626',
           borderWidth: 1
         },
         {
           label: 'Max Salary (k PHP/mo)',
           data: maxSalaries,
-          backgroundColor: 'rgba(16, 185, 129, 0.6)',
-          borderColor: '#10b981',
+          backgroundColor: 'rgba(245, 158, 11, 0.6)',
+          borderColor: '#f59e0b',
           borderWidth: 1
         }
       ]
@@ -670,8 +772,8 @@ function exportRoadmapPDF(jobTitle) {
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(20);
-  doc.setTextColor(99, 102, 241);
-  doc.text("Career Path Roadmap Report", 20, 20);
+  doc.setTextColor(220, 38, 38);
+  doc.text("Career Path & Mapúa Academic Report", 20, 20);
 
   doc.setFontSize(12);
   doc.setTextColor(50, 50, 50);
@@ -683,41 +785,50 @@ function exportRoadmapPDF(jobTitle) {
   doc.line(20, 45, 190, 45);
 
   doc.setFont("helvetica", "bold");
-  doc.text("Why This Role Fits You (RAG Rationale):", 20, 55);
+  doc.text("Recommended Mapúa Programs:", 20, 55);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(10);
+  doc.text((job.mapua_degrees || []).join(', ') || 'N/A', 20, 62);
+
+  let currentY = 72;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(12);
+  doc.text("Why This Role Fits You (RAG Rationale):", 20, currentY);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
   const splitReason = doc.splitTextToSize(job.rag_reason, 170);
-  doc.text(splitReason, 20, 62);
+  doc.text(splitReason, 20, currentY + 7);
 
-  let currentY = 62 + (splitReason.length * 5) + 8;
+  currentY += 7 + (splitReason.length * 5) + 8;
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(12);
-  doc.text("Skill Gap Breakdown:", 20, currentY);
+  doc.text("Portfolio Side Project Blueprints:", 20, currentY);
   currentY += 8;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
-  doc.text(`Matched Skills: ${job.matched_skills.join(', ') || 'None'}`, 20, currentY);
+  (job.side_project_blueprints || []).forEach(p => {
+    doc.text(`• ${p}`, 20, currentY);
+    currentY += 6;
+  });
+
   currentY += 6;
-  doc.text(`Skills to Acquire: ${job.missing_skills.join(', ') || 'None'}`, 20, currentY);
-  currentY += 12;
-
   doc.setFont("helvetica", "bold");
   doc.setFontSize(12);
-  doc.text("Career Path Progression Stages:", 20, currentY);
+  doc.text("Career Progression Pathway:", 20, currentY);
   currentY += 8;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
-
   (job.career_roadmap || []).forEach(step => {
     doc.text(`• ${step.stage} (${step.timeframe}): ${step.focus}`, 20, currentY);
     currentY += 7;
   });
 
-  doc.save(`${job.title.replace(/\s+/g, '_')}_Career_Roadmap.pdf`);
-  showToast(`Exported PDF for ${job.title}!`, 'success');
+  doc.save(`${job.title.replace(/\s+/g, '_')}_Mapua_Career_Roadmap.pdf`);
+  showToast(`Exported Mapúa Career PDF for ${job.title}!`, 'success');
 }
 
 // --- RL Modal ---

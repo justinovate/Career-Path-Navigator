@@ -3,6 +3,7 @@ from flask_cors import CORS
 import os
 from job_recommender import recommend_jobs, update_rl, load_qtable, load_jobs
 from auth import register_user, authenticate_user, get_user_profile, update_user_profile
+from ai_assistant import ask_cardi
 
 frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend'))
 
@@ -16,6 +17,21 @@ def index():
 @app.route('/api/health', methods=['GET'])
 def health():
     return jsonify({"status": "ok", "message": "Career Path Navigator API is running."})
+
+# --- Cardi AI Assistant Endpoint ---
+@app.route('/api/ai_chat', methods=['POST'])
+def ai_chat():
+    data = request.get_json() or {}
+    message = data.get("message", "")
+    skills = data.get("skills", "")
+    interests = data.get("interests", "")
+    user_stage = data.get("user_stage", "student")
+
+    if not message:
+        return jsonify({"error": "Message is required"}), 400
+
+    response = ask_cardi(message, skills, interests, user_stage)
+    return jsonify(response)
 
 # --- User Auth Endpoints ---
 @app.route('/signup', methods=['POST'])
@@ -41,7 +57,6 @@ def login_user_route():
     result, status_code = authenticate_user(identifier, password)
     if status_code == 200:
         user_data = result.get("user", {})
-        # Attach recommendations if skills exist
         skills = user_data.get("skills", "")
         interests = user_data.get("interests", "")
         if skills or interests:
