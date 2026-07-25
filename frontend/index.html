@@ -13,6 +13,10 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+  <!-- Chart.js & jsPDF for Analytics & Export -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -28,19 +32,22 @@
     </div>
 
     <div class="nav-right">
-      <div class="student-badge">
-        <i class="fa-solid fa-user-graduate"></i>
-        <span id="student-display">ID: Guest</span>
-      </div>
+      <button class="nav-btn accent-btn" onclick="openQuizModal()">
+        <i class="fa-solid fa-clipboard-question"></i> Career Quiz
+      </button>
 
-      <div class="rl-status-badge">
-        <span class="pulse-dot"></span>
-        <span>RL Model: <strong id="rl-adaptation-status">Active & Learning</strong></span>
-      </div>
+      <button class="nav-btn secondary" onclick="openChartsModal()">
+        <i class="fa-solid fa-chart-line"></i> Salary Trends
+      </button>
 
       <button id="rl-insights-btn" class="nav-btn secondary" onclick="openRLModal()">
         <i class="fa-solid fa-brain"></i> RL Insights
       </button>
+
+      <div class="student-badge">
+        <i class="fa-solid fa-circle-user"></i>
+        <span id="student-display">User: Account</span>
+      </div>
 
       <button id="logout-btn" class="nav-btn Danger" onclick="logout()">
         <i class="fa-solid fa-right-from-bracket"></i> Sign Out
@@ -51,31 +58,69 @@
   <!-- Main Container -->
   <main class="app-container">
 
-    <!-- Screen 1: Student Login Screen -->
+    <!-- Screen 1: User Sign In / Sign Up Screen -->
     <section id="login-screen" class="glass-card login-card">
       <div class="login-header">
         <div class="login-logo">
           <i class="fa-solid fa-compass-drafting"></i>
         </div>
-        <h2>Welcome to Career Path Navigator</h2>
-        <p>Personalized career exploration powered by Retrieval-Augmented Generation & Q-Learning Reinforcement Learning.</p>
+        <h2>Career Path Navigator</h2>
+        <p>Personalized career exploration powered by Retrieval-Augmented Generation & Reinforcement Learning.</p>
       </div>
 
-      <form id="login-form" onsubmit="event.preventDefault(); login();">
+      <!-- Auth Tabs: Sign In vs Sign Up -->
+      <div class="auth-tabs">
+        <button id="tab-signin" class="auth-tab active" onclick="switchAuthTab('signin')">Sign In</button>
+        <button id="tab-signup" class="auth-tab" onclick="switchAuthTab('signup')">Create Account</button>
+      </div>
+
+      <!-- Sign In Form -->
+      <form id="signin-form" onsubmit="event.preventDefault(); handleSignIn();">
         <div class="form-group">
-          <label for="student-id"><i class="fa-solid fa-id-card"></i> Enter Student ID Number:</label>
-          <input type="text" id="student-id" placeholder="e.g. 2024-10088 or STU-994" required autocomplete="off">
+          <label for="signin-id"><i class="fa-solid fa-user"></i> Username or Email:</label>
+          <input type="text" id="signin-id" placeholder="Enter your username or email" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="signin-pwd"><i class="fa-solid fa-lock"></i> Password:</label>
+          <input type="password" id="signin-pwd" placeholder="Enter password" required autocomplete="current-password">
         </div>
 
         <div class="quick-students">
-          <span>Quick Demo Profiles:</span>
-          <button type="button" class="chip-btn" onclick="quickLogin('2024-10088')">2024-10088 (Tech/AI)</button>
-          <button type="button" class="chip-btn" onclick="quickLogin('2024-30129')">2024-30129 (Engineering)</button>
-          <button type="button" class="chip-btn" onclick="quickLogin('2024-50411')">2024-50411 (Design/Marketing)</button>
+          <span>Demo Quick Login Accounts:</span>
+          <button type="button" class="chip-btn" onclick="quickDemoLogin('alex_ai', 'password123')">Alex (AI & Data)</button>
+          <button type="button" class="chip-btn" onclick="quickDemoLogin('maria_eng', 'password123')">Maria (Engineering)</button>
         </div>
 
         <button type="submit" class="btn-primary full-width">
-          Launch Navigation Workspace <i class="fa-solid fa-arrow-right"></i>
+          Sign In to Workspace <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+
+      <!-- Sign Up Form -->
+      <form id="signup-form" style="display: none;" onsubmit="event.preventDefault(); handleSignUp();">
+        <div class="form-group">
+          <label for="signup-name"><i class="fa-solid fa-id-badge"></i> Full Name:</label>
+          <input type="text" id="signup-name" placeholder="e.g. Alex Rivera" required>
+        </div>
+
+        <div class="form-group">
+          <label for="signup-username"><i class="fa-solid fa-user"></i> Choose Username:</label>
+          <input type="text" id="signup-username" placeholder="e.g. alex_ai" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="signup-email"><i class="fa-solid fa-envelope"></i> Email Address:</label>
+          <input type="email" id="signup-email" placeholder="e.g. alex@example.com" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="signup-pwd"><i class="fa-solid fa-lock"></i> Password:</label>
+          <input type="password" id="signup-pwd" placeholder="Create password (min 6 chars)" required autocomplete="new-password">
+        </div>
+
+        <button type="submit" class="btn-primary full-width">
+          Create Account & Start <i class="fa-solid fa-user-plus"></i>
         </button>
       </form>
     </section>
@@ -86,8 +131,8 @@
       <!-- Left Sidebar: Skill & Interest Builder -->
       <aside class="sidebar-panel glass-card">
         <div class="panel-header">
-          <h3><i class="fa-solid fa-sliders"></i> Skill & Interest Intake</h3>
-          <p class="panel-desc">Specify your technical skills & career interests to trigger vector retrieval.</p>
+          <h3><i class="fa-solid fa-sliders"></i> Skill & Interest Profile</h3>
+          <p class="panel-desc">Specify your technical skills & career interests to trigger RAG vector search.</p>
         </div>
 
         <!-- Quick Skill Chips Picker -->
@@ -95,7 +140,8 @@
           <label class="section-label"><i class="fa-solid fa-bolt"></i> Popular Skill Quick-Add:</label>
           <div class="quick-chips-container">
             <button class="quick-chip" onclick="quickAddSkill('Python')">+ Python</button>
-            <button class="quick-chip" onclick="quickAddSkill('Java')">+ Java</button>
+            <button class="quick-chip" onclick="quickAddSkill('TensorFlow')">+ TensorFlow</button>
+            <button class="quick-chip" onclick="quickAddSkill('PyTorch')">+ PyTorch</button>
             <button class="quick-chip" onclick="quickAddSkill('Machine Learning')">+ Machine Learning</button>
             <button class="quick-chip" onclick="quickAddSkill('SQL')">+ SQL</button>
             <button class="quick-chip" onclick="quickAddSkill('UX Design')">+ UX Design</button>
@@ -103,7 +149,6 @@
             <button class="quick-chip" onclick="quickAddSkill('CAD Software')">+ CAD Software</button>
             <button class="quick-chip" onclick="quickAddSkill('Cloud Computing')">+ Cloud</button>
             <button class="quick-chip" onclick="quickAddSkill('Financial Analysis')">+ Finance</button>
-            <button class="quick-chip" onclick="quickAddSkill('SEO')">+ SEO</button>
           </div>
         </div>
 
@@ -111,16 +156,13 @@
         <div class="input-section">
           <label for="skill-input"><i class="fa-solid fa-code"></i> Technical Skills:</label>
           <div class="input-with-button">
-            <input type="text" id="skill-input" list="skills-list" placeholder="Type a skill (e.g. C++, React, PyTorch)">
+            <input type="text" id="skill-input" list="skills-list" placeholder="Type a skill (e.g. Python, TensorFlow, C++)">
             <button type="button" class="btn-add" onclick="addSkill()">Add</button>
           </div>
           <datalist id="skills-list">
-            <option value="Python"><option value="Java"><option value="C++"><option value="JavaScript">
-            <option value="SQL"><option value="Machine Learning"><option value="Data Analysis"><option value="PyTorch">
-            <option value="TensorFlow"><option value="Docker"><option value="Kubernetes"><option value="Figma">
-            <option value="Adobe XD"><option value="CAD Software"><option value="SolidWorks"><option value="AutoCAD">
-            <option value="Financial Analysis"><option value="Excel"><option value="SEO"><option value="Content Marketing">
-            <option value="Network Security"><option value="Encryption"><option value="REST APIs"><option value="Git">
+            <option value="Python"><option value="TensorFlow"><option value="PyTorch"><option value="Java"><option value="C++">
+            <option value="Machine Learning"><option value="Deep Learning"><option value="SQL"><option value="Figma">
+            <option value="UX Design"><option value="CAD Software"><option value="Financial Analysis"><option value="SEO">
           </datalist>
           <div class="tag-list" id="skill-tags"></div>
         </div>
@@ -129,14 +171,13 @@
         <div class="input-section">
           <label for="interest-input"><i class="fa-solid fa-heart"></i> Career Interests & Fields:</label>
           <div class="input-with-button">
-            <input type="text" id="interest-input" list="interests-list" placeholder="Type an interest (e.g. AI, Startups, UX)">
+            <input type="text" id="interest-input" list="interests-list" placeholder="Type an interest (e.g. AI/ML, UX, Startups)">
             <button type="button" class="btn-add" onclick="addInterest()">Add</button>
           </div>
           <datalist id="interests-list">
-            <option value="AI & Machine Learning"><option value="Web & Software Development"><option value="Cybersecurity">
-            <option value="UI/UX & Product Design"><option value="Data Analytics"><option value="Cloud & DevOps">
-            <option value="Robotics & Mechanical Systems"><option value="Civil Infrastructure"><option value="Fintech & Investment">
-            <option value="Digital Growth & Marketing"><option value="E-commerce"><option value="Healthcare & Bio">
+            <option value="AI/ML"><option value="AI & Machine Learning"><option value="Web & Software Development">
+            <option value="Cybersecurity"><option value="UI/UX Design"><option value="Cloud & DevOps">
+            <option value="Mechanical Systems"><option value="Fintech & Investment"><option value="Digital Growth">
           </datalist>
           <div class="tag-list" id="interest-tags"></div>
         </div>
@@ -171,8 +212,8 @@
           <!-- Category Filter Tabs -->
           <div class="category-tabs" id="category-tabs">
             <button class="tab-btn active" data-category="All" onclick="setCategoryFilter('All', this)">All Careers</button>
-            <button class="tab-btn" data-category="Software Engineering" onclick="setCategoryFilter('Software Engineering', this)">Software</button>
             <button class="tab-btn" data-category="Data & AI" onclick="setCategoryFilter('Data & AI', this)">Data & AI</button>
+            <button class="tab-btn" data-category="Software Engineering" onclick="setCategoryFilter('Software Engineering', this)">Software</button>
             <button class="tab-btn" data-category="Design & Product" onclick="setCategoryFilter('Design & Product', this)">Design</button>
             <button class="tab-btn" data-category="Engineering" onclick="setCategoryFilter('Engineering', this)">Engineering</button>
             <button class="tab-btn" data-category="Cybersecurity & IT" onclick="setCategoryFilter('Cybersecurity & IT', this)">Cybersecurity</button>
@@ -199,15 +240,43 @@
     </div>
   </main>
 
-  <!-- RL Insights & Student Stats Modal -->
+  <!-- Modal 1: Career Assessment Quiz -->
+  <div id="quiz-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-card glass-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-clipboard-question"></i> 5-Minute Career Assessment Quiz</h3>
+        <button class="modal-close" onclick="closeQuizModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="quiz-body">
+        <!-- Quiz Steps rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Salary & Market Demand Trends -->
+  <div id="charts-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-card glass-card max-w-700">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-chart-line"></i> Salary Ranges & Industry Market Demand Growth</h3>
+        <button class="modal-close" onclick="closeChartsModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="chart-container" style="position: relative; height: 320px; width: 100%;">
+          <canvas id="salaryChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: RL Insights & Profile Stats -->
   <div id="rl-modal" class="modal-overlay" style="display: none;">
     <div class="modal-card glass-card">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-brain"></i> Reinforcement Learning & Profile Insights</h3>
+        <h3><i class="fa-solid fa-brain"></i> Reinforcement Learning Q-Table Preferences</h3>
         <button class="modal-close" onclick="closeRLModal()">&times;</button>
       </div>
       <div class="modal-body" id="rl-modal-content">
-        <p>Loading RL student Q-table metrics...</p>
+        <p>Loading RL metrics...</p>
       </div>
     </div>
   </div>
