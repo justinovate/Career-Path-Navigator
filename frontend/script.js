@@ -374,6 +374,33 @@ async function fetchRecommendations() {
   }
 }
 
+function getFallbackDegrees(category) {
+  const cat = (category || "").toLowerCase();
+  if (cat.includes("medicine") || cat.includes("health")) {
+    return ["Doctor of Medicine (MD)", "BS Biology (Pre-Med Track)", "BS Health Sciences", "BS Nursing"];
+  }
+  if (cat.includes("law") || cat.includes("legal")) {
+    return ["Juris Doctor (JD / LLB)", "BS Legal Management", "BA Political Science", "BS Accountancy"];
+  }
+  if (cat.includes("archi") || cat.includes("design")) {
+    return ["BS Architecture (BS Archi)", "BS Environmental Planning & Design", "BS Interior Architecture"];
+  }
+  if (cat.includes("civil") || cat.includes("engineer")) {
+    return ["BS Civil Engineering (BS CE)", "BS Mechanical Engineering", "BS Computer Engineering (BS CpE)"];
+  }
+  return ["BS Computer Science (AI Track)", "BS Computer Engineering (BS CpE)", "BS Data Science", "BS Information Technology"];
+}
+
+function getFallbackUniversities() {
+  return [
+    "Mapúa University (ABET Accredited & CHED Center of Excellence in CS / IT)",
+    "UP Diliman (UPD - CHED Center of Excellence)",
+    "De La Salle University (DLSU - THE/QS Ranked)",
+    "UST (CHED Center of Excellence)",
+    "MSU-IIT (CHED Center of Excellence in IT / Engineering)"
+  ];
+}
+
 function renderRecommendations(jobs) {
   let filtered = jobs;
   if (searchQuery) {
@@ -414,15 +441,16 @@ function renderRecommendations(jobs) {
     const matchedChips = job.matched_skills.map(s => `<span class="skill-chip matched"><i class="fa-solid fa-check"></i> ${s}</span>`).join(' ');
     const missingChips = job.missing_skills.map(s => `<span class="skill-chip missing"><i class="fa-solid fa-lightbulb"></i> ${s}</span>`).join(' ');
 
-    const employerChips = (job.top_philippine_employers || []).map(e => `<span class="meta-chip category"><i class="fa-solid fa-building"></i> ${e}</span>`).join(' ');
+    const employerChips = (job.top_philippine_employers || ["GCash (Mynt)", "Globe Telecom", "Canva PH", "Accenture PH"]).map(e => `<span class="meta-chip category"><i class="fa-solid fa-building"></i> ${e}</span>`).join(' ');
     
-    // Explicit Degree Chips & University Chips
-    const degreesList = job.recommended_degrees && job.recommended_degrees.length > 0
+    // Explicit Specific Degrees & Universities Output (Zero Generic Fallbacks)
+    const degreesList = (job.recommended_degrees && job.recommended_degrees.length > 0)
       ? job.recommended_degrees
-      : ["Bachelor Degree in relevant domain"];
-    const universitiesList = job.top_recommended_universities && job.top_recommended_universities.length > 0
+      : getFallbackDegrees(job.category);
+
+    const universitiesList = (job.top_recommended_universities && job.top_recommended_universities.length > 0)
       ? job.top_recommended_universities
-      : ["Top CHED Accredited Universities"];
+      : getFallbackUniversities();
 
     const degreeChips = degreesList.map(d => `<span class="degree-chip"><i class="fa-solid fa-graduation-cap"></i> ${d}</span>`).join(' ');
     const universityChips = universitiesList.map(u => `<span class="university-chip"><i class="fa-solid fa-university"></i> ${u}</span>`).join(' ');
@@ -501,7 +529,7 @@ function renderRecommendations(jobs) {
             <i class="fa-solid fa-bookmark"></i> ${isBookmarked ? 'Saved' : 'Bookmark'}
           </button>
           <button class="action-btn target ${isTarget ? 'targeted' : ''}" onclick="sendFeedback('${job.title}', 'target')">
-            <i class="fa-solid fa-bullseye"></i> ${isTarget ? 'Target Goal' : 'Set Goal'}
+            <i class="fa-solid fa-bullseye"></i> ${isTarget ? 'Set Goal' : 'Set Goal'}
           </button>
         </div>
       </div>

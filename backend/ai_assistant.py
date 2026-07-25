@@ -7,41 +7,41 @@ def ask_cardi(user_message, user_skills="", user_interests="", user_stage="stude
     msg = user_message.strip()
     msg_lower = msg.lower()
 
-    # 1. Direct Question Entity Matching: Computer Engineering for AI
+    # 1. Computer Engineering for AI Question
     if ("computer engineering" in msg_lower or "cpe" in msg_lower) and ("ai" in msg_lower or "machine learning" in msg_lower):
         return {
             "sender": "AI Advisor",
             "reply": "Yes! **BS Computer Engineering (BS CpE)** is highly recommended for AI roles, especially for hardware-accelerated AI, robotics, embedded systems, and edge computing. Alongside BS CpE, **BS Computer Science (AI Track)** and **BS Data Science** are prime choices.\n\nTop accredited Philippine universities for CpE and AI include **Mapúa University** (ABET Accredited & CHED COE in CS/IT), **UP Diliman**, **De La Salle University (DLSU)**, and **MSU-IIT**."
         }
 
-    # 2. Direct Question Entity Matching: Law / Legal
+    # 2. Law & Pre-Law Question
     if any(w in msg_lower for w in ["law school", "lawyer", "attorney", "bar exam", "juris doctor", "pre-law"]):
         return {
             "sender": "AI Advisor",
-            "reply": "For **Law & Legal Services**, top Philippine law schools based on Bar Examination passing rates and legal accreditation include **UP Law (UP Diliman)**, **Ateneo Law School (ALS - Rockwell)**, **San Beda University College of Law**, and **DLSU College of Law**.\n\nRecommended Pre-Law degree programs include **BS Legal Management**, **BA Political Science**, **BS Accountancy**, and **BS Business Administration**."
+            "reply": "For **Law & Legal Services**, top Philippine law schools based on Supreme Court Bar Examination passing rates and legal accreditation include **UP Law (UP Diliman)**, **Ateneo Law School (ALS - Rockwell)**, **San Beda University College of Law**, and **DLSU College of Law**.\n\nRecommended Pre-Law degree programs include **BS Legal Management**, **BA Political Science**, **BS Accountancy**, and **BS Business Administration**."
         }
 
-    # 3. Direct Question Entity Matching: Medicine / Healthcare
+    # 3. Medicine & Pre-Med Question
     if any(w in msg_lower for w in ["medicine", "doctor", "physician", "nmat", "hospital", "pre-med"]):
         return {
             "sender": "AI Advisor",
             "reply": "For **Medicine & Healthcare**, top medical schools in the Philippines include **UP Manila (UPM - #1 THE/QS Ranked)**, **UST Faculty of Medicine & Surgery**, **Ateneo School of Medicine & Public Health (ASMPH)**, **Mapúa School of Health Sciences**, **DLSMHSI**, and **SLU Baguio**.\n\nRecommended Pre-Med bachelor degrees include **Doctor of Medicine (MD)** after completing **BS Biology**, **BS Health Sciences**, **BS Nursing**, or **BS Medical Laboratory Science**."
         }
 
-    # 4. Direct Question Entity Matching: Architecture
+    # 4. Architecture Question
     if any(w in msg_lower for w in ["architect", "architecture", "building", "revit", "autocad", "ale board"]):
         return {
             "sender": "AI Advisor",
             "reply": "For **Architecture & Built Environment**, top accredited Philippine institutions include **UST College of Architecture** (CHED Center of Excellence), **Mapúa University School of Architecture**, **UP Diliman College of Architecture**, **CSB Design**, and **USC Cebu**.\n\nRecommended degree programs include **BS Architecture (BS Archi)** and **BS Environmental Planning & Design**."
         }
 
-    # 5. RAG Vector Knowledge Base Context Matcher
+    # 5. RAG Vector Knowledge Base Search
     jobs = load_jobs()
     matched_job = None
     for job in jobs:
         title_lower = job['title'].lower()
         cat_lower = job['category'].lower()
-        if any(t in msg_lower for t in title_lower.split()) or cat_lower in msg_lower:
+        if any(t in msg_lower for t in title_lower.split() if len(t) > 2) or cat_lower in msg_lower:
             matched_job = job
             break
 
@@ -59,7 +59,7 @@ def ask_cardi(user_message, user_skills="", user_interests="", user_stage="stude
                      f"*{matched_job['description']}*"
         }
 
-    # 6. Fallback Context Advisor
+    # 6. Fallback Context Answer
     recs = recommend_jobs(user_skills or "Python, Data Analysis", user_interests or "AI/ML, Business", "advisor_query")
     top_job = recs[0] if recs else None
     
@@ -68,15 +68,15 @@ def ask_cardi(user_message, user_skills="", user_interests="", user_stage="stude
         unis_str = ", ".join(top_job.get("top_recommended_universities", [])[:3])
         return {
             "sender": "AI Advisor",
-            "reply": f"Based on your profile, your top career match is **{top_job['title']}** ({top_job['overall_score']}% match).\n\n"
+            "reply": f"Regarding your query: Based on your profile, your top career match is **{top_job['title']}** ({top_job['overall_score']}% match).\n\n"
                      f"• **Recommended Degrees:** {degrees_str}\n"
                      f"• **Top Accredited Universities:** {unis_str}\n\n"
-                     f"Feel free to ask a specific question about degrees, top schools, or career shifts!"
+                     f"Feel free to ask a specific question about recommended degrees, top accredited Philippine universities, or career shifts!"
         }
 
     return {
         "sender": "AI Advisor",
-        "reply": "I am your AI Career Advisor. Ask me any question regarding recommended degree programs, top accredited Philippine universities (CHED COE, ABET, THE/QS), or career transitions!"
+        "reply": "I am your AI Career Advisor. Ask me any question regarding recommended degree programs, top accredited Philippine universities (CHED COE, ABET, THE/QS), or career shifts!"
     }
 
 # --- Dynamic Adaptive Quiz Generator ---

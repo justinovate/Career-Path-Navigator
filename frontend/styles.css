@@ -1,17 +1,16 @@
 /* ==========================================================================
-   Career Path Navigator - Minimalist High Contrast Design System
+   Career Path Navigator - High Contrast Minimalist Design System
    ========================================================================== */
 
 :root, [data-theme="dark"] {
   --bg-dark: #0f172a;
-  --bg-card: rgba(30, 41, 59, 0.85);
-  --bg-card-hover: rgba(51, 65, 85, 0.95);
-  --border-glass: rgba(255, 255, 255, 0.12);
+  --bg-card: #1e293b;
+  --bg-card-hover: #334155;
+  --border-glass: #475569;
   
   --primary-indigo: #3b82f6; /* Clean Royal Blue Accent */
-  --primary-indigo-glow: rgba(59, 130, 246, 0.35);
   --emerald-green: #34d399; /* High-Contrast Emerald */
-  --amber-gold: #fbbf24; /* Crisp High-Contrast Gold */
+  --amber-gold: #f59e0b; /* High-Contrast Gold */
   --crimson-red: #f87171;
   --sky-blue: #38bdf8; /* High-Contrast Cyan */
   
@@ -33,14 +32,13 @@
   --border-glass: #cbd5e1;
   
   --primary-indigo: #2563eb;
-  --primary-indigo-glow: rgba(37, 99, 235, 0.2);
   --emerald-green: #059669;
   --amber-gold: #d97706;
   --crimson-red: #dc2626;
   --sky-blue: #0284c7;
   
   --text-main: #0f172a;
-  --text-muted: #475569;
+  --text-muted: #334155;
   --shadow-glass: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
@@ -122,7 +120,7 @@ h1, h2, h3, h4, h5, .brand-title {
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.2);
   padding: 6px 14px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-glass);
@@ -132,7 +130,7 @@ h1, h2, h3, h4, h5, .brand-title {
 /* Life-Stage Selector Pills */
 .stage-selector-container {
   margin-bottom: 18px;
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.2);
   padding: 12px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-glass);
@@ -244,7 +242,7 @@ h1, h2, h3, h4, h5, .brand-title {
 input[type="text"], input[type="email"], input[type="password"] {
   width: 100%;
   padding: 11px 15px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.25);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-sm);
   color: var(--text-main);
@@ -393,11 +391,11 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 }
 
 .tag-chip {
-  background: rgba(56, 189, 248, 0.15);
+  background: rgba(15, 23, 42, 0.9);
   border: 1px solid var(--sky-blue);
   color: var(--sky-blue);
   font-size: 12.5px;
-  font-weight: 600;
+  font-weight: 700;
   padding: 4px 10px;
   border-radius: var(--radius-sm);
   display: flex;
@@ -406,7 +404,6 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 }
 
 .tag-chip.interest {
-  background: rgba(251, 191, 36, 0.15);
   border-color: var(--amber-gold);
   color: var(--amber-gold);
 }
@@ -471,7 +468,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 .select-box select {
   height: 42px;
   padding: 0 12px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.25);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-sm);
   color: var(--text-main);
@@ -532,9 +529,9 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
   gap: 20px;
 }
 
-/* High-Contrast Prominent Degree & University Callout Cards */
+/* High-Contrast Prominent Degree & University Callout Cards (Fixed Readability) */
 .prominent-degree-box {
-  background: rgba(251, 191, 36, 0.12);
+  background: rgba(15, 23, 42, 0.8);
   border: 1.5px solid var(--amber-gold);
   border-radius: var(--radius-sm);
   padding: 14px 18px;
@@ -548,7 +545,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -556,18 +553,18 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 .degree-chip {
   font-size: 13px;
   font-weight: 700;
-  padding: 5px 12px;
+  padding: 6px 12px;
   border-radius: var(--radius-sm);
-  background: rgba(251, 191, 36, 0.25);
-  color: #fef08a;
-  border: 1px solid rgba(251, 191, 36, 0.5);
+  background: #1e293b;
+  color: #fde047; /* High-contrast bright yellow */
+  border: 1px solid var(--amber-gold);
   display: inline-block;
   margin-right: 6px;
   margin-bottom: 6px;
 }
 
 .prominent-university-box {
-  background: rgba(56, 189, 248, 0.12);
+  background: rgba(15, 23, 42, 0.8);
   border: 1.5px solid var(--sky-blue);
   border-radius: var(--radius-sm);
   padding: 14px 18px;
@@ -581,19 +578,19 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
 .university-chip {
   font-size: 13px;
-  font-weight: 600;
-  padding: 5px 12px;
+  font-weight: 700;
+  padding: 6px 12px;
   border-radius: var(--radius-sm);
-  background: rgba(56, 189, 248, 0.22);
-  color: #e0f2fe;
-  border: 1px solid rgba(56, 189, 248, 0.5);
+  background: #1e293b;
+  color: #7dd3fc; /* High-contrast bright cyan */
+  border: 1px solid var(--sky-blue);
   display: inline-block;
   margin-right: 6px;
   margin-bottom: 6px;
@@ -626,12 +623,14 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
   position: absolute;
   bottom: 60px;
   right: 0;
-  width: 400px;
-  height: 480px;
+  width: 420px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   padding: 16px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+  background: #0f172a;
+  border: 1px solid var(--border-glass);
 }
 
 .cardi-drawer-header {
@@ -669,13 +668,13 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
   font-size: 13.5px;
   padding: 12px 14px;
   border-radius: var(--radius-sm);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .cardi-message.bot {
-  background: rgba(0, 0, 0, 0.3);
+  background: #1e293b;
   border: 1px solid var(--border-glass);
-  color: var(--text-main);
+  color: #ffffff; /* Solid White Text for AI Chat */
   align-self: flex-start;
 }
 

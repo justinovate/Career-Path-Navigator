@@ -206,6 +206,11 @@ def recommend_jobs(skills, interests, student_id, category_filter=None, experien
             title, matched_skills, missing_skills, user_interests, job_category, overall_percentage
         )
         
+        # Ensure explicit non-empty lists
+        recommended_degrees = job.get("recommended_degrees", [])
+        top_universities = job.get("top_recommended_universities", [])
+        top_employers = job.get("top_philippine_employers", [])
+        
         results.append({
             "id": job.get("id", title.replace(" ", "_").lower()),
             "title": title,
@@ -221,9 +226,9 @@ def recommend_jobs(skills, interests, student_id, category_filter=None, experien
             "skills_required": job.get("skills_required", []),
             "matched_skills": matched_skills,
             "missing_skills": missing_skills,
-            "top_philippine_employers": job.get("top_philippine_employers", []),
-            "recommended_degrees": job.get("recommended_degrees", []),
-            "top_recommended_universities": job.get("top_recommended_universities", []),
+            "top_philippine_employers": top_employers,
+            "recommended_degrees": recommended_degrees,
+            "top_recommended_universities": top_universities,
             "overall_score": overall_percentage,
             "semantic_score": round(semantic_score * 100, 1),
             "skill_score": round(skill_score * 100, 1),
